@@ -1,0 +1,334 @@
+[
+    {
+        "id": "0a9520b3bc66dad6",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e5ff7f387ec0af58",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "09310a4daf509e32",
+        "type": "watch",
+        "z": "e5ff7f387ec0af58",
+        "name": "Watch test folder",
+        "files": "/Users/gelso/workspace/PoC/client/inferences/test",
+        "recursive": true,
+        "x": 400,
+        "y": 160,
+        "wires": [
+            [
+                "d370592ba8da03c9"
+            ]
+        ]
+    },
+    {
+        "id": "d370592ba8da03c9",
+        "type": "exec",
+        "z": "e5ff7f387ec0af58",
+        "command": "cd /Users/gelso/workspace/PoC/client/inferences && python3 test-onnx.py",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "1",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Run detection",
+        "x": 660,
+        "y": 160,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "d31042a673ff0977",
+        "type": "watch",
+        "z": "e5ff7f387ec0af58",
+        "name": "Watch output folder",
+        "files": "/Users/gelso/workspace/PoC/client/inferences/output",
+        "recursive": true,
+        "x": 410,
+        "y": 280,
+        "wires": [
+            [
+                "03a5554fd1cc6569"
+            ]
+        ]
+    },
+    {
+        "id": "8b2cd957b93a2ab0",
+        "type": "debug",
+        "z": "e5ff7f387ec0af58",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2160,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "03a5554fd1cc6569",
+        "type": "switch",
+        "z": "e5ff7f387ec0af58",
+        "name": "",
+        "property": "event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 280,
+        "wires": [
+            [
+                "a4db42fd73d27fd0"
+            ]
+        ]
+    },
+    {
+        "id": "a4db42fd73d27fd0",
+        "type": "change",
+        "z": "e5ff7f387ec0af58",
+        "name": "Add Timestamp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timestamp",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 280,
+        "wires": [
+            [
+                "dc80e2a28022a9cc"
+            ]
+        ]
+    },
+    {
+        "id": "dc80e2a28022a9cc",
+        "type": "function",
+        "z": "e5ff7f387ec0af58",
+        "name": "Clean Object",
+        "func": "// ADD PROPERTY\nmsg.sayhello = \"ciao\";\n\n// FORMAT DATA\nvar date = new Date(msg.timestamp).toLocaleString()\nmsg.date = date;\n\n//CLEAN\ndelete msg.topic;\ndelete msg.event;\ndelete msg.size;\ndelete msg.type;\ndelete msg._msgid;\ndelete msg.timestamp;\ndelete msg.payload;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 280,
+        "wires": [
+            [
+                "783d18f0473c6345"
+            ]
+        ]
+    },
+    {
+        "id": "783d18f0473c6345",
+        "type": "file in",
+        "z": "e5ff7f387ec0af58",
+        "name": "Convert Image ",
+        "filename": "filename",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "base64",
+        "allProps": false,
+        "x": 1160,
+        "y": 280,
+        "wires": [
+            [
+                "1b8ee9d8e8af8135"
+            ]
+        ]
+    },
+    {
+        "id": "1b8ee9d8e8af8135",
+        "type": "change",
+        "z": "e5ff7f387ec0af58",
+        "name": "Change payload name",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "base64",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1380,
+        "y": 280,
+        "wires": [
+            [
+                "88074fdbfdc6127e"
+            ]
+        ]
+    },
+    {
+        "id": "a91fe4b363cb2226",
+        "type": "template",
+        "z": "e5ff7f387ec0af58",
+        "name": "HTML Template",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<h1> DEFECT DEFECT... </h1>\n<p>We detected a defect on {{date}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{base64}}\" alt=\"Defect Image\"/></p>\n\n<p>{{sayhello}}</p>\n\nlistuser:\n<pre>{{listuser}}</pre>",
+        "output": "str",
+        "x": 1960,
+        "y": 280,
+        "wires": [
+            [
+                "c58ef4d4fb3acac9",
+                "8b2cd957b93a2ab0",
+                "df022a9fb51e6439"
+            ]
+        ]
+    },
+    {
+        "id": "c58ef4d4fb3acac9",
+        "type": "e-mail",
+        "z": "e5ff7f387ec0af58",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "andrea_gelsomino@hotmail.com",
+        "dname": "Send notification",
+        "x": 2190,
+        "y": 220,
+        "wires": [],
+        "info": "vpsp hmum bsge lxyf"
+    },
+    {
+        "id": "88074fdbfdc6127e",
+        "type": "http request",
+        "z": "e5ff7f387ec0af58",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://jsonplaceholder.typicode.com/users",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1570,
+        "y": 280,
+        "wires": [
+            [
+                "faa81977c42b531e"
+            ]
+        ]
+    },
+    {
+        "id": "faa81977c42b531e",
+        "type": "change",
+        "z": "e5ff7f387ec0af58",
+        "name": "Change name",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "listuser",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1760,
+        "y": 280,
+        "wires": [
+            [
+                "a91fe4b363cb2226"
+            ]
+        ]
+    },
+    {
+        "id": "df022a9fb51e6439",
+        "type": "function",
+        "z": "e5ff7f387ec0af58",
+        "name": "Move image to processed",
+        "func": "msg.payload = \"mv \" + msg.filename + \" \" + msg.filename.replace(\"output\", \"processed\");\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2230,
+        "y": 280,
+        "wires": [
+            [
+                "18244781a42a8078"
+            ]
+        ]
+    },
+    {
+        "id": "18244781a42a8078",
+        "type": "exec",
+        "z": "e5ff7f387ec0af58",
+        "command": "exec",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 2450,
+        "y": 280,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    }
+]
