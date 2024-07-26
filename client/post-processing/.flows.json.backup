@@ -34,7 +34,7 @@
         "id": "d370592ba8da03c9",
         "type": "exec",
         "z": "e5ff7f387ec0af58",
-        "command": "cd /Users/gelso/workspace/Detectify/wheels/inferences && python3 test-onnx.py",
+        "command": "cd /Users/gelso/workspace/PoC/client/inferences && python3 test-onnx.py",
         "addpay": "",
         "append": "",
         "useSpawn": "false",

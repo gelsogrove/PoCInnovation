@@ -1,0 +1,12 @@
+{
+  "name": "root-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start:backend": "cd server/backend && npm run dev",
+    "start:frontend": "cd server/frontend && npm run start",
+    "start:node-red": "cd client/post-processing && npm run start",
+    "start:all": "npm run start:backend & npm run start:frontend & npm run start:node-red",
+    "stop:all": "pkill -f 'node' && pkill -f 'nodemon'"
+  }
+}
