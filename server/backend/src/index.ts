@@ -8,6 +8,12 @@ const PORT = process.env.PORT || 3000
 app.use(express.json()) // Middleware to parse JSON
 app.use(express.urlencoded({ extended: true })) // Middleware to parse URL-encoded data
 
+// Function to validate date
+const isValidDate = (dateString: string): boolean => {
+  const date = new Date(dateString)
+  return !isNaN(date.getTime())
+}
+
 app.post("/new-defect", (req: Request, res: Response) => {
   const {
     data,
@@ -36,8 +42,20 @@ app.post("/new-defect", (req: Request, res: Response) => {
     })
   }
 
+  // Check if 'data' is a valid date
+  if (!isValidDate(data)) {
+    return res.status(400).json({ error: "Invalid date value" })
+  }
+
+  const date = new Date(data)
+
   const imagesDirPath = path.join(__dirname, "images")
   const imagePath = path.join(imagesDirPath, filename)
+
+  // Create the images directory if it doesn't exist
+  if (!fs.existsSync(imagesDirPath)) {
+    fs.mkdirSync(imagesDirPath, { recursive: true })
+  }
 
   // Decode base64 image and save it
   const imageBuffer = Buffer.from(imageBase64, "base64")
@@ -45,6 +63,11 @@ app.post("/new-defect", (req: Request, res: Response) => {
 
   const dirPath = path.join(__dirname, "data")
   const filePath = path.join(dirPath, `${workshopId}.json`)
+
+  // Create the data directory if it doesn't exist
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true })
+  }
 
   // Read existing content of the file
   fs.readFile(filePath, "utf8", (err, fileData) => {
@@ -63,7 +86,7 @@ app.post("/new-defect", (req: Request, res: Response) => {
     // Add the new object to the existing content
     jsonData.push({
       _msgId,
-      data: new Date(data).toISOString(),
+      data: date.toISOString(), // Use the validated date value
       filepath: imagePath,
       workshop,
       workshopId,

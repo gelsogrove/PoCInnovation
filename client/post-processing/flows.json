@@ -66,7 +66,7 @@
         "wires": [
             [
                 "c58ef4d4fb3acac9",
-                "8b2cd957b93a2ab0"
+                "31f530353a98f1a7"
             ]
         ]
     },
@@ -128,8 +128,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2160,
-        "y": 340,
+        "x": 2400,
+        "y": 280,
         "wires": []
     },
     {
@@ -287,6 +287,61 @@
         "wires": [
             [
                 "03a5554fd1cc6569"
+            ]
+        ]
+    },
+    {
+        "id": "31f530353a98f1a7",
+        "type": "http request",
+        "z": "e5ff7f387ec0af58",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://localhost:3000",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "workshop",
+                "valueType": "other",
+                "valueValue": "T11"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "_msgId",
+                "valueType": "msg",
+                "valueValue": "_msgId"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "imageBase64",
+                "valueType": "msg",
+                "valueValue": "base64"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "camera",
+                "valueType": "other",
+                "valueValue": "camera1"
+            }
+        ],
+        "x": 2190,
+        "y": 280,
+        "wires": [
+            [
+                "8b2cd957b93a2ab0"
             ]
         ]
     }
