@@ -42,7 +42,7 @@
         "winHide": false,
         "oldrc": false,
         "name": "Run detection",
-        "x": 660,
+        "x": 620,
         "y": 160,
         "wires": [
             [],
@@ -59,43 +59,12 @@
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "<h1> DEFECT DEFECT... </h1>\n<p>We detected a defect on {{date}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{base64}}\" alt=\"Defect Image\"/></p>\n\n<p>{{sayhello}}</p>\n\nlistuser:\n<pre>{{listuser}}</pre>",
+        "template": "<h1> DEFECT DEFECT... </h1>\n<p>We detected a defect on {{dateFormat}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{base64}}\" alt=\"Defect Image\"/></p>\n\n {{sayhello}}",
         "output": "str",
-        "x": 1960,
-        "y": 280,
+        "x": 1540,
+        "y": 640,
         "wires": [
-            [
-                "c58ef4d4fb3acac9",
-                "8b2cd957b93a2ab0",
-                "8bf708d5ab910f71"
-            ]
-        ]
-    },
-    {
-        "id": "faa81977c42b531e",
-        "type": "change",
-        "z": "e5ff7f387ec0af58",
-        "name": "Change name",
-        "rules": [
-            {
-                "t": "move",
-                "p": "payload",
-                "pt": "msg",
-                "to": "listuser",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1760,
-        "y": 280,
-        "wires": [
-            [
-                "a91fe4b363cb2226"
-            ]
+            []
         ]
     },
     {
@@ -111,8 +80,8 @@
         "tls": true,
         "name": "andrea_gelsomino@hotmail.com",
         "dname": "Send notification",
-        "x": 2190,
-        "y": 220,
+        "x": 1870,
+        "y": 580,
         "wires": [],
         "info": "vpsp hmum bsge lxyf"
     },
@@ -129,60 +98,9 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2160,
-        "y": 340,
+        "x": 1740,
+        "y": 280,
         "wires": []
-    },
-    {
-        "id": "88074fdbfdc6127e",
-        "type": "http request",
-        "z": "e5ff7f387ec0af58",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "https://jsonplaceholder.typicode.com/users",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 1570,
-        "y": 280,
-        "wires": [
-            [
-                "faa81977c42b531e"
-            ]
-        ]
-    },
-    {
-        "id": "1b8ee9d8e8af8135",
-        "type": "change",
-        "z": "e5ff7f387ec0af58",
-        "name": "Change payload name",
-        "rules": [
-            {
-                "t": "move",
-                "p": "payload",
-                "pt": "msg",
-                "to": "base64",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1380,
-        "y": 280,
-        "wires": [
-            [
-                "88074fdbfdc6127e"
-            ]
-        ]
     },
     {
         "id": "783d18f0473c6345",
@@ -196,11 +114,11 @@
         "sendError": false,
         "encoding": "base64",
         "allProps": false,
-        "x": 1160,
+        "x": 760,
         "y": 280,
         "wires": [
             [
-                "1b8ee9d8e8af8135"
+                "a4db42fd73d27fd0"
             ]
         ]
     },
@@ -209,18 +127,18 @@
         "type": "function",
         "z": "e5ff7f387ec0af58",
         "name": "Clean Object",
-        "func": "// ADD PROPERTY\nmsg.sayhello = \"ciao\";\n\n// FORMAT DATA\nvar date = new Date(msg.timestamp).toLocaleString()\nmsg.date = date;\n\n//CLEAN\ndelete msg.topic;\ndelete msg.event;\ndelete msg.size;\ndelete msg.type;\ndelete msg._msgid;\ndelete msg.timestamp;\ndelete msg.payload;\n\nreturn msg;",
+        "func": "// ADD PROPERTY\nmsg.sayhello = \"ciao\"; \n\nmsg.payload = {\n    dateFormat: new Date(msg.timestamp).toLocaleString(),\n    filename: \"test.jpg\",\n    workshop: \"T11\",\n    workshopId: \"12345\",\n    _msgId: msg._msgid,\n    camera: \"Camera 1\",\n    cameraId: \"CameraId\",\n    imageBase64: msg.imageBase64\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 970,
+        "x": 1350,
         "y": 280,
         "wires": [
             [
-                "783d18f0473c6345"
+                "31f530353a98f1a7"
             ]
         ]
     },
@@ -243,11 +161,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 780,
+        "x": 960,
         "y": 280,
         "wires": [
             [
-                "dc80e2a28022a9cc"
+                "acbc95ca8524c449"
             ]
         ]
     },
@@ -268,11 +186,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 630,
+        "x": 590,
         "y": 280,
         "wires": [
             [
-                "a4db42fd73d27fd0"
+                "783d18f0473c6345"
             ]
         ]
     },
@@ -292,14 +210,154 @@
         ]
     },
     {
-        "id": "8bf708d5ab910f71",
-        "type": "http response",
+        "id": "31f530353a98f1a7",
+        "type": "http request",
+        "z": "e5ff7f387ec0af58",
+        "name": "Http Post ",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://localhost:3000/new-defect",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1540,
+        "y": 280,
+        "wires": [
+            [
+                "aba485c9d5252c0c"
+            ]
+        ]
+    },
+    {
+        "id": "98bb624796090f07",
+        "type": "catch",
         "z": "e5ff7f387ec0af58",
         "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 2150,
-        "y": 280,
+        "scope": null,
+        "uncaught": false,
+        "x": 380,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "447c76ee6502aceb",
+        "type": "debug",
+        "z": "e5ff7f387ec0af58",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 600,
         "wires": []
+    },
+    {
+        "id": "acbc95ca8524c449",
+        "type": "change",
+        "z": "e5ff7f387ec0af58",
+        "name": "Change name",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "imageBase64",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "size",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "type",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "topic",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "event",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1160,
+        "y": 280,
+        "wires": [
+            [
+                "dc80e2a28022a9cc"
+            ]
+        ]
+    },
+    {
+        "id": "aba485c9d5252c0c",
+        "type": "change",
+        "z": "e5ff7f387ec0af58",
+        "name": "Change name",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "retry",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "redirectList",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "file",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "statusCode",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "responseUrl",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "headers",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1720,
+        "y": 420,
+        "wires": [
+            [
+                "447c76ee6502aceb"
+            ]
+        ]
     }
 ]

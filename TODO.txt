@@ -1,0 +1,10 @@
+- FINIRE BENE IL BACKEND
+
+- VIN NUMBER SAREBBE UNA BELLA IDA, MA ULTIMA PRIORITA
+https://universe.roboflow.com/kirill-sergeev/vin-detection/dataset/7
+
+- Parte di react Login, lista items con difetto
+
+- Update settings da remote 
+
+

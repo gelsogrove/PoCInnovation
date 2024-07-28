@@ -5,8 +5,9 @@ import path from "path"
 const app = express()
 const PORT = process.env.PORT || 3000
 
-app.use(express.json()) // Middleware to parse JSON
-app.use(express.urlencoded({ extended: true })) // Middleware to parse URL-encoded data
+// Middleware to parse JSON and URL-encoded data with increased limit
+app.use(express.json({ limit: "50mb" }))
+app.use(express.urlencoded({ limit: "50mb", extended: true }))
 
 // Function to validate date
 const isValidDate = (dateString: string): boolean => {
@@ -15,54 +16,41 @@ const isValidDate = (dateString: string): boolean => {
 }
 
 app.post("/new-defect", (req: Request, res: Response) => {
-  const {
-    data,
-    filename,
-    workshop,
-    workshopId,
-    _msgId,
-    camera,
-    cameraId,
-    imageBase64,
-  } = req.body
+  const { dateFormat, timestamp, workshop, _msgId, camera, imageBase64 } =
+    req.body
 
-  if (
-    !data ||
-    !filename ||
-    !workshop ||
-    !workshopId ||
-    !_msgId ||
-    !camera ||
-    !cameraId ||
-    !imageBase64
-  ) {
+  console.log(req.body)
+
+  if (!dateFormat || !timestamp) {
     return res.status(400).json({
-      error:
-        "data, filename, workshop, workshopId, _msgId, camera, cameraId, and imageBase64 are required",
+      error: "dateFormat and timestamp are required",
     })
   }
 
-  // Check if 'data' is a valid date
-  if (!isValidDate(data)) {
+  // Check if 'dateFormat' is a valid date
+  if (!isValidDate(dateFormat)) {
     return res.status(400).json({ error: "Invalid date value" })
   }
 
-  const date = new Date(data)
+  const date = new Date(dateFormat)
 
   const imagesDirPath = path.join(__dirname, "images")
-  const imagePath = path.join(imagesDirPath, filename)
+  const imagePath = path.join(
+    "/Users/gelso/workspace/PoC/server/backend/images",
+    `${timestamp}.jpg`
+  )
 
   // Create the images directory if it doesn't exist
   if (!fs.existsSync(imagesDirPath)) {
     fs.mkdirSync(imagesDirPath, { recursive: true })
   }
 
-  // Decode base64 image and save it
+  // Decode base64 image and save it as a binary file
   const imageBuffer = Buffer.from(imageBase64, "base64")
   fs.writeFileSync(imagePath, imageBuffer)
 
-  const dirPath = path.join(__dirname, "data")
-  const filePath = path.join(dirPath, `${workshopId}.json`)
+  const dirPath = path.join("/Users/gelso/workspace/PoC/server/backend", "data")
+  const filePath = path.join(dirPath, `${workshop}.json`)
 
   // Create the data directory if it doesn't exist
   if (!fs.existsSync(dirPath)) {
@@ -87,16 +75,14 @@ app.post("/new-defect", (req: Request, res: Response) => {
     jsonData.push({
       _msgId,
       data: date.toISOString(), // Use the validated date value
-      filepath: imagePath,
+      filepath: "images/" + timestamp + ".jpg",
       workshop,
-      workshopId,
       camera,
-      cameraId,
     })
 
     const fileContent = JSON.stringify(jsonData, null, 2)
 
-    // Write the updated content to the file
+    // Write the content to the file
     fs.writeFile(filePath, fileContent, (err) => {
       if (err) {
         return res.status(500).json({ error: "Error saving the file" })
@@ -107,14 +93,14 @@ app.post("/new-defect", (req: Request, res: Response) => {
 })
 
 app.get("/defects", (req: Request, res: Response) => {
-  const { workshopId } = req.query
+  const { workshop } = req.query
 
-  if (!workshopId) {
+  if (!workshop) {
     return res.status(400).json({ error: "workshopId is required" })
   }
 
   const dirPath = path.join(__dirname, "data")
-  const filePath = path.join(dirPath, `${workshopId}.json`)
+  const filePath = path.join(dirPath, `${workshop}.json`)
 
   fs.readFile(filePath, "utf8", (err, fileData) => {
     if (err) {
