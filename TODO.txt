@@ -1,4 +1,3 @@
-- FINIRE BENE IL BACKEND
 
 - VIN NUMBER SAREBBE UNA BELLA IDA, MA ULTIMA PRIORITA
 https://universe.roboflow.com/kirill-sergeev/vin-detection/dataset/7
