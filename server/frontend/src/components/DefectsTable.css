@@ -1,56 +1,17 @@
-/* DefectsTable.css */
-
-/* DefectsTable.css */
-
 .defects-table-container {
   width: 68vw;
-  height: 89vh !important;
+  height: 89vh; /* Altezza della container */
+  display: flex;
+  flex-direction: column;
 }
 
 .defects-table {
   width: 100%;
-  min-height: 70vh !important;
-  border-collapse: collapse;
-}
-
-.defects-table th {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-.defects-table tr {
-  padding: 8px;
-  width: 180px;
-}
-
-.defects-table td:first-child {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  width: 180px;
-}
-.defects-table td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.defects-table th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
-.thumbnail {
-  width: 100px;
-  height: auto;
-  cursor: pointer;
-}
-
-.defects-table {
-  width: 100%;
+  min-height: 80vh; /* Altezza minima della tabella */
   border-collapse: collapse;
   background-color: #fff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Scorrimento verticale per la tabella */
 }
 
 .defects-table th,
@@ -58,12 +19,11 @@
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
-  max-width: 130px !important;
 }
 
 .defects-table th {
   background-color: #f4f4f4;
-  color: #333;
+  font-weight: bold;
 }
 
 .defects-table td img {
@@ -72,6 +32,8 @@
   cursor: pointer;
 }
 
-.defects-table td {
-  vertical-align: top;
+.thumbnail {
+  width: 100px;
+  height: auto;
+  cursor: pointer;
 }

@@ -26,7 +26,7 @@ const Modal: React.FC<ModalProps> = ({ imageUrl, onClose }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content" ref={modalRef}>
-        <img src={imageUrl} alt="Defect" className="modal-image" />
+        <img src={imageUrl} alt="Defect" />
       </div>
     </div>
   )

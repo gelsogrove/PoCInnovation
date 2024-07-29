@@ -6,7 +6,6 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <div className="container">
-        <div className="title-container"></div>
         <div>
           <h1>Workshop T11 - scratch detection on the car body</h1>
           <div className="defects-table-container">

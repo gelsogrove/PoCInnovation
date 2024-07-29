@@ -1,5 +1,3 @@
-/* App.css */
-
 html,
 body {
   height: 100%;
@@ -16,15 +14,19 @@ body {
   gap: 20px;
 }
 
-h1 {
-  color: #333;
-  margin-bottom: 20px;
-  text-align: left;
-}
-
 .container {
   display: flex;
   flex: 1;
+  position: relative; /* Per assicurare che il contenuto delle card non venga coperto */
+}
+
+.title-container {
+  width: 100%;
+}
+
+h1 {
+  color: #333;
+  text-align: left;
 }
 
 .defects-table-container {
@@ -34,29 +36,13 @@ h1 {
   overflow-y: auto; /* Aggiungi scrollbar verticale se necessario */
 }
 
-.defects-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.defects-table th,
-.defects-table td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.defects-table th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
 .cards-container {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px; /* Spazio tra le card */
   margin-top: 80px; /* Sposta le card verso il basso di 80px */
+  position: relative; /* Assicurati che le card non siano sopra la patina della popup */
 }
 
 .card {
@@ -66,13 +52,9 @@ h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   height: 300px; /* Altezza fissa per le card */
   position: relative;
+  z-index: 1; /* Assicurati che le card siano sopra la patina */
 }
 
 .card h2 {
   margin-top: 0;
-}
-
-h1 {
-  text-align: center;
-  color: #333;
 }
