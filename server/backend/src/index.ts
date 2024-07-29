@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express"
 import fs from "fs"
 import path from "path"
+const cors = require("cors")
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -8,6 +9,13 @@ const PORT = process.env.PORT || 3000
 // Middleware to parse JSON and URL-encoded data with increased limit
 app.use(express.json({ limit: "50mb" }))
 app.use(express.urlencoded({ limit: "50mb", extended: true }))
+
+// Abilita CORS per tutte le origini
+app.use(cors())
+
+// Serve static files from the 'images' directory
+const imagesPath = path.join(__dirname, "images")
+app.use("/images", express.static(imagesPath))
 
 // Function to validate date
 const isValidDate = (dateString: string): boolean => {
@@ -18,8 +26,6 @@ const isValidDate = (dateString: string): boolean => {
 app.post("/new-defect", (req: Request, res: Response) => {
   const { dateFormat, timestamp, workshop, _msgId, camera, imageBase64 } =
     req.body
-
-  console.log(req.body)
 
   if (!dateFormat || !timestamp) {
     return res.status(400).json({
@@ -35,10 +41,7 @@ app.post("/new-defect", (req: Request, res: Response) => {
   const date = new Date(dateFormat)
 
   const imagesDirPath = path.join(__dirname, "images")
-  const imagePath = path.join(
-    "/Users/gelso/workspace/PoC/server/backend/images",
-    `${timestamp}.jpg`
-  )
+  const imagePath = path.join(imagesDirPath, `${timestamp}.jpg`)
 
   // Create the images directory if it doesn't exist
   if (!fs.existsSync(imagesDirPath)) {
@@ -49,7 +52,7 @@ app.post("/new-defect", (req: Request, res: Response) => {
   const imageBuffer = Buffer.from(imageBase64, "base64")
   fs.writeFileSync(imagePath, imageBuffer)
 
-  const dirPath = path.join("/Users/gelso/workspace/PoC/server/backend", "data")
+  const dirPath = path.join(__dirname, "data")
   const filePath = path.join(dirPath, `${workshop}.json`)
 
   // Create the data directory if it doesn't exist
@@ -75,7 +78,7 @@ app.post("/new-defect", (req: Request, res: Response) => {
     jsonData.push({
       _msgId,
       data: date.toISOString(), // Use the validated date value
-      filepath: "images/" + timestamp + ".jpg",
+      filepath: `images/${timestamp}.jpg`, // Relative path
       workshop,
       camera,
     })
@@ -104,7 +107,9 @@ app.get("/defects", (req: Request, res: Response) => {
 
   fs.readFile(filePath, "utf8", (err, fileData) => {
     if (err) {
-      return res.status(500).json({ error: "Error reading the file" })
+      return res
+        .status(500)
+        .json({ error: "Error reading the file" + filePath })
     }
     try {
       const jsonData = JSON.parse(fileData)
