@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useEffect, useState } from "react"
 import "./DefectsTable.css"
 import Modal from "./Modal"
@@ -13,6 +14,7 @@ interface Defect {
 const DefectsTable: React.FC = () => {
   const [defects, setDefects] = useState<Defect[]>([])
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+
   const [ws, setWs] = useState<WebSocket | null>(null)
 
   // Define fetchDefects as a callback function
@@ -23,6 +25,7 @@ const DefectsTable: React.FC = () => {
         throw new Error(`HTTP error! Status: ${response.status}`)
       }
       const data = await response.json()
+
       setDefects(data)
     } catch (error) {
       console.error("Error fetching defects:", error)
@@ -87,8 +90,6 @@ const DefectsTable: React.FC = () => {
             <th></th>
             <th>VIN NUMBER</th>
             <th>Datetime</th>
-            <th>Workshop</th>
-            <th>Camera</th>
           </tr>
         </thead>
         <tbody>
@@ -104,8 +105,6 @@ const DefectsTable: React.FC = () => {
               </td>
               <td>HDHDVDHHDVDHHDFHVHHD</td>
               <td>{new Date(defect.data).toLocaleString()}</td>
-              <td>{defect.workshop}</td>
-              <td>{defect.camera}</td>
             </tr>
           ))}
         </tbody>

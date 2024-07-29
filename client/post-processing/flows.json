@@ -1,16 +1,32 @@
 [
     {
-        "id": "0a9520b3bc66dad6",
+        "id": "e5ff7f387ec0af58",
         "type": "tab",
-        "label": "Flow 1",
-        "disabled": true,
+        "label": "Advance Settings",
+        "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "e5ff7f387ec0af58",
+        "id": "b56b851c180cbc4b",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Pre Detection flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "56d7af57f34d08fb",
+        "type": "tab",
+        "label": "Post Detection flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8f4823599e012ecf",
+        "type": "tab",
+        "label": "Catch Flow",
         "disabled": false,
         "info": "",
         "env": []
@@ -59,13 +75,14 @@
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "<h1> DEFECT DEFECT... </h1>\n<p>We detected a defect on {{dateFormat}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{base64}}\" alt=\"Defect Image\"/></p>\n\n {{sayhello}}",
+        "template": "<h1> DEFECT DEFECT... </h1>\n<p>We detected a defect on {{dateFormat}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
         "output": "str",
-        "x": 1960,
-        "y": 340,
+        "x": 1120,
+        "y": 440,
         "wires": [
             [
-                "c58ef4d4fb3acac9"
+                "c58ef4d4fb3acac9",
+                "3e7d849007b1bb5c"
             ]
         ]
     },
@@ -82,8 +99,8 @@
         "tls": true,
         "name": "andrea_gelsomino@hotmail.com",
         "dname": "Send notification",
-        "x": 2170,
-        "y": 380,
+        "x": 1350,
+        "y": 400,
         "wires": [],
         "info": "vpsp hmum bsge lxyf"
     },
@@ -111,16 +128,16 @@
         "id": "dc80e2a28022a9cc",
         "type": "function",
         "z": "e5ff7f387ec0af58",
-        "name": "Clean Object",
-        "func": "// ADD PROPERTY\nmsg.sayhello = \"ciao\"; \n\nmsg.payload = {\n    timestamp: msg.timestamp,\n    dateFormat: new Date(msg.timestamp).toLocaleString(),\n    filename: \"test.jpg\",\n    workshop: \"T11\",\n    workshopId: \"12345\",\n    _msgId: msg._msgid,\n    camera: \"Camera 1\",\n    cameraId: \"CameraId\",\n    imageBase64: msg.imageBase64\n};\n\nreturn msg;",
+        "name": "Prepare Object",
+        "func": "msg.payload = {\n    timestamp: msg.timestamp,\n    dateFormat: new Date(msg.timestamp).toLocaleString(),\n    filename: msg.filename,\n    workshop: \"T11\",\n    workshopId: \"12345\",\n    _msgId: msg._msgid,\n    camera: \"Camera 1\",\n    cameraId: \"CameraId\",\n    imageBase64: msg.imageBase64\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1350,
-        "y": 280,
+        "x": 420,
+        "y": 440,
         "wires": [
             [
                 "31f530353a98f1a7"
@@ -198,7 +215,7 @@
         "id": "31f530353a98f1a7",
         "type": "http request",
         "z": "e5ff7f387ec0af58",
-        "name": "Http Post ",
+        "name": "Http Post -send defect",
         "method": "POST",
         "ret": "txt",
         "paytoqs": "ignore",
@@ -210,43 +227,13 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1540,
-        "y": 280,
+        "x": 660,
+        "y": 440,
         "wires": [
             [
                 "aba485c9d5252c0c"
             ]
         ]
-    },
-    {
-        "id": "98bb624796090f07",
-        "type": "catch",
-        "z": "e5ff7f387ec0af58",
-        "name": "",
-        "scope": null,
-        "uncaught": false,
-        "x": 380,
-        "y": 420,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "447c76ee6502aceb",
-        "type": "debug",
-        "z": "e5ff7f387ec0af58",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1940,
-        "y": 220,
-        "wires": []
     },
     {
         "id": "acbc95ca8524c449",
@@ -337,13 +324,202 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1740,
-        "y": 280,
+        "x": 900,
+        "y": 440,
         "wires": [
             [
-                "447c76ee6502aceb",
                 "a91fe4b363cb2226"
             ]
         ]
+    },
+    {
+        "id": "3e7d849007b1bb5c",
+        "type": "exec",
+        "z": "e5ff7f387ec0af58",
+        "command": "rm ",
+        "addpay": "filename",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "1",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Delete image",
+        "x": 1330,
+        "y": 480,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "cc227be2cc1cb3aa",
+        "type": "watch",
+        "z": "56d7af57f34d08fb",
+        "name": "Watch output folder",
+        "files": "/Users/gelso/workspace/PoC/client/inferences/output",
+        "recursive": true,
+        "x": 210,
+        "y": 140,
+        "wires": [
+            [
+                "b6657661e635a53b"
+            ]
+        ]
+    },
+    {
+        "id": "b6657661e635a53b",
+        "type": "http request",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 450,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0c57b342dc3cd876",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "credtype": "account",
+        "account": "",
+        "text": "",
+        "phonenumbervalue": "",
+        "apikeyvalue": "",
+        "apikeyinputtypemessage": "msg",
+        "phonenumberinputtypemessage": "msg",
+        "inputtypemessage": "str",
+        "rejectssl": false,
+        "x": 460,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b9bc5f9ce600beb1",
+        "type": "telegram sender",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "bot": "",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 460,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "126195d01abe3337",
+        "type": "http request",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 450,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "786368135c5f76b3",
+        "type": "websocket in",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "server": "",
+        "client": "",
+        "x": 440,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "98bb624796090f07",
+        "type": "catch",
+        "z": "8f4823599e012ecf",
+        "name": "",
+        "scope": [
+            "783d18f0473c6345",
+            "dc80e2a28022a9cc",
+            "31f530353a98f1a7",
+            "aba485c9d5252c0c",
+            "3e7d849007b1bb5c",
+            "09310a4daf509e32",
+            "d370592ba8da03c9"
+        ],
+        "uncaught": false,
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "56b7a1f0165a52a4",
+                "596fe05ccbb831ea"
+            ]
+        ]
+    },
+    {
+        "id": "596fe05ccbb831ea",
+        "type": "debug",
+        "z": "8f4823599e012ecf",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "56b7a1f0165a52a4",
+        "type": "e-mail",
+        "z": "8f4823599e012ecf",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "andrea_gelsomino@hotmail.com",
+        "dname": "Send notification",
+        "x": 330,
+        "y": 100,
+        "wires": [],
+        "info": "vpsp hmum bsge lxyf"
     }
 ]

@@ -58,3 +58,28 @@ h1 {
 .card h2 {
   margin-top: 0;
 }
+
+.settings-list {
+  margin-top: 30px;
+  width: 400px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+input[type="email"] {
+  width: 300px;
+  height: 10px;
+  padding: 10px;
+}
+
+input[type="checkbox"] {
+  height: 20px; /* Imposta l'altezza desiderata */
+  width: 20px; /* Aggiungi anche una larghezza per mantenere la proporzione */
+  border: 1px solid red; /* Bordo rosso come indicato */
+}
+
+input[type="text"] {
+  width: 300px;
+  height: 10px;
+  padding: 10px;
+}

@@ -116,7 +116,7 @@ def main():
     model_path = 'models/scratches.onnx'  # Path to the ONNX model
     input_shape = [1, 3, 640, 640] 
     output_folder = './output' 
-    confidence_threshold = 0.9 
+    confidence_threshold = 0.85
 
 
     analyze_images_in_folder(folder_path, model_path, input_shape, output_folder, confidence_threshold)
