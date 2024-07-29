@@ -127,7 +127,7 @@
         "type": "function",
         "z": "e5ff7f387ec0af58",
         "name": "Clean Object",
-        "func": "// ADD PROPERTY\nmsg.sayhello = \"ciao\"; \n\nmsg.payload = {\n    dateFormat: new Date(msg.timestamp).toLocaleString(),\n    filename: \"test.jpg\",\n    workshop: \"T11\",\n    workshopId: \"12345\",\n    _msgId: msg._msgid,\n    camera: \"Camera 1\",\n    cameraId: \"CameraId\",\n    imageBase64: msg.imageBase64\n};\n\nreturn msg;",
+        "func": "// ADD PROPERTY\nmsg.sayhello = \"ciao\"; \n\nmsg.payload = {\n    timestamp: msg.timestamp,\n    dateFormat: new Date(msg.timestamp).toLocaleString(),\n    filename: \"test.jpg\",\n    workshop: \"T11\",\n    workshopId: \"12345\",\n    _msgId: msg._msgid,\n    camera: \"Camera 1\",\n    cameraId: \"CameraId\",\n    imageBase64: msg.imageBase64\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,

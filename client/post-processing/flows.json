@@ -61,10 +61,12 @@
         "syntax": "mustache",
         "template": "<h1> DEFECT DEFECT... </h1>\n<p>We detected a defect on {{dateFormat}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{base64}}\" alt=\"Defect Image\"/></p>\n\n {{sayhello}}",
         "output": "str",
-        "x": 1540,
-        "y": 640,
+        "x": 1960,
+        "y": 340,
         "wires": [
-            []
+            [
+                "c58ef4d4fb3acac9"
+            ]
         ]
     },
     {
@@ -80,27 +82,10 @@
         "tls": true,
         "name": "andrea_gelsomino@hotmail.com",
         "dname": "Send notification",
-        "x": 1870,
-        "y": 580,
+        "x": 2170,
+        "y": 380,
         "wires": [],
         "info": "vpsp hmum bsge lxyf"
-    },
-    {
-        "id": "8b2cd957b93a2ab0",
-        "type": "debug",
-        "z": "e5ff7f387ec0af58",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1740,
-        "y": 280,
-        "wires": []
     },
     {
         "id": "783d18f0473c6345",
@@ -259,8 +244,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1180,
-        "y": 600,
+        "x": 1940,
+        "y": 220,
         "wires": []
     },
     {
@@ -352,11 +337,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1720,
-        "y": 420,
+        "x": 1740,
+        "y": 280,
         "wires": [
             [
-                "447c76ee6502aceb"
+                "447c76ee6502aceb",
+                "a91fe4b363cb2226"
             ]
         ]
     }

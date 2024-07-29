@@ -6,5 +6,5 @@ client/inferences/models
 client/inferences/models/scratches.onnx
 client/post-processing/node_modules
 server/backend/node_modules
-server/backend/data
-server/backend/images
+server/backend/src/data
+server/backend/src/images
