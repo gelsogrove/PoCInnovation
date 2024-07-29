@@ -1,6 +1,5 @@
 localhost:3000 senza parametri
 
-creare i componenti per la homepage
 
 popup con node-red e personalizzazione css
 

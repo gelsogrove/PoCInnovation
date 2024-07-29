@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useEffect, useState } from "react"
+import Modal from "../modal/Modal"
 import "./DefectsTable.css"
-import Modal from "./Modal"
 
 interface Defect {
   _msgId: string
