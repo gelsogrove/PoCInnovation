@@ -8,18 +8,18 @@ const App: React.FC = () => {
       <div className="container">
         <div className="title-container"></div>
         <div>
-          <h1>Defects Table</h1>
+          <h1>Workshop T11 - scratch detection on the car body</h1>
           <div className="defects-table-container">
             <DefectsTable />
           </div>
         </div>
         <div className="cards-container">
           <div className="card">
-            <h2>Card 1</h2>
+            <h2>Settings</h2>
             {/* Contenuto futuro */}
           </div>
           <div className="card">
-            <h2>Card 2</h2>
+            <h2>Graph</h2>
             {/* Contenuto futuro */}
           </div>
         </div>

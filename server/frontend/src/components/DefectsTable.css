@@ -4,6 +4,7 @@
 
 .defects-table-container {
   width: 68vw;
+  height: 89vh !important;
 }
 
 .defects-table {
@@ -12,7 +13,22 @@
   border-collapse: collapse;
 }
 
-.defects-table th,
+.defects-table th {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+.defects-table tr {
+  padding: 8px;
+  width: 180px;
+}
+
+.defects-table td:first-child {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  width: 180px;
+}
 .defects-table td {
   padding: 8px;
   text-align: left;

@@ -30,9 +30,8 @@ h1 {
 .defects-table-container {
   flex: 3;
   margin-right: 20px; /* Aggiungi spazio tra tabella e card */
-  max-height: 650px; /* Imposta l'altezza massima della tabella */
+  max-height: 880px; /* Imposta l'altezza massima della tabella */
   overflow-y: auto; /* Aggiungi scrollbar verticale se necessario */
-  height: 930px; /* Altezza fissa per la tabella */
 }
 
 .defects-table {
