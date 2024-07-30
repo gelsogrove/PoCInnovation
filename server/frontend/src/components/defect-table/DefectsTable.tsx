@@ -1,4 +1,3 @@
-// DefectsTable.tsx
 import React, { useState } from "react"
 import DefectModel from "../../models/DefectModel"
 import CustomModal from "../customModal/CustomModal"
@@ -43,6 +42,7 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
                     onClick={() => handleImageClick(defect.filepath)}
                     className="thumbnail"
                   />
+
                   <img
                     src={`http://localhost:3000/${defect.filepath}`}
                     alt="Defect"

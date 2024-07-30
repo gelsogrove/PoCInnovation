@@ -1,80 +1,82 @@
+/* Contenitore della tabella */
 .defects-table-container {
-  width: 58vw; /* Larghezza del contenitore della tabella */
-  height: 830px; /* Altezza fissa per il contenitore della tabella */
+  width: 58vw;
+  height: 830px;
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
-  overflow: hidden; /* Nasconde la scrollbar per il contenitore */
+  overflow: hidden;
 }
 
+/* Stile della tabella */
 .defects-table {
-  width: 118vw;
-
+  width: 100%; /* Adatta la larghezza alla dimensione del contenitore */
   height: 100%; /* Occupa tutta l'altezza del contenitore */
   border-collapse: collapse;
   background-color: #fff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Nasconde la scrollbar qui */
 }
 
+/* Intestazioni della tabella */
 .defects-table thead {
-  position: -webkit-sticky; /* Per Safari */
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   height: 40px;
   background-color: #f4f4f4;
-  z-index: 1; /* Assicura che le intestazioni siano sopra il corpo della tabella */
+  z-index: 1;
 }
 
+/* Colonne della tabella */
 .defects-table th {
+}
+.defects-table td {
+  padding: 16px;
+  border: 1px solid #ddd;
 }
 
 .defects-table td:first-child {
   width: 350px;
 }
 
-.defects-table td {
-  padding: 16px; /* Maggiore spazio */
-  border: 1px solid #ddd;
-}
-
-.defects-table th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-  white-space: nowrap; /* Evita il wrapping del testo */
-}
-
+/* Colonna della tabella per le immagini */
 .defects-table th.detection {
-  width: 200px; /* Larghezza fissa per la colonna delle immagini */
+  width: 200px;
 }
 
 .defects-table th.details {
-  width: 400px; /* Larghezza fissa per la colonna dei dettagli */
+  width: 400px;
 }
 
+/* Corpo della tabella con scroll verticale */
 .defects-table tbody {
   display: block;
-  height: calc(
-    100% - 56px
-  ); /* Altezza totale meno l'altezza dell'intestazione */
-  overflow-y: auto; /* Scrollbar verticale per il corpo della tabella */
+  width: 1041px;
+  font-size: 18px;
+  height: calc(100% - 40px); /* Altezza totale meno altezza intestazioni */
+  overflow-y: auto;
 }
 
+/* Righe della tabella */
 .defects-table tbody tr {
   display: table;
   width: 100%;
-  table-layout: fixed; /* Mantiene la larghezza fissa delle colonne */
+  table-layout: fixed;
 }
 
-.defects-table td {
-  vertical-align: top;
-  font-size: 18px;
-  overflow: hidden; /* Evita che il testo esca fuori dalle celle */
+/* Alternanza dei colori delle righe */
+.defects-table tbody tr:nth-child(odd) {
+  background-color: #ffffff; /* Bianco per righe dispari */
 }
 
+.defects-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Grigio chiaro per righe pari */
+}
+
+/* Miniature */
 .thumbnail {
-  width: 150px; /* Aumenta la larghezza delle miniature */
-  height: 150px; /* Aumenta l'altezza delle miniature */
+  width: 150px;
+  height: 150px;
   cursor: pointer;
-  margin-left: 20px; /* Margine sinistro per distanziare le miniature */
+  margin-left: 20px;
 }
