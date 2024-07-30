@@ -46,6 +46,13 @@ const DefectsTable: React.FC<DefectsTableProps> = (props) => {
                   onClick={() => handleImageClick(defect.filepath)}
                   className="thumbnail"
                 />
+
+                <img
+                  src={`http://localhost:3000/${defect.filepath}`}
+                  alt="Defect"
+                  onClick={() => handleImageClick(defect.filepath)}
+                  className="thumbnail"
+                />
               </td>
               <td>
                 <b>ID:</b> {defect._msgId} <br />

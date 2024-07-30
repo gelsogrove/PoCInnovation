@@ -47,11 +47,13 @@ h1 {
 
 /* CSS per le card */
 .card {
+  margin-left: 30px;
   background: white;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 300px; /* Altezza fissa per le card */
+  height: 360px; /* Altezza fissa per le card */
+  width: 500px;
   position: relative;
   z-index: 0; /* Assicurati che le card siano sotto l'overlay e la modale */
 }

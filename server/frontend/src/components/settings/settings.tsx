@@ -23,7 +23,6 @@ const Settings: React.FC = () => {
   return (
     <div className="card">
       <h2>Settings</h2>
-      <hr />
       <div className="settings-list">
         <div>
           <div className="block">

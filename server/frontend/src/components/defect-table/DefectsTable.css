@@ -1,5 +1,5 @@
 .defects-table-container {
-  width: 68vw;
+  width: 58vw;
   height: 830px !important;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,8 @@
 }
 .defects-table td:first-child {
   padding: 16px;
-  width: 130px;
+  width: 300px;
+  padding: 20px;
 }
 
 .defects-table td {
@@ -48,6 +49,7 @@
   width: 100px;
   height: auto;
   cursor: pointer;
+  margin-left: 20px;
 }
 
 .headerth {
