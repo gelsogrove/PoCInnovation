@@ -1,58 +1,80 @@
 .defects-table-container {
-  width: 58vw;
-  height: 830px !important;
+  width: 58vw; /* Larghezza del contenitore della tabella */
+  height: 830px; /* Altezza fissa per il contenitore della tabella */
   display: flex;
   flex-direction: column;
+  border: 1px solid #ccc;
+  overflow: hidden; /* Nasconde la scrollbar per il contenitore */
 }
 
 .defects-table {
-  width: 100%;
-  max-height: 500px;
-  border: 1px solid red;
+  width: 118vw;
+
+  height: 100%; /* Occupa tutta l'altezza del contenitore */
   border-collapse: collapse;
   background-color: #fff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Scorrimento verticale per la tabella */
+  overflow: hidden; /* Nasconde la scrollbar qui */
+}
+
+.defects-table thead {
+  position: -webkit-sticky; /* Per Safari */
+  position: sticky;
+  top: 0;
+  height: 40px;
+  background-color: #f4f4f4;
+  z-index: 1; /* Assicura che le intestazioni siano sopra il corpo della tabella */
 }
 
 .defects-table th {
-  height: 50px;
-  background-color: white;
-  border: 1px solid #ccc;
 }
+
 .defects-table td:first-child {
-  padding: 16px;
-  width: 300px;
-  padding: 20px;
+  width: 350px;
 }
 
 .defects-table td {
+  padding: 16px; /* Maggiore spazio */
   border: 1px solid #ddd;
-  padding: 24px;
-  text-align: left;
-  vertical-align: top;
-  font-size: 18px;
 }
 
 .defects-table th {
   background-color: #f4f4f4;
   font-weight: bold;
+  white-space: nowrap; /* Evita il wrapping del testo */
 }
 
-.defects-table td img {
-  width: 130px;
-  height: 130px;
-  cursor: pointer;
+.defects-table th.detection {
+  width: 200px; /* Larghezza fissa per la colonna delle immagini */
+}
+
+.defects-table th.details {
+  width: 400px; /* Larghezza fissa per la colonna dei dettagli */
+}
+
+.defects-table tbody {
+  display: block;
+  height: calc(
+    100% - 56px
+  ); /* Altezza totale meno l'altezza dell'intestazione */
+  overflow-y: auto; /* Scrollbar verticale per il corpo della tabella */
+}
+
+.defects-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* Mantiene la larghezza fissa delle colonne */
+}
+
+.defects-table td {
+  vertical-align: top;
+  font-size: 18px;
+  overflow: hidden; /* Evita che il testo esca fuori dalle celle */
 }
 
 .thumbnail {
-  width: 100px;
-  height: auto;
+  width: 150px; /* Aumenta la larghezza delle miniature */
+  height: 150px; /* Aumenta l'altezza delle miniature */
   cursor: pointer;
-  margin-left: 20px;
-}
-
-.headerth {
-  text-align: left;
-  padding-left: 20px;
+  margin-left: 20px; /* Margine sinistro per distanziare le miniature */
 }

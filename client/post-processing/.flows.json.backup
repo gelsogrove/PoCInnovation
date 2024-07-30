@@ -1,5 +1,13 @@
 [
     {
+        "id": "e5ff7f387ec0af58",
+        "type": "tab",
+        "label": "Advance Settings",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "b56b851c180cbc4b",
         "type": "tab",
         "label": "Pre Detection flow",
@@ -19,14 +27,6 @@
         "id": "8f4823599e012ecf",
         "type": "tab",
         "label": "Catch Flow",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "e5ff7f387ec0af58",
-        "type": "tab",
-        "label": "Advance Settings",
         "disabled": false,
         "info": "",
         "env": []
@@ -207,6 +207,78 @@
         "y": 140,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "31f530353a98f1a7",
+        "type": "http request",
+        "z": "e5ff7f387ec0af58",
+        "name": "Http Post -Send Defect",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://localhost:3000/new-defect",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 770,
+        "y": 180,
+        "wires": [
+            [
+                "3e7d849007b1bb5c"
+            ]
+        ]
+    },
+    {
+        "id": "3e7d849007b1bb5c",
+        "type": "exec",
+        "z": "e5ff7f387ec0af58",
+        "command": "rm ",
+        "addpay": "filename",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "1",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Delete local image",
+        "x": 1050,
+        "y": 180,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "aada60ebf6288682",
+        "type": "subflow:79f7f96a02b62b78",
+        "z": "e5ff7f387ec0af58",
+        "name": "Prepare Object Defect",
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [
+                "31f530353a98f1a7"
+            ]
+        ]
+    },
+    {
+        "id": "dc47a598cd60c45f",
+        "type": "watch",
+        "z": "e5ff7f387ec0af58",
+        "name": "Watch output folder",
+        "files": "/Users/gelso/workspace/PoC/client/inferences/output",
+        "recursive": true,
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "aada60ebf6288682"
+            ]
         ]
     },
     {
@@ -511,74 +583,86 @@
         "info": "vpsp hmum bsge lxyf"
     },
     {
-        "id": "31f530353a98f1a7",
-        "type": "http request",
-        "z": "e5ff7f387ec0af58",
-        "name": "Http Post -Send Defect",
-        "method": "POST",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "http://localhost:3000/new-defect",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 770,
-        "y": 180,
+        "id": "06c86b669066fb32",
+        "type": "http in",
+        "z": "94e3b6bceb5546d9",
+        "name": "Check. Server 1",
+        "url": "",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 420,
+        "y": 120,
         "wires": [
             [
-                "3e7d849007b1bb5c"
+                "e8a8bbfe1ba546b7"
             ]
         ]
     },
     {
-        "id": "3e7d849007b1bb5c",
-        "type": "exec",
-        "z": "e5ff7f387ec0af58",
-        "command": "rm ",
-        "addpay": "filename",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "1",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Delete local image",
-        "x": 1050,
-        "y": 180,
-        "wires": [
-            [],
-            [],
-            []
-        ]
+        "id": "e8a8bbfe1ba546b7",
+        "type": "debug",
+        "z": "94e3b6bceb5546d9",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 120,
+        "wires": []
     },
     {
-        "id": "aada60ebf6288682",
-        "type": "subflow:79f7f96a02b62b78",
-        "z": "e5ff7f387ec0af58",
-        "name": "Prepare Object Defect",
-        "x": 500,
+        "id": "3f7a6bd0a3237e26",
+        "type": "http in",
+        "z": "94e3b6bceb5546d9",
+        "name": "Check IOT 1",
+        "url": "",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 410,
         "y": 180,
         "wires": [
             [
-                "31f530353a98f1a7"
+                "e8a8bbfe1ba546b7"
             ]
         ]
     },
     {
-        "id": "dc47a598cd60c45f",
-        "type": "watch",
-        "z": "e5ff7f387ec0af58",
-        "name": "Watch output folder",
-        "files": "/Users/gelso/workspace/PoC/client/inferences/output",
-        "recursive": true,
-        "x": 250,
-        "y": 180,
+        "id": "8281a173d441a8e0",
+        "type": "http in",
+        "z": "94e3b6bceb5546d9",
+        "name": "Check Camera 1",
+        "url": "",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 420,
+        "y": 240,
         "wires": [
             [
-                "aada60ebf6288682"
+                "e8a8bbfe1ba546b7"
+            ]
+        ]
+    },
+    {
+        "id": "b7afcf2b0211296c",
+        "type": "http in",
+        "z": "94e3b6bceb5546d9",
+        "name": "Check Camera 2",
+        "url": "",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 420,
+        "y": 300,
+        "wires": [
+            [
+                "e8a8bbfe1ba546b7"
             ]
         ]
     }

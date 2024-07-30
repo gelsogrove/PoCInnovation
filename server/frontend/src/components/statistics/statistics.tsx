@@ -1,3 +1,10 @@
+import React, { useState } from "react"
+import { Bar } from "react-chartjs-2"
+import Modal from "react-modal"
+import "../customModal/CustomModal.css" // Assicurati che il percorso sia corretto
+import "./statistics.css" // Assicurati che il percorso sia corretto
+
+// Import dei moduli necessari per Chart.js
 import {
   BarElement,
   CategoryScale,
@@ -7,9 +14,6 @@ import {
   Title,
   Tooltip,
 } from "chart.js"
-import React, { useState } from "react"
-import { Bar } from "react-chartjs-2"
-import Modal from "react-modal"
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -41,7 +45,7 @@ const Statistics: React.FC<StatisticsProps> = ({ defects }) => {
     labels: hours.map((hour) => `${hour}:00`),
     datasets: [
       {
-        label: "Error por hour",
+        label: "Errors per Hour",
         data: counts,
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderColor: "rgba(75, 192, 192, 1)",
@@ -59,7 +63,7 @@ const Statistics: React.FC<StatisticsProps> = ({ defects }) => {
       tooltip: {
         callbacks: {
           label: (context: any) => {
-            return `${context.label}: ${context.raw} errori`
+            return `${context.label}: ${context.raw} errors`
           },
         },
       },
@@ -79,24 +83,33 @@ const Statistics: React.FC<StatisticsProps> = ({ defects }) => {
     <div className="card">
       <h2>Statistics</h2>
 
-      <div style={{ position: "relative", height: "400px" }}>
+      <div
+        className="chart-container"
+        style={{ position: "relative", height: "400px" }}
+      >
         <Bar data={data} options={options} />
       </div>
+
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Detailed Error Stats"
         className="Modal"
         overlayClassName="Overlay"
-        shouldCloseOnOverlayClick={true}
       >
-        <div style={{ position: "relative", height: "500px", width: "800px" }}>
+        <div
+          className="chart-container"
+          style={{ position: "relative", height: "500px", width: "800px" }}
+        >
           {modalData ? (
             <Bar data={modalData} options={options} />
           ) : (
-            <p>Caricamento...</p>
+            <p>Loading...</p>
           )}
         </div>
+        <button onClick={closeModal} className="close-button">
+          Close
+        </button>
       </Modal>
     </div>
   )

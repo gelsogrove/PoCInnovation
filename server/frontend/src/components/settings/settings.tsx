@@ -1,15 +1,14 @@
 import React, { useState } from "react"
 import Modal from "react-modal"
-import "./settings.css"
+import "../customModal/CustomModal.css" // Assicurati che il percorso sia corretto
+import "./settings.css" // Assicurati che il percorso sia corretto
 
-// Assicurati che il modale si riferisca all'elemento radice
 Modal.setAppElement("#root")
 
 const Settings: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalContent, setModalContent] = useState<string | null>(null)
 
-  // Funzione per aprire il popup centrato
   const openModal = (url: string) => {
     setModalContent(url)
     setIsModalOpen(true)
@@ -32,7 +31,7 @@ const Settings: React.FC = () => {
             <a
               href="#"
               onClick={(e) => {
-                e.preventDefault() // Previeni il comportamento predefinito del link
+                e.preventDefault()
                 openModal("http://127.0.0.1:1880/#flow/94e3b6bceb5546d9")
               }}
             >
@@ -43,7 +42,7 @@ const Settings: React.FC = () => {
             <a
               href="#"
               onClick={(e) => {
-                e.preventDefault() // Previeni il comportamento predefinito del link
+                e.preventDefault()
                 openModal("http://127.0.0.1:1880/#flow/56d7af57f34d08fb")
               }}
             >
@@ -54,7 +53,7 @@ const Settings: React.FC = () => {
             <a
               href="#"
               onClick={(e) => {
-                e.preventDefault() // Previeni il comportamento predefinito del link
+                e.preventDefault()
                 openModal("http://127.0.0.1:1880/#flow/8f4823599e012ecf")
               }}
             >
@@ -67,13 +66,13 @@ const Settings: React.FC = () => {
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Popup Content"
-        className="Modal"
-        overlayClassName="Overlay"
+        className="settings-Modal" // Classe CSS specifica
+        overlayClassName="settings-Overlay" // Classe CSS specifica
       >
         {modalContent && (
           <iframe
             src={modalContent}
-            style={{ width: "1300px", height: "700px", border: "none" }}
+            style={{ width: "100%", height: "100%", border: "none" }}
             title="Modal Content"
           />
         )}

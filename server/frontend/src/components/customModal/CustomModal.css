@@ -1,4 +1,4 @@
-/* CSS per l'overlay della modale */
+/* Modal.css */
 .Overlay {
   position: fixed;
   top: 0;
@@ -9,7 +9,6 @@
   z-index: 1000; /* Assicurati che sia sopra gli altri contenuti, ma sotto la modale */
 }
 
-/* CSS per il contenuto della modale */
 .Modal {
   position: absolute;
   top: 50%;
@@ -22,7 +21,6 @@
   z-index: 1001; /* Assicurati che sia sopra l'overlay */
 }
 
-/* CSS per il pulsante di chiusura */
 .close-button {
   display: block;
   margin: 0 0 10px auto;
@@ -32,10 +30,4 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.chart-container {
-  cursor: pointer !important;
-  cursor: pointer !important;
-  /* Imposta il cursore a mano per indicare un link o cliccabile */
 }

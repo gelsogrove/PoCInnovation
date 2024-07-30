@@ -1,34 +1,28 @@
-.settings-list {
-  margin-top: 30px;
-  width: 400px;
-  padding: 10px;
-  font-size: 18px;
+/* CSS per l'overlay della modale specifico per Settings */
+.settings-Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Colore scuro con trasparenza */
+  z-index: 1000; /* Assicurati che sia sotto la modale */
 }
 
-input[type="email"] {
-  width: 300px;
-  height: 10px;
-  padding: 10px;
-}
-
-input[type="checkbox"] {
-  height: 20px; /* Imposta l'altezza desiderata */
-  width: 20px; /* Aggiungi anche una larghezza per mantenere la proporzione */
-  border: 1px solid red; /* Bordo rosso come indicato */
-}
-
-input[type="text"] {
-  width: 300px;
-  height: 10px;
-  padding: 10px;
-}
-
-.green {
-  color: green;
-  font-weight: bold;
-}
-
-.block {
-  display: block;
-  margin-top: 15px;
+/* CSS per il contenuto della modale specifico per Settings */
+.settings-Modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001; /* Assicurati che sia sopra l'overlay */
+  width: 90vw; /* Imposta la larghezza del modale */
+  max-width: 1300px; /* Imposta una larghezza massima */
+  height: 80vh; /* Imposta l'altezza del modale */
+  max-height: 800px; /* Imposta un'altezza massima */
+  overflow: auto; /* Aggiungi scrollbar se necessario */
 }
