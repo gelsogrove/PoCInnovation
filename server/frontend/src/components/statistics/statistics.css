@@ -1,41 +1,30 @@
-/* CSS per l'overlay della modale */
-.Overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Colore scuro con trasparenza */
-  z-index: 1000; /* Assicurati che sia sopra gli altri contenuti, ma sotto la modale */
+/* settings.css */
+
+/* Stile per il contenitore dei blocchi */
+.block {
+  display: flex; /* Usa flexbox per allineare gli elementi */
+  justify-content: space-between; /* Spaziatura tra gli elementi */
+  align-items: center; /* Allineamento verticale al centro */
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ddd; /* Aggiungi un bordo se necessario */
+  border-radius: 5px; /* Aggiungi un angolo arrotondato se necessario */
 }
 
-/* CSS per il contenuto della modale */
-.Modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1001; /* Assicurati che sia sopra l'overlay */
+/* Stile per l'etichetta "Active" a destra */
+.status-label {
+  font-weight: bold;
+  color: green; /* Colore verde per l'etichetta "Active" */
+  margin-left: 20px; /* Spazio a sinistra dell'etichetta "Active" */
 }
 
-/* CSS per il pulsante di chiusura */
-.close-button {
-  display: block;
-  margin: 0 0 10px auto;
-  padding: 10px 20px;
-  background: #f44336;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/* Stile per il testo "Status" */
+.block div {
+  display: flex;
+  align-items: center;
 }
 
-.chart-container {
-  cursor: pointer !important;
-  cursor: pointer !important;
-  /* Imposta il cursore a mano per indicare un link o cliccabile */
+.green {
+  color: green; /* Colore verde per lo status */
+  font-weight: bold; /* Testo in grassetto */
 }

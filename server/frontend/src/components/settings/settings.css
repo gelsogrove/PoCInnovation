@@ -1,15 +1,65 @@
-/* CSS per l'overlay della modale specifico per Settings */
-.settings-Overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Colore scuro con trasparenza */
-  z-index: 1000; /* Assicurati che sia sotto la modale */
+.settings-list {
+  margin-top: 30px;
+  width: 400px;
+  padding: 10px;
+  font-size: 18px;
 }
 
-/* CSS per il contenuto della modale specifico per Settings */
+.block {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 440px;
+  cursor: pointer; /* Applicabile agli elementi cliccabili */
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.block:hover {
+  background-color: #f0f0f0; /* Colore di sfondo al passaggio del mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra leggera per l'effetto di sollevamento */
+}
+
+.block a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  flex: 1; /* Occupy available space */
+}
+
+.block a:hover {
+  background-color: #f0f0f0; /* Colore di sfondo al passaggio del mouse */
+}
+
+.block b {
+  margin-right: 10px;
+}
+
+.status {
+  margin-left: auto; /* Spinge lo stato verso destra */
+  font-weight: bold;
+  color: green; /* Colore verde per lo stato attivo */
+}
+
+.status.inactive {
+  color: gray; /* Colore per lo stato inattivo se necessario */
+}
+
+.block a .status {
+  cursor: pointer; /* Cursore a mano solo per gli elementi cliccabili */
+}
+
+.block .status {
+  cursor: default; /* Cursore normale per lo stato non cliccabile */
+}
+
+/* Rimuove l'effetto hover per lo stato non cliccabile */
+.block .status:not(.active) {
+  background-color: transparent;
+}
+
 .settings-Modal {
   position: absolute;
   top: 50%;
@@ -19,10 +69,43 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1001; /* Assicurati che sia sopra l'overlay */
-  width: 90vw; /* Imposta la larghezza del modale */
-  max-width: 1300px; /* Imposta una larghezza massima */
-  height: 80vh; /* Imposta l'altezza del modale */
-  max-height: 800px; /* Imposta un'altezza massima */
-  overflow: auto; /* Aggiungi scrollbar se necessario */
+  z-index: 1001;
+  width: 80%;
+  max-width: 1200px;
+  height: 80%;
+  max-height: 800px;
+}
+
+.settings-Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.close-button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.close-button:hover {
+  background-color: #0056b3; /* Colore di sfondo al passaggio del mouse */
+  transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
+}
+
+/* Stile per la frase Last Update */
+.last-update {
+  margin-top: 30px;
+  margin-left: 230px;
+  font-size: 16px;
+  color: #666; /* Colore del testo per la data */
 }

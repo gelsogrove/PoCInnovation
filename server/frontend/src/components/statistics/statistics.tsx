@@ -41,6 +41,8 @@ const Statistics: React.FC<StatisticsProps> = ({ defects }) => {
   const hours = Array.from({ length: 24 }, (_, i) => i)
   const counts = hours.map((hour) => hourCounts[hour] || 0)
 
+  const totalDefects = defects.length // Calcolo del totale dei difetti
+
   const data = {
     labels: hours.map((hour) => `${hour}:00`),
     datasets: [
@@ -82,6 +84,7 @@ const Statistics: React.FC<StatisticsProps> = ({ defects }) => {
   return (
     <div className="card">
       <h2>Statistics</h2>
+      <div className="defect-count">Count: {totalDefects} defects</div>
 
       <div
         className="chart-container"
