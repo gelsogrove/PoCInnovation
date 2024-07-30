@@ -1,75 +1,19 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useState } from "react"
+import DefectModel from "../../models/DefectModel"
 import Modal from "../modal/Modal"
 import "./DefectsTable.css"
 
-interface Defect {
-  _msgId: string
-  data: string
-  filepath: string
-  workshop: string
-  camera: string
+interface DefectsTableProps {
+  defects: DefectModel[]
 }
 
-const DefectsTable: React.FC = () => {
-  const [defects, setDefects] = useState<Defect[]>([])
+const DefectsTable: React.FC<DefectsTableProps> = (props) => {
+  const { defects } = props
+
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-
-  const [ws, setWs] = useState<WebSocket | null>(null)
-
-  // Define fetchDefects as a callback function
-  const fetchDefects = useCallback(async () => {
-    try {
-      const response = await fetch("http://localhost:3000/defects?workshop=T11")
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
-      }
-      const data = await response.json()
-
-      setDefects(data)
-    } catch (error) {
-      console.error("Error fetching defects:", error)
-    }
-  }, [])
-
-  const createWebSocket = () => {
-    const websocket = new WebSocket("ws://localhost:3000")
-
-    websocket.onopen = () => {
-      console.log("WebSocket connection established")
-    }
-
-    websocket.onmessage = (event) => {
-      console.log("WebSocket message received:", event.data)
-      if (event.data === "refresh") {
-        fetchDefects() // Call fetchDefects here
-      }
-    }
-
-    websocket.onclose = (event) => {
-      console.log("WebSocket connection closed...", event)
-      // Attempt to reconnect after a delay
-      setTimeout(createWebSocket, 5000)
-    }
-
-    websocket.onerror = (error) => {
-      console.error("WebSocket error:", error)
-    }
-
-    setWs(websocket)
-  }
-
-  useEffect(() => {
-    fetchDefects() // Initial fetch of defects
-    createWebSocket() // Initialize WebSocket connection
-
-    return () => {
-      if (ws) {
-        ws.close()
-      }
-    }
-  }, [fetchDefects]) // Ensure fetchDefects is included in dependencies
 
   const handleImageClick = (filepath: string) => {
     setSelectedImage(`http://localhost:3000/${filepath}`)
