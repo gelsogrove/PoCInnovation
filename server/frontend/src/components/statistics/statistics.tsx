@@ -47,7 +47,7 @@ const Statistics: React.FC<StatisticsProps> = ({ defects }) => {
     labels: hours.map((hour) => `${hour}:00`),
     datasets: [
       {
-        label: "Errors per Hour",
+        label: "Defects per Hour",
         data: counts,
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderColor: "rgba(75, 192, 192, 1)",
@@ -102,7 +102,7 @@ const Statistics: React.FC<StatisticsProps> = ({ defects }) => {
       >
         <div
           className="chart-container"
-          style={{ position: "relative", height: "500px", width: "800px" }}
+          style={{ position: "relative", height: "550px", width: "1100px" }}
         >
           {modalData ? (
             <Bar data={modalData} options={options} />

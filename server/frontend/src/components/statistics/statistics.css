@@ -28,3 +28,7 @@
   color: green; /* Colore verde per lo status */
   font-weight: bold; /* Testo in grassetto */
 }
+
+.chart-container {
+  cursor: pointer;
+}
