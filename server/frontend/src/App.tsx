@@ -1,12 +1,10 @@
-import React, { useState } from "react"
+import React from "react"
 import "./App.css"
 import DefectsTable from "./components/defect-table/DefectsTable"
 import Settings from "./components/settings/settings"
 import Statistics from "./components/statistics/statistics"
 
 const App: React.FC = () => {
-  const [count] = useState<number>(0)
-
   return (
     <div className="App">
       <div className="container">

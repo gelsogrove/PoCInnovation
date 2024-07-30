@@ -89,7 +89,6 @@ const DefectsTable: React.FC = () => {
           <tr>
             <th></th>
             <th>VIN NUMBER</th>
-            <th>Datetime</th>
           </tr>
         </thead>
         <tbody>
@@ -103,8 +102,18 @@ const DefectsTable: React.FC = () => {
                   className="thumbnail"
                 />
               </td>
-              <td>HDHDVDHHDVDHHDFHVHHD</td>
-              <td>{new Date(defect.data).toLocaleString()}</td>
+              <td>
+                <b>ID:</b> {defect._msgId} <br />
+                <br />
+                <br />
+                <b>Vin:</b> 1HBHD2DV4HHAAY65976DFHG Date:
+                <br />
+                <b>Date:</b>{" "}
+                {new Date(defect.data).toLocaleString().substring(0, 10)}
+                <br />
+                <b>Time:</b>{" "}
+                {new Date(defect.data).toLocaleString().substring(11)}
+              </td>
             </tr>
           ))}
         </tbody>

@@ -1,24 +1,36 @@
 .defects-table-container {
   width: 68vw;
-  height: 89vh; /* Altezza della container */
+  height: 830px !important;
   display: flex;
   flex-direction: column;
 }
 
 .defects-table {
   width: 100%;
-  min-height: 80vh; /* Altezza minima della tabella */
+  max-height: 500px;
+  border: 1px solid red;
   border-collapse: collapse;
   background-color: #fff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   overflow-y: auto; /* Scorrimento verticale per la tabella */
 }
 
-.defects-table th,
+.defects-table th {
+  height: 50px;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+.defects-table td:first-child {
+  padding: 16px;
+  width: 130px;
+}
+
 .defects-table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 24px;
   text-align: left;
+  vertical-align: top;
+  font-size: 18px;
 }
 
 .defects-table th {
@@ -36,4 +48,9 @@
   width: 100px;
   height: auto;
   cursor: pointer;
+}
+
+.headerth {
+  text-align: left;
+  padding-left: 20px;
 }

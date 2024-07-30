@@ -1,15 +1,14 @@
 localhost:3000 senza parametri
 
+Devi fare in modo di pasare tutto l'oggetto data all'homepage.
 
 popup con node-red e personalizzazione css
 
 primo td piu' corto
 
-LISTA DEI TALLER
+
 
 post detection deve inviare la mail
-
-Devi fare in modo di pasare tutto l'oggetto data all'homepage.
 
 Customizzare node-red logo(e scritte)
 

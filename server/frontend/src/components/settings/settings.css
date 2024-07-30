@@ -22,3 +22,13 @@ input[type="text"] {
   height: 10px;
   padding: 10px;
 }
+
+.green {
+  color: green;
+  font-weight: bold;
+}
+
+.block {
+  display: block;
+  margin-top: 15px;
+}
