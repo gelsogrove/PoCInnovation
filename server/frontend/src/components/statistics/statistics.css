@@ -1,0 +1,35 @@
+/* CSS per l'overlay della modale */
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Colore scuro con trasparenza */
+  z-index: 1000; /* Assicurati che sia sopra gli altri contenuti, ma sotto la modale */
+}
+
+/* CSS per il contenuto della modale */
+.Modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001; /* Assicurati che sia sopra l'overlay */
+}
+
+/* CSS per il pulsante di chiusura */
+.close-button {
+  display: block;
+  margin: 0 0 10px auto;
+  padding: 10px 20px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

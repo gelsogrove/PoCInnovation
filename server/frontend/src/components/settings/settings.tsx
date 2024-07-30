@@ -1,26 +1,25 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react"
+import React, { useState } from "react"
+import Modal from "react-modal"
 import "./settings.css"
 
-// Funzione per aprire il popup centrato
-const openPopup = (url: string) => {
-  // Specifiche del popup
-  const width = 1300
-  const height = 780
-
-  // Calcola la posizione del popup per centrarlo
-  const left = window.innerWidth / 2 - width / 2
-  const top = window.innerHeight / 2 - height / 2
-
-  // Apri il popup con le dimensioni e la posizione calcolata
-  window.open(
-    url,
-    "popup",
-    `width=${width},height=${height},left=${left},top=${top},scrollbars=no,resizable=no`
-  )
-}
+// Assicurati che il modale si riferisca all'elemento radice
+Modal.setAppElement("#root")
 
 const Settings: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalContent, setModalContent] = useState<string | null>(null)
+
+  // Funzione per aprire il popup centrato
+  const openModal = (url: string) => {
+    setModalContent(url)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setModalContent(null)
+  }
+
   return (
     <div className="card">
       <h2>Settings</h2>
@@ -35,7 +34,7 @@ const Settings: React.FC = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault() // Previeni il comportamento predefinito del link
-                openPopup("http://127.0.0.1:1880/#flow/94e3b6bceb5546d9")
+                openModal("http://127.0.0.1:1880/#flow/94e3b6bceb5546d9")
               }}
             >
               <b>Health Check</b>
@@ -46,7 +45,7 @@ const Settings: React.FC = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault() // Previeni il comportamento predefinito del link
-                openPopup("http://127.0.0.1:1880/#flow/56d7af57f34d08fb")
+                openModal("http://127.0.0.1:1880/#flow/56d7af57f34d08fb")
               }}
             >
               <b>Post detection flow</b>
@@ -57,7 +56,7 @@ const Settings: React.FC = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault() // Previeni il comportamento predefinito del link
-                openPopup("http://127.0.0.1:1880/#flow/8f4823599e012ecf")
+                openModal("http://127.0.0.1:1880/#flow/8f4823599e012ecf")
               }}
             >
               <b>Error flow</b>
@@ -65,6 +64,21 @@ const Settings: React.FC = () => {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Popup Content"
+        className="Modal"
+        overlayClassName="Overlay"
+      >
+        {modalContent && (
+          <iframe
+            src={modalContent}
+            style={{ width: "1300px", height: "700px", border: "none" }}
+            title="Modal Content"
+          />
+        )}
+      </Modal>
     </div>
   )
 }
