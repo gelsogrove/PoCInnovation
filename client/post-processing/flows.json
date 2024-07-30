@@ -32,6 +32,14 @@
         "env": []
     },
     {
+        "id": "94e3b6bceb5546d9",
+        "type": "tab",
+        "label": "Health Check",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "79f7f96a02b62b78",
         "type": "subflow",
         "name": "Prepare Object Defect",
@@ -253,8 +261,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1230,
-        "y": 240,
+        "x": 850,
+        "y": 260,
         "wires": [
             []
         ]
@@ -274,8 +282,8 @@
         "phonenumberinputtypemessage": "msg",
         "inputtypemessage": "str",
         "rejectssl": false,
-        "x": 1240,
-        "y": 300,
+        "x": 860,
+        "y": 320,
         "wires": [
             []
         ]
@@ -289,8 +297,8 @@
         "bot": "",
         "haserroroutput": false,
         "outputs": 1,
-        "x": 1240,
-        "y": 360,
+        "x": 860,
+        "y": 380,
         "wires": [
             []
         ]
@@ -312,8 +320,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1230,
-        "y": 420,
+        "x": 850,
+        "y": 440,
         "wires": [
             []
         ]
@@ -329,8 +337,8 @@
         "syntax": "mustache",
         "template": "<h1> DEFECT DEFECT... </h1>\n<p>We detected a defect on {{dateFormat}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
         "output": "str",
-        "x": 980,
-        "y": 240,
+        "x": 400,
+        "y": 340,
         "wires": [
             [
                 "81b74fbe0531d93f",
@@ -355,8 +363,8 @@
         "tls": true,
         "name": "andrea_gelsomino@hotmail.com",
         "dname": "Send notification",
-        "x": 1250,
-        "y": 180,
+        "x": 870,
+        "y": 200,
         "wires": [],
         "info": "vpsp hmum bsge lxyf"
     },
@@ -367,8 +375,8 @@
         "name": "Watch output folder",
         "files": "/Users/gelso/workspace/PoC/client/inferences/output",
         "recursive": true,
-        "x": 250,
-        "y": 240,
+        "x": 270,
+        "y": 80,
         "wires": [
             [
                 "54db61e91c8f9d4c"
@@ -417,8 +425,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 760,
-        "y": 240,
+        "x": 780,
+        "y": 80,
         "wires": [
             [
                 "553c2b1463077f70"
@@ -433,8 +441,8 @@
         "name": "",
         "server": "",
         "client": "",
-        "x": 1230,
-        "y": 480,
+        "x": 850,
+        "y": 500,
         "wires": []
     },
     {
@@ -442,8 +450,8 @@
         "type": "subflow:79f7f96a02b62b78",
         "z": "56d7af57f34d08fb",
         "name": "",
-        "x": 520,
-        "y": 240,
+        "x": 540,
+        "y": 80,
         "wires": [
             [
                 "809a7186b4352fc2"
@@ -455,17 +463,9 @@
         "type": "catch",
         "z": "8f4823599e012ecf",
         "name": "",
-        "scope": [
-            "783d18f0473c6345",
-            "dc80e2a28022a9cc",
-            "31f530353a98f1a7",
-            "aba485c9d5252c0c",
-            "3e7d849007b1bb5c",
-            "09310a4daf509e32",
-            "d370592ba8da03c9"
-        ],
-        "uncaught": false,
-        "x": 130,
+        "scope": null,
+        "uncaught": true,
+        "x": 160,
         "y": 140,
         "wires": [
             [
@@ -487,7 +487,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 300,
+        "x": 400,
         "y": 200,
         "wires": []
     },
@@ -505,7 +505,7 @@
         "tls": true,
         "name": "andrea_gelsomino@hotmail.com",
         "dname": "Send notification",
-        "x": 330,
+        "x": 430,
         "y": 100,
         "wires": [],
         "info": "vpsp hmum bsge lxyf"
@@ -579,6 +579,90 @@
         "wires": [
             [
                 "aada60ebf6288682"
+            ]
+        ]
+    },
+    {
+        "id": "06c86b669066fb32",
+        "type": "http in",
+        "z": "94e3b6bceb5546d9",
+        "name": "Check. Server 1",
+        "url": "",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 420,
+        "y": 120,
+        "wires": [
+            [
+                "e8a8bbfe1ba546b7"
+            ]
+        ]
+    },
+    {
+        "id": "e8a8bbfe1ba546b7",
+        "type": "debug",
+        "z": "94e3b6bceb5546d9",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "3f7a6bd0a3237e26",
+        "type": "http in",
+        "z": "94e3b6bceb5546d9",
+        "name": "Check IOT 1",
+        "url": "",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 410,
+        "y": 180,
+        "wires": [
+            [
+                "e8a8bbfe1ba546b7"
+            ]
+        ]
+    },
+    {
+        "id": "8281a173d441a8e0",
+        "type": "http in",
+        "z": "94e3b6bceb5546d9",
+        "name": "Check Camera 1",
+        "url": "",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "e8a8bbfe1ba546b7"
+            ]
+        ]
+    },
+    {
+        "id": "b7afcf2b0211296c",
+        "type": "http in",
+        "z": "94e3b6bceb5546d9",
+        "name": "Check Camera 2",
+        "url": "",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 420,
+        "y": 300,
+        "wires": [
+            [
+                "e8a8bbfe1ba546b7"
             ]
         ]
     }

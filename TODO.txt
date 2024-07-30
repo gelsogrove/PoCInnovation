@@ -1,18 +1,10 @@
-localhost:3000 senza parametri
-
 Devi fare in modo di pasare tutto l'oggetto data all'homepage.
 
 popup con node-red e personalizzazione css
 
-primo td piu' corto
-
-
-
-post detection deve inviare la mail
-
 Customizzare node-red logo(e scritte)
 
-statistiche per ora.
+
 
 ____________________________________________________________
 
@@ -22,4 +14,6 @@ https://universe.roboflow.com/kirill-sergeev/vin-detection/dataset/7
 
  
 
+ OpenALPR e Tesseract OCR
 
+statistiche per ora.

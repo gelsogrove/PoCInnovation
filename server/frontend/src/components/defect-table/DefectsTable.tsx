@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useEffect, useState } from "react"
 import Modal from "../modal/Modal"
@@ -87,8 +88,8 @@ const DefectsTable: React.FC = () => {
       <table className="defects-table">
         <thead>
           <tr>
-            <th></th>
-            <th>VIN NUMBER</th>
+            <th className="headerth">DETECTION</th>
+            <th className="headerth">DETAILS</th>
           </tr>
         </thead>
         <tbody>
@@ -105,14 +106,19 @@ const DefectsTable: React.FC = () => {
               <td>
                 <b>ID:</b> {defect._msgId} <br />
                 <br />
-                <br />
-                <b>Vin:</b> 1HBHD2DV4HHAAY65976DFHG Date:
+                <b>Vin:</b> 1HBHD2DV4HHAAY65976DFHG
                 <br />
                 <b>Date:</b>{" "}
                 {new Date(defect.data).toLocaleString().substring(0, 10)}
                 <br />
                 <b>Time:</b>{" "}
                 {new Date(defect.data).toLocaleString().substring(11)}
+                <br />
+                <b>Defect: </b>
+                {"Scratch "}
+                <br />
+                <b>Workshop: </b>
+                {"T11 "}
               </td>
             </tr>
           ))}

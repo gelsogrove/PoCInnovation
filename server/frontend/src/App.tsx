@@ -9,7 +9,7 @@ const App: React.FC = () => {
     <div className="App">
       <div className="container">
         <div>
-          <h1>Workshop T11 - scratch detection on the car body</h1>
+          <h1>Poc - Object detection</h1>
           <div className="defects-table-container">
             <DefectsTable />
           </div>
