@@ -1,12 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react"
+import DefectModel from "../../models/DefectModel"
 
-const Statistics: React.FC = () => {
+interface StatisticsProps {
+  defects: DefectModel[]
+}
+
+const Statistics: React.FC<StatisticsProps> = (props) => {
+  const { defects } = props
+
   return (
     <div className="card">
       <h2>Statistics</h2>
       <hr />
-      <h3>Count: 120</h3>
+      <h3>Count: {defects.length}</h3>
       <br />
       <img
         width="500"

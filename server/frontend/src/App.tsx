@@ -73,7 +73,7 @@ const App: React.FC = () => {
           </div>
         </div>
         <div className="cards-container">
-          <Statistics />
+          <Statistics defects={defects} />
           <Settings />
         </div>
       </div>
