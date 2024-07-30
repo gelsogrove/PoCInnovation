@@ -8,12 +8,5 @@
     "start:node-red": "cd client/post-processing && npm run start",
     "start:all": "npm run start:backend & npm run start:frontend & npm run start:node-red",
     "stop:all": "pkill -f 'node' && pkill -f 'nodemon'"
-  },
-  "devDependencies": {
-    "@types/react-modal": "^3.16.3",
-    "@types/ws": "^8.5.12"
-  },
-  "dependencies": {
-    "react-modal": "^3.16.1"
   }
 }

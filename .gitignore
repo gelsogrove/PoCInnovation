@@ -8,3 +8,4 @@ client/post-processing/node_modules
 server/backend/node_modules
 server/backend/src/data
 server/backend/src/images
+node_modules

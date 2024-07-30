@@ -20,6 +20,7 @@
         "type": "tab",
         "label": "Post Detection flow",
         "disabled": false,
+        "locked": true,
         "info": "",
         "env": []
     },
@@ -28,6 +29,7 @@
         "type": "tab",
         "label": "Catch Flow",
         "disabled": false,
+        "locked": true,
         "info": "",
         "env": []
     },
@@ -36,6 +38,7 @@
         "type": "tab",
         "label": "Health Check",
         "disabled": false,
+        "locked": true,
         "info": "",
         "env": []
     },
