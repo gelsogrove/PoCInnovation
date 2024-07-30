@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import DefectModel from "../../models/DefectModel"
 import CustomModal from "../customModal/CustomModal"
 import "./DefectsTable.css"
@@ -9,6 +9,25 @@ interface DefectsTableProps {
 
 const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [highlightedRowId, setHighlightedRowId] = useState<string | null>(null)
+  const prevDefectsCountRef = useRef<number>(defects.length)
+
+  useEffect(() => {
+    // Check if the number of defects has increased
+    if (defects.length > prevDefectsCountRef.current) {
+      const newDefect = defects[defects.length - 1]
+      setHighlightedRowId(newDefect._msgId)
+
+      // Remove the highlight after 3 seconds
+      const timeoutId = setTimeout(() => setHighlightedRowId(null), 3000)
+
+      // Cleanup the timeout if the component unmounts or the effect reruns
+      return () => clearTimeout(timeoutId)
+    }
+
+    // Update the previous defects count
+    prevDefectsCountRef.current = defects.length
+  }, [defects])
 
   const handleImageClick = (filepath: string) => {
     setSelectedImage(`http://localhost:3000/${filepath}`)
@@ -34,7 +53,12 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
           </thead>
           <tbody>
             {sortedDefects.map((defect) => (
-              <tr key={defect._msgId}>
+              <tr
+                key={defect._msgId}
+                className={
+                  highlightedRowId === defect._msgId ? "highlight-new" : ""
+                }
+              >
                 <td>
                   <img
                     src={`http://localhost:3000/${defect.filepath}`}
@@ -42,7 +66,6 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
                     onClick={() => handleImageClick(defect.filepath)}
                     className="thumbnail"
                   />
-
                   <img
                     src={`http://localhost:3000/${defect.filepath}`}
                     alt="Defect"

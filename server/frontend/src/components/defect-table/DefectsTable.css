@@ -1,4 +1,4 @@
-/* Contenitore della tabella */
+/* Container for the table */
 .defects-table-container {
   width: 58vw;
   height: 830px;
@@ -8,16 +8,16 @@
   overflow: hidden;
 }
 
-/* Stile della tabella */
+/* Style for the table */
 .defects-table {
-  width: 100%; /* Adatta la larghezza alla dimensione del contenitore */
-  height: 100%; /* Occupa tutta l'altezza del contenitore */
+  width: 100%; /* Fit the width to the container size */
+  height: 100%; /* Occupy the full height of the container */
   border-collapse: collapse;
   background-color: #fff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Intestazioni della tabella */
+/* Table headers */
 .defects-table thead {
   position: -webkit-sticky;
   position: sticky;
@@ -27,9 +27,8 @@
   z-index: 1;
 }
 
-/* Colonne della tabella */
-.defects-table th {
-}
+/* Table columns */
+.defects-table th,
 .defects-table td {
   padding: 16px;
   border: 1px solid #ddd;
@@ -39,7 +38,7 @@
   width: 350px;
 }
 
-/* Colonna della tabella per le immagini */
+/* Table column for images */
 .defects-table th.detection {
   width: 200px;
 }
@@ -48,35 +47,59 @@
   width: 400px;
 }
 
-/* Corpo della tabella con scroll verticale */
+/* Table body with vertical scroll */
 .defects-table tbody {
   display: block;
-  width: 1041px;
+  width: 1040px;
   font-size: 18px;
-  height: calc(100% - 40px); /* Altezza totale meno altezza intestazioni */
+  height: calc(100% - 40px); /* Total height minus header height */
   overflow-y: auto;
 }
 
-/* Righe della tabella */
+/* Table rows */
 .defects-table tbody tr {
   display: table;
   width: 100%;
   table-layout: fixed;
 }
 
-/* Alternanza dei colori delle righe */
+/* Alternating row colors */
 .defects-table tbody tr:nth-child(odd) {
-  background-color: #ffffff; /* Bianco per righe dispari */
+  background-color: #ffffff; /* White for odd rows */
 }
 
 .defects-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9; /* Grigio chiaro per righe pari */
+  background-color: #f9f9f9; /* Light gray for even rows */
 }
 
-/* Miniature */
+/* Thumbnails */
 .thumbnail {
   width: 150px;
   height: 150px;
   cursor: pointer;
   margin-left: 20px;
+}
+
+/* Highlighting for new rows */
+.highlight-new {
+  background: linear-gradient(
+    90deg,
+    rgba(139, 0, 0, 0.5) 0%,
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  animation: highlight-animation 3s ease-in-out forwards;
+}
+
+/* Animation for new row */
+@keyframes highlight-animation {
+  from {
+    background: linear-gradient(
+      90deg,
+      rgba(139, 0, 0, 0.5) 0%,
+      rgba(255, 255, 255, 0.5) 100%
+    );
+  }
+  to {
+    background: none;
+  }
 }

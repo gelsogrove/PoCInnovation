@@ -61,7 +61,7 @@ def postprocess(outputs, original_image, confidence_threshold):
             cv2.rectangle(image_with_boxes, (x1, y1), (x2, y2), (0, 255, 0), 2)
             
             # Add the text below the bounding box
-            text = f"Conf: {confidence:.2f} Width:{width}"
+            text = f"Conf: {confidence:.2f} Width:{width}px"
             text_size, _ = cv2.getTextSize(text, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 2)
             text_w, text_h = text_size
             cv2.putText(image_with_boxes, text, (x1, y2 + text_h + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
