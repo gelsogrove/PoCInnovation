@@ -3,6 +3,7 @@ client/inferences/test
 client/inferences/output
 client/inferences/processed
 client/inferences/models
+client/inferences/easyocr
 client/inferences/models/scratches.onnx
 client/post-processing/node_modules
 server/backend/node_modules

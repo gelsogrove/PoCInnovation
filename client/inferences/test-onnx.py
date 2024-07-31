@@ -81,10 +81,10 @@ def analyze_images_in_folder(folder_path, model_path, input_shape, output_folder
     """
     Analyze all images in a folder and save images with bounding boxes in a new folder.
     """
-
     session = load_model(model_path)
     for filename in os.listdir(folder_path):
-        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
+        # Process only files that do not contain 'vin' in any case
+        if 'vin' not in filename.lower() and filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
             image_path = os.path.join(folder_path, filename)
             image = cv2.imread(image_path)
             if image is None:
@@ -112,12 +112,11 @@ def analyze_images_in_folder(folder_path, model_path, input_shape, output_folder
             print(f"Deleted {filename} from {folder_path}")
 
 def main():
-    folder_path = './test'  # Folder containing images
+    folder_path = './detect'  # Folder containing images
     model_path = 'models/scratches.onnx'  # Path to the ONNX model
     input_shape = [1, 3, 640, 640] 
     output_folder = './output' 
     confidence_threshold = 0.85
-
 
     analyze_images_in_folder(folder_path, model_path, input_shape, output_folder, confidence_threshold)
 
