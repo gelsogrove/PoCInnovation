@@ -47,7 +47,7 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
         <table className="defects-table">
           <thead>
             <tr>
-              <th className="detection">DETECTION</th>
+              <th className="detection">DETECTION DEFECTS</th>
               <th className="details">DETAILS</th>
             </tr>
           </thead>

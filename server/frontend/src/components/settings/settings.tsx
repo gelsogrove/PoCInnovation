@@ -73,7 +73,7 @@ const Settings: React.FC = () => {
               openModal("http://127.0.0.1:1880/#flow/8f4823599e012ecf")
             }}
           >
-            <b>Error flow</b>
+            <b>Catch Errors flow</b>
             <span className="status active">Active</span>
           </a>
         </div>
