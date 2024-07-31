@@ -119,11 +119,11 @@ def run_yolo_detection(model_path, input_dir, output_dir, tmpDir, confidence_thr
 model_path = "models/vin.onnx"
 input_dir = "detect"
 output_dir = "output"
-tmpDir = "tmp"  # Temporary directory for intermediate files
+tmpDir = "tmp"
 confidence_threshold = 0.7
 ocr_confidence_threshold = 0.1
 margin = 10
-delete_zoom = True  # Change to False if you want to keep zoomed images
-delete_original = True  # Change to True if you want to delete original images
+delete_zoom = True
+delete_original = True
 
 run_yolo_detection(model_path, input_dir, output_dir, tmpDir, confidence_threshold, ocr_confidence_threshold, margin, delete_zoom=delete_zoom, delete_original=delete_original)
