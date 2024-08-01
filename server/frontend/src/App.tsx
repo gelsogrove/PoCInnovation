@@ -11,7 +11,7 @@ const App: React.FC = () => {
   const [ws, setWs] = useState<WebSocket | null>(null)
 
   const createWebSocket = () => {
-    const websocket = new WebSocket("ws://localhost:3000")
+    const websocket = new WebSocket("ws://localhost:1880/ws/refresh")
 
     websocket.onopen = () => {
       console.log("WebSocket connection established")
@@ -19,9 +19,9 @@ const App: React.FC = () => {
 
     websocket.onmessage = (event) => {
       console.log("WebSocket message received:", event.data)
-      if (event.data === "refresh") {
-        fetchDefects() // Call fetchDefects here
-      }
+      // if (event.data === "refresh") {
+      fetchDefects() // Call fetchDefects here
+      // }
     }
 
     websocket.onclose = (event) => {
