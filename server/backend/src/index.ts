@@ -57,7 +57,6 @@ const sendWebSocketMessage = (message: string) => {
     }
   })
 }
-
 app.post("/new-defect", (req: Request, res: Response) => {
   const { dateFormat, timestamp, workshop, _msgId, camera, imageBase64, file } =
     req.body
@@ -104,13 +103,27 @@ app.post("/new-defect", (req: Request, res: Response) => {
       }
     }
 
-    jsonData.push({
-      _msgId,
-      data: date.toISOString(),
-      filepath: `images/${file}`,
-      workshop,
-      camera,
-    })
+    // Add a new entry if the last entry does not contain VIN
+    console.log(file)
+    if (!file.toLowerCase().includes("vin")) {
+      jsonData.push({
+        _msgId,
+        data: date.toISOString(),
+        filepath: `images/${file}`,
+        workshop,
+        camera,
+        vin: null,
+      })
+    } else {
+      let lastEntry = jsonData[jsonData.length - 1]
+
+      jsonData[jsonData.length - 1] = {
+        ...lastEntry,
+        vin: `images/${file}`,
+      }
+
+      console.log(lastEntry)
+    }
 
     const fileContent = JSON.stringify(jsonData, null, 2)
 
@@ -121,7 +134,7 @@ app.post("/new-defect", (req: Request, res: Response) => {
       }
 
       sendWebSocketMessage("refresh")
-      res.json({ message: "File saved successfully" })
+      res.json({ message: "File saved/updated successfully" })
     })
   })
 })
@@ -152,7 +165,6 @@ app.get("/defects", (req: Request, res: Response) => {
   })
 })
 
-// Start the HTTP and WebSocket server
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
 })

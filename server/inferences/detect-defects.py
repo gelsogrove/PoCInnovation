@@ -2,6 +2,7 @@ import os
 import onnxruntime
 import cv2
 import numpy as np
+import subprocess
 
 def load_model(model_path):
     """
@@ -119,6 +120,10 @@ def main():
     confidence_threshold = 0.85
 
     analyze_images_in_folder(input_dir, model_path, input_shape, output_folder, confidence_threshold)
+
+    # Execute the shell command at the end
+    command = "cd /Users/gelso/workspace/PoC/server/inferences && python3 detect-vin.py"
+    subprocess.run(command, shell=True)
 
 if __name__ == "__main__":
     main()

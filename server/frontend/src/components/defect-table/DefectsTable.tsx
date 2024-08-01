@@ -52,39 +52,46 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
             </tr>
           </thead>
           <tbody>
-            {sortedDefects.map((defect) => (
-              <tr
-                key={defect._msgId}
-                className={
-                  highlightedRowId === defect._msgId ? "highlight-new" : ""
-                }
-              >
-                <td>
-                  <img
-                    src={`http://localhost:3000/${defect.filepath}`}
-                    alt="Defect"
-                    onClick={() => handleImageClick(defect.filepath)}
-                    className="thumbnail"
-                  />
-                  <img
-                    src={`http://localhost:3000/${defect.filepath}`}
-                    alt="Defect"
-                    onClick={() => handleImageClick(defect.filepath)}
-                    className="thumbnail"
-                  />
-                </td>
-                <td>
-                  <b>ID:</b> {defect._msgId} <br />
-                  <b>Vin:</b> 1HBHD2DV4HHAAY65976DFHG <br />
-                  <b>Date:</b> {new Date(defect.data).toLocaleDateString()}{" "}
-                  <br />
-                  <b>Time:</b> {new Date(defect.data).toLocaleTimeString()}{" "}
-                  <br />
-                  <b>Defect: </b> Scratch <br />
-                  <b>Workshop: </b> T11
-                </td>
-              </tr>
-            ))}
+            {sortedDefects.map((defect) => {
+              const vin = defect.vin
+                ? defect.vin.replace("images/VIN_", "").replace(".jpeg", "")
+                : "N/A"
+
+              return (
+                <tr
+                  key={defect._msgId}
+                  className={
+                    highlightedRowId === defect._msgId ? "highlight-new" : ""
+                  }
+                >
+                  <td>
+                    <img
+                      src={`http://localhost:3000/${defect.vin}`}
+                      alt="Defect"
+                      onClick={() => handleImageClick(defect.vin)}
+                      className="thumbnail"
+                    />
+                    <img
+                      src={`http://localhost:3000/${defect.filepath}`}
+                      alt="Defect"
+                      onClick={() => handleImageClick(defect.filepath)}
+                      className="thumbnail"
+                    />
+                  </td>
+                  <td>
+                    <b>Vin:</b> {vin}
+                    <br />
+                    <br />
+                    <b>Date:</b> {new Date(defect.data).toLocaleDateString()}{" "}
+                    <br />
+                    <b>Time:</b> {new Date(defect.data).toLocaleTimeString()}{" "}
+                    <br />
+                    <b>Defect: </b> Scratch <br />
+                    <b>Workshop: </b> T11
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>

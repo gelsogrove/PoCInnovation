@@ -4,6 +4,7 @@ interface DefectModel {
   filepath: string
   workshop: string
   camera: string
+  vin: string
 }
 
 export default DefectModel

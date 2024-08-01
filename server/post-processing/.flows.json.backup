@@ -279,7 +279,6 @@
         "id": "3e7d849007b1bb5c",
         "type": "exec",
         "z": "e5ff7f387ec0af58",
-        "d": true,
         "command": "rm ",
         "addpay": "filename",
         "append": "",
@@ -343,7 +342,7 @@
         "id": "d370592ba8da03c9",
         "type": "exec",
         "z": "e5ff7f387ec0af58",
-        "command": "cd /Users/gelso/workspace/PoC/server/inferences; python3 detect-defects.py && python3 detect-vin.py",
+        "command": "cd /Users/gelso/workspace/PoC/server/inferences; python3 detect-defects.py",
         "addpay": "",
         "append": "",
         "useSpawn": "false",
@@ -355,9 +354,7 @@
         "y": 60,
         "wires": [
             [],
-            [
-                "0313abf988d3f584"
-            ],
+            [],
             []
         ]
     },
@@ -387,23 +384,6 @@
         ]
     },
     {
-        "id": "0313abf988d3f584",
-        "type": "debug",
-        "z": "e5ff7f387ec0af58",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 860,
-        "y": 60,
-        "wires": []
-    },
-    {
         "id": "4cbd1e5d146f5ad0",
         "type": "switch",
         "z": "e5ff7f387ec0af58",
@@ -424,8 +404,29 @@
         "y": 60,
         "wires": [
             [
-                "d370592ba8da03c9"
+                "d370592ba8da03c9",
+                "7b481c8c64fdd93b"
             ]
+        ]
+    },
+    {
+        "id": "7b481c8c64fdd93b",
+        "type": "exec",
+        "z": "e5ff7f387ec0af58",
+        "command": "cd /Users/gelso/workspace/PoC/server/inferences; python3 python3 detect-vin.py",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "5",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Run Vin detection",
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [],
+            [],
+            []
         ]
     },
     {

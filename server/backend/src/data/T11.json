@@ -1,100 +1,66 @@
 [
   {
-    "_msgId": "be5dc816e2b2b766",
-    "data": "2024-08-01T10:32:15.000Z",
+    "_msgId": "8430e3778f0d70f0",
+    "data": "2024-08-01T12:40:17.000Z",
     "filepath": "images/ok3.jpeg",
     "workshop": "T11",
-    "camera": "Camera 1"
+    "camera": "Camera 1",
+    "vin": "images/VIN_VSSZZZKNTPWO05319.jpeg"
   },
   {
-    "_msgId": "7d838efa0ad85024",
-    "data": "2024-08-01T10:32:27.000Z",
-    "filepath": "images/VIN_VSSZZZKNTPWO05319.jpeg",
+    "_msgId": "4089321db0ea5cd8",
+    "data": "2024-08-01T12:48:24.000Z",
+    "filepath": "images/2.jpeg",
     "workshop": "T11",
-    "camera": "Camera 1"
+    "camera": "Camera 1",
+    "vin": "images/VIN_WAUZZZF49HAO36784.jpg"
   },
   {
-    "_msgId": "804ab5e81cea51ba",
-    "data": "2024-08-01T10:57:27.000Z",
+    "_msgId": "a42ec870d53d09b2",
+    "data": "2024-08-01T12:50:37.000Z",
     "filepath": "images/ok3.jpeg",
     "workshop": "T11",
-    "camera": "Camera 1"
+    "camera": "Camera 1",
+    "vin": null
   },
   {
-    "_msgId": "10879447273063c2",
-    "data": "2024-08-01T10:58:40.000Z",
-    "filepath": "images/VIN_VSSZZZKNTPWO05319.jpeg",
-    "workshop": "T11",
-    "camera": "Camera 1"
-  },
-  {
-    "_msgId": "645cfc2b1f05d953",
-    "data": "2024-08-01T11:05:10.000Z",
+    "_msgId": "ea7671409aabac76",
+    "data": "2024-08-01T12:53:06.000Z",
     "filepath": "images/ok3.jpeg",
     "workshop": "T11",
-    "camera": "Camera 1"
+    "camera": "Camera 1",
+    "vin": "images/VIN_VSSZZZKNTPWO05319.jpeg"
   },
   {
-    "_msgId": "a8524c2504d5b382",
-    "data": "2024-08-01T11:19:30.000Z",
+    "_msgId": "b8917d34328a0719",
+    "data": "2024-08-01T12:53:57.000Z",
     "filepath": "images/ok3.jpeg",
     "workshop": "T11",
-    "camera": "Camera 1"
+    "camera": "Camera 1",
+    "vin": null
   },
   {
-    "_msgId": "b4315113a9537b53",
-    "data": "2024-08-01T11:20:13.000Z",
+    "_msgId": "0e36dc1398232f88",
+    "data": "2024-08-01T12:54:41.000Z",
     "filepath": "images/ok3.jpeg",
     "workshop": "T11",
-    "camera": "Camera 1"
+    "camera": "Camera 1",
+    "vin": null
   },
   {
-    "_msgId": "9bc8b6444f25b6c8",
-    "data": "2024-08-01T11:20:49.000Z",
+    "_msgId": "d51c8e4e36db740b",
+    "data": "2024-08-01T12:57:54.000Z",
     "filepath": "images/ok3.jpeg",
     "workshop": "T11",
-    "camera": "Camera 1"
+    "camera": "Camera 1",
+    "vin": "images/VIN_VSSZZZKNTPWO05319.jpeg"
   },
   {
-    "_msgId": "10a138d2521a42db",
-    "data": "2024-08-01T11:21:27.000Z",
-    "filepath": "images/ok3.jpeg",
+    "_msgId": "fa357f9e3214e977",
+    "data": "2024-08-01T12:58:31.000Z",
+    "filepath": "images/2.jpeg",
     "workshop": "T11",
-    "camera": "Camera 1"
-  },
-  {
-    "_msgId": "c701f78f167215f1",
-    "data": "2024-08-01T11:21:40.000Z",
-    "filepath": "images/VIN_VSSZZZKNTPWO05319.jpeg",
-    "workshop": "T11",
-    "camera": "Camera 1"
-  },
-  {
-    "_msgId": "7034d09679c160a8",
-    "data": "2024-08-01T11:22:24.000Z",
-    "filepath": "images/ok3.jpeg",
-    "workshop": "T11",
-    "camera": "Camera 1"
-  },
-  {
-    "_msgId": "728f44a3953cd98b",
-    "data": "2024-08-01T11:22:30.000Z",
-    "filepath": "images/VIN_VSSZZZKNTPWO05319.jpeg",
-    "workshop": "T11",
-    "camera": "Camera 1"
-  },
-  {
-    "_msgId": "99de55bdf158b188",
-    "data": "2024-08-01T11:23:06.000Z",
-    "filepath": "images/ok3.jpeg",
-    "workshop": "T11",
-    "camera": "Camera 1"
-  },
-  {
-    "_msgId": "dea2ed2d2f2a132f",
-    "data": "2024-08-01T11:23:11.000Z",
-    "filepath": "images/VIN_VSSZZZKNTPWO05319.jpeg",
-    "workshop": "T11",
-    "camera": "Camera 1"
+    "camera": "Camera 1",
+    "vin": "images/VIN_WAUZZZF49HAO36784.jpg"
   }
 ]
