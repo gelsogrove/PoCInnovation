@@ -8,5 +8,9 @@
     "start:node-red": "cd server/post-processing && npm run start",
     "start:all": "npm run start:backend & npm run start:frontend & npm run start:node-red",
     "stop:all": "pkill -f 'node' && pkill -f 'nodemon'"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "axios": "^1.7.2"
   }
 }

@@ -499,9 +499,9 @@
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "<h1> DEFECT DEFECT... </h1>\n<p>We detected a defect on {{dateFormat}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
+        "template": "<h1> NEW DEFECT... </h1>\n<p>We detected a defect on {{dateFormat}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
         "output": "str",
-        "x": 720,
+        "x": 780,
         "y": 80,
         "wires": [
             [
@@ -564,12 +564,11 @@
         "type": "subflow:79f7f96a02b62b78",
         "z": "56d7af57f34d08fb",
         "name": "",
-        "x": 500,
+        "x": 540,
         "y": 80,
         "wires": [
             [
-                "553c2b1463077f70",
-                "5bf0293e19ce52d7"
+                "553c2b1463077f70"
             ]
         ]
     },
@@ -585,8 +584,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 180,
-        "y": 240,
+        "x": 320,
+        "y": 160,
         "wires": [
             [
                 "be74cea9aed6ba88"
@@ -610,29 +609,13 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 350,
-        "y": 240,
+        "x": 470,
+        "y": 160,
         "wires": [
             [
                 "54db61e91c8f9d4c"
             ]
         ]
-    },
-    {
-        "id": "5bf0293e19ce52d7",
-        "type": "debug",
-        "z": "56d7af57f34d08fb",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 540,
-        "y": 260,
-        "wires": []
     },
     {
         "id": "6a7735e113237e6d",
@@ -651,8 +634,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 170,
-        "y": 160,
+        "x": 270,
+        "y": 80,
         "wires": [
             [
                 "bd78fcd07e69dbfa"
@@ -742,8 +725,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 620,
-        "y": 120,
+        "x": 700,
+        "y": 200,
         "wires": []
     },
     {

@@ -425,7 +425,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1010,
+        "x": 1130,
         "y": 100,
         "wires": [
             []
@@ -446,7 +446,7 @@
         "phonenumberinputtypemessage": "msg",
         "inputtypemessage": "str",
         "rejectssl": false,
-        "x": 1020,
+        "x": 1140,
         "y": 160,
         "wires": [
             []
@@ -461,7 +461,7 @@
         "bot": "",
         "haserroroutput": false,
         "outputs": 1,
-        "x": 1020,
+        "x": 1140,
         "y": 220,
         "wires": [
             []
@@ -484,7 +484,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1010,
+        "x": 1130,
         "y": 280,
         "wires": [
             []
@@ -501,7 +501,7 @@
         "syntax": "mustache",
         "template": "<h1> NEW DEFECT... </h1>\n<p>We detected a defect on {{dateFormat}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
         "output": "str",
-        "x": 780,
+        "x": 900,
         "y": 80,
         "wires": [
             [
@@ -527,7 +527,7 @@
         "tls": true,
         "name": "andrea_gelsomino@hotmail.com",
         "dname": "Send notification",
-        "x": 1030,
+        "x": 1150,
         "y": 40,
         "wires": [],
         "info": "vpsp hmum bsge lxyf"
@@ -539,7 +539,7 @@
         "name": "Watch output",
         "files": "/Users/gelso/workspace/PoC/server/inferences/output",
         "recursive": true,
-        "x": 130,
+        "x": 90,
         "y": 80,
         "wires": [
             [
@@ -555,7 +555,7 @@
         "name": "",
         "server": "",
         "client": "",
-        "x": 1010,
+        "x": 1130,
         "y": 340,
         "wires": []
     },
@@ -564,7 +564,7 @@
         "type": "subflow:79f7f96a02b62b78",
         "z": "56d7af57f34d08fb",
         "name": "",
-        "x": 540,
+        "x": 680,
         "y": 80,
         "wires": [
             [
@@ -584,8 +584,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
-        "y": 160,
+        "x": 380,
+        "y": 80,
         "wires": [
             [
                 "be74cea9aed6ba88"
@@ -609,8 +609,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 470,
-        "y": 160,
+        "x": 510,
+        "y": 80,
         "wires": [
             [
                 "54db61e91c8f9d4c"
@@ -634,7 +634,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 270,
+        "x": 230,
         "y": 80,
         "wires": [
             [
@@ -725,8 +725,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 620,
-        "y": 120,
+        "x": 700,
+        "y": 200,
         "wires": []
     },
     {

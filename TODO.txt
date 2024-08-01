@@ -10,3 +10,6 @@
 
 - Metti Commenti
 
+- Bottoni di delete
+
+ post detection > troppi swicth e se li raggruppiamo ?

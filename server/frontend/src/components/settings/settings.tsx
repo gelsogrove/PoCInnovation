@@ -46,19 +46,6 @@ const Settings: React.FC = () => {
             href="#"
             onClick={(e) => {
               e.preventDefault()
-              openModal("http://127.0.0.1:1880/#flow/e5ff7f387ec0af58")
-            }}
-          >
-            <b>Advance Settings</b>
-            <span className="status active">Active</span>
-          </a>
-        </div>
-
-        <div className="block">
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault()
               openModal("http://127.0.0.1:1880/#flow/94e3b6bceb5546d9")
             }}
           >

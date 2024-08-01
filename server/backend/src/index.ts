@@ -133,10 +133,51 @@ app.post("/new-defect", (req: Request, res: Response) => {
 
       res.json({ message: "File saved/updated successfully" })
     })
+    sendWebSocketMessage("refresh")
+  })
+})
 
-    setTimeout(() => {
-      sendWebSocketMessage("refresh")
-    }, 6000)
+app.delete("/delete-defect", (req: Request, res: Response) => {
+  const { workshop, _msgId } = req.query
+
+  if (!workshop || !_msgId) {
+    return res.status(400).json({ error: "workshop and _msgId are required" })
+  }
+
+  const dirPath = path.join(__dirname, "data")
+  const filePath = path.join(dirPath, `${workshop}.json`)
+
+  fs.readFile(filePath, "utf8", (err, fileData) => {
+    if (err) {
+      console.error("Error reading the file:", err)
+      return res.status(500).json({ error: "Error reading the file" })
+    }
+
+    let jsonData: any[] = []
+
+    try {
+      jsonData = JSON.parse(fileData)
+    } catch (parseErr) {
+      console.error("Error parsing file data:", parseErr)
+      return res.status(500).json({ error: "Error parsing file data" })
+    }
+
+    const updatedData = jsonData.filter((entry) => entry._msgId !== _msgId)
+
+    if (updatedData.length === jsonData.length) {
+      return res.status(404).json({ error: "Entry not found" })
+    }
+
+    const fileContent = JSON.stringify(updatedData, null, 2)
+
+    fs.writeFile(filePath, fileContent, (err) => {
+      if (err) {
+        console.error("Error saving the file:", err)
+        return res.status(500).json({ error: "Error saving the file" })
+      }
+
+      res.json({ message: "File updated successfully" })
+    })
   })
 })
 
