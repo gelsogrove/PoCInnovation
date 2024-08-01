@@ -10,6 +10,7 @@ interface CustomModalProps {
   onRequestClose: () => void
   contentType: "image" | "iframe"
   content: string | null
+  vin?: string | null
 }
 
 const CustomModal: React.FC<CustomModalProps> = ({
@@ -17,6 +18,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
   onRequestClose,
   contentType,
   content,
+  vin,
 }) => {
   return (
     <Modal
@@ -50,6 +52,14 @@ const CustomModal: React.FC<CustomModalProps> = ({
       <button onClick={onRequestClose} className="close-button">
         Close
       </button>
+
+      {vin && vin.length === 17 && (
+        <div className="modal-vin">
+          <h1>
+            <b>VIN:</b> {vin}
+          </h1>
+        </div>
+      )}
     </Modal>
   )
 }

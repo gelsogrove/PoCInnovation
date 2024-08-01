@@ -9,6 +9,7 @@ interface DefectsTableProps {
 
 const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [selectedVin, setSelectedVin] = useState<string | null>(null)
   const [highlightedRowId, setHighlightedRowId] = useState<string | null>(null)
   const prevDefectsCountRef = useRef<number>(defects.length)
 
@@ -31,6 +32,7 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
 
   const handleImageClick = (filepath: string) => {
     setSelectedImage(`http://localhost:3000/${filepath}`)
+    setSelectedVin(filepath)
   }
 
   const handleCloseModal = () => {
@@ -101,6 +103,7 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
         onRequestClose={handleCloseModal}
         contentType="image"
         content={selectedImage}
+        vin={selectedVin?.replace("images/VIN_", "")?.replace(/\.[^/.]+$/, "")}
       />
     </>
   )

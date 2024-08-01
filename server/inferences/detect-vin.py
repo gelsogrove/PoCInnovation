@@ -91,7 +91,8 @@ def run_yolo_detection(model_path, input_dir, output_dir, tmpDir, confidence_thr
                     
                     # Perform OCR on the zoomed image
                     vin_number = perform_ocr(zoomed_filepath, ocr_confidence_threshold)
-                    
+                    vin_number = vin_number.replace('.', '').replace(',', '')
+
                     if vin_number:
                         new_filename = f"VIN_{vin_number}{os.path.splitext(filename)[1]}"
                         new_filepath = os.path.join(output_dir, new_filename)
