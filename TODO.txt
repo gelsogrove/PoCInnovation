@@ -1,66 +1,12 @@
+- il websocket non va
 
-- VIN NUMBER SAREBBE UNA BELLA IDA, MA ULTIMA PRIORITA
-https://universe.roboflow.com/kirill-sergeev/vin-detection/dataset/7
+- MI PIACEREBBE FARE IL SOCKET DA NDOE-resized
 
- 
-una volta che ha il 
+-MI PIACEREBBE FARE UN ALTRO ONNX WHEEL per esempio (ma ci penso)
 
-Tesseract OCR
+- ORGANNIZA VIAGGIO GERMANIA
 
+- COMUNICA CHE SEI LISTO
 
-1. Conversione in Scala di Grigi
-Convertire l'immagine a scala di grigi riduce la complessità dei dati dell'immagine, rimuovendo le informazioni sui colori e lasciando solo le informazioni sui toni di grigio. Questo semplifica il processo di riconoscimento del testo.
+- Metti Commenti
 
- 
-La binarizzazione converte l'immagine in una rappresentazione in bianco e nero (binaria), dove il testo diventa nero e lo sfondo diventa bianco. Questo aiuta a isolare il testo dallo sfondo e migliorare il contrasto.
-
-python
-Copy code
-_, binary = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-3. Riduzione del Rumore
-Il rumore dell'immagine può includere puntini e artefatti che possono ostacolare il riconoscimento del testo. Tecniche come il filtro bilaterale o il filtro Gaussiano aiutano a ridurre il rumore mantenendo i bordi del testo.
-
-
-4. Operazioni Morfologiche
-Le operazioni morfologiche, come la dilatazione e l'erosione, aiutano a migliorare la struttura del testo e a rimuovere piccoli difetti. La dilatazione espande le aree bianche (testo), mentre l'erosione le riduce.
-
-
-5. Rimozione di Sfondo
-In alcune immagini, può essere utile rimuovere lo sfondo per migliorare la chiarezza del testo. Tecniche come la sottrazione dello sfondo o l'uso di maschere possono aiutare.
-
-
-Se il testo è inclinato o deformato, puoi applicare tecniche di correzione della prospettiva o di rotazione per allineare il testo orizzontalmente.
-
-Ingrandire o ridimensionare l'immagine può migliorare la chiarezza del testo, soprattutto se il testo è piccolo. Può essere utile per migliorare la leggibilità prima di applicare OCR.
-
-python
-Copy code
-resized = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
-Esempio Completo di Pre-processing
-Ecco un esempio di come applicare diverse tecniche di pre-processing all'immagine per prepararla all'analisi OCR con Tesseract:
-
- 
-
-# Carica l'immagine
-image_path = 'path/to/your/image.jpg'
-image = cv2.imread(image_path)
-
-# Conversione in scala di grigi
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-# Riduzione del rumore
-gray_filtered = cv2.bilateralFilter(gray, 11, 17, 17)
-
-# Binarizzazione
-_, binary = cv2.threshold(gray_filtered, 150, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-
-# Operazioni morfologiche
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-dilated = cv2.dilate(binary, kernel, iterations=1)
-eroded = cv2.erode(dilated, kernel, iterations=1)
-
-# Usa Tesseract OCR per estrarre il testo dall'immagine pre-processataS
-text = pytesseract.image_to_string(eroded, config='--psm 6')
-print(f"Detected text: {text}")
-Conclusione
-Il pre-processing dell'immagine migliora l'accuratezza del riconoscimento OCR riducendo il rumore e migliorando il contrasto del testo. Sperimenta con diverse tecniche e parametri per ottenere i migliori risultati per il tuo caso specifico.

@@ -346,7 +346,7 @@
         "addpay": "",
         "append": "",
         "useSpawn": "false",
-        "timer": "2",
+        "timer": "0",
         "winHide": false,
         "oldrc": false,
         "name": "Run Vin detection",
@@ -539,11 +539,11 @@
         "name": "Watch output",
         "files": "/Users/gelso/workspace/PoC/server/inferences/output",
         "recursive": true,
-        "x": 190,
+        "x": 130,
         "y": 80,
         "wires": [
             [
-                "54db61e91c8f9d4c"
+                "6a7735e113237e6d"
             ]
         ]
     },
@@ -564,11 +564,98 @@
         "type": "subflow:79f7f96a02b62b78",
         "z": "56d7af57f34d08fb",
         "name": "",
-        "x": 440,
+        "x": 500,
         "y": 80,
         "wires": [
             [
-                "553c2b1463077f70"
+                "553c2b1463077f70",
+                "5bf0293e19ce52d7"
+            ]
+        ]
+    },
+    {
+        "id": "bd78fcd07e69dbfa",
+        "type": "function",
+        "z": "56d7af57f34d08fb",
+        "name": "function 1",
+        "func": "let filename = msg.filename; \n\nif (filename.toLowerCase().includes(\"vin\")) {\n    msg.process = false;\n    return null;\n} else {\n    msg.process = true;\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "be74cea9aed6ba88"
+            ]
+        ]
+    },
+    {
+        "id": "be74cea9aed6ba88",
+        "type": "switch",
+        "z": "56d7af57f34d08fb",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "null",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 350,
+        "y": 240,
+        "wires": [
+            [
+                "54db61e91c8f9d4c"
+            ]
+        ]
+    },
+    {
+        "id": "5bf0293e19ce52d7",
+        "type": "debug",
+        "z": "56d7af57f34d08fb",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "6a7735e113237e6d",
+        "type": "switch",
+        "z": "56d7af57f34d08fb",
+        "name": "",
+        "property": "event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "bd78fcd07e69dbfa"
             ]
         ]
     },

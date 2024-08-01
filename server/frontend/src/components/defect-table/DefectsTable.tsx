@@ -37,6 +37,7 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
 
   const handleCloseModal = () => {
     setSelectedImage(null)
+    setSelectedVin(null) // Clear selectedVin when closing the modal
   }
 
   const sortedDefects = [...defects].sort(
@@ -57,7 +58,7 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
             {sortedDefects.map((defect) => {
               const vin = defect.vin
                 ? defect.vin.replace("images/VIN_", "").replace(/\.[^/.]+$/, "")
-                : "N/A"
+                : null
 
               return (
                 <tr
@@ -81,14 +82,19 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
                     />
                   </td>
                   <td>
-                    <b>VIN:</b> {vin}
+                    {vin ? (
+                      <>
+                        <b>VIN:</b> {vin}
+                        <br />
+                        <br />
+                      </>
+                    ) : null}
+                    <b>Date:</b> {new Date(defect.data).toLocaleDateString()}
                     <br />
+                    <b>Time:</b> {new Date(defect.data).toLocaleTimeString()}
                     <br />
-                    <b>Date:</b> {new Date(defect.data).toLocaleDateString()}{" "}
+                    <b>Defect: </b> Scratch
                     <br />
-                    <b>Time:</b> {new Date(defect.data).toLocaleTimeString()}{" "}
-                    <br />
-                    <b>Defect: </b> Scratch <br />
                     <b>Workshop: </b> T11
                   </td>
                 </tr>
@@ -103,7 +109,11 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
         onRequestClose={handleCloseModal}
         contentType="image"
         content={selectedImage}
-        vin={selectedVin?.replace("images/VIN_", "")?.replace(/\.[^/.]+$/, "")}
+        vin={
+          selectedVin
+            ? selectedVin.replace("images/VIN_", "").replace(/\.[^/.]+$/, "")
+            : ""
+        }
       />
     </>
   )

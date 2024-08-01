@@ -121,7 +121,6 @@ app.post("/new-defect", (req: Request, res: Response) => {
         ...lastEntry,
         vin: `images/${file}`,
       }
-      sendWebSocketMessage("refresh")
     }
 
     const fileContent = JSON.stringify(jsonData, null, 2)
@@ -134,6 +133,10 @@ app.post("/new-defect", (req: Request, res: Response) => {
 
       res.json({ message: "File saved/updated successfully" })
     })
+
+    setTimeout(() => {
+      sendWebSocketMessage("refresh")
+    }, 6000)
   })
 })
 
