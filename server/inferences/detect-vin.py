@@ -115,7 +115,7 @@ def run_yolo_detection(model_path, input_dir, output_dir, tmpDir, confidence_thr
     # Final message (optional)
     # print("Detection, zooming, and OCR completed for all images.")
 
-# Example usage
+ 
 model_path = "models/vin.onnx"
 input_dir = "defects/scratches"
 output_dir = "output"
@@ -127,3 +127,4 @@ delete_zoom = True
 delete_original = True
 
 run_yolo_detection(model_path, input_dir, output_dir, tmpDir, confidence_threshold, ocr_confidence_threshold, margin, delete_zoom=delete_zoom, delete_original=delete_original)
+

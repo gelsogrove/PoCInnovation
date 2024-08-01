@@ -1,6 +1,7 @@
 _dataset/
 server/inferences/test
 server/inferences/output
+server/inferences/tmp
 server/inferences/processed
 server/inferences/models
 server/inferences/easyocr

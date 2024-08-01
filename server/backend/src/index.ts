@@ -59,7 +59,7 @@ const sendWebSocketMessage = (message: string) => {
 }
 
 app.post("/new-defect", (req: Request, res: Response) => {
-  const { dateFormat, timestamp, workshop, _msgId, camera, imageBase64 } =
+  const { dateFormat, timestamp, workshop, _msgId, camera, imageBase64, file } =
     req.body
 
   if (!dateFormat || !timestamp) {
@@ -74,7 +74,7 @@ app.post("/new-defect", (req: Request, res: Response) => {
 
   const date = new Date(dateFormat)
   const imagesDirPath = path.join(__dirname, "images")
-  const imagePath = path.join(imagesDirPath, `${timestamp}.jpg`)
+  const imagePath = path.join(imagesDirPath, `${file}`)
 
   if (!fs.existsSync(imagesDirPath)) {
     fs.mkdirSync(imagesDirPath, { recursive: true })
@@ -107,7 +107,7 @@ app.post("/new-defect", (req: Request, res: Response) => {
     jsonData.push({
       _msgId,
       data: date.toISOString(),
-      filepath: `images/${timestamp}.jpg`,
+      filepath: `images/${file}`,
       workshop,
       camera,
     })

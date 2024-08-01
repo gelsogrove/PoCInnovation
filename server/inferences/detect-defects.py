@@ -100,7 +100,7 @@ def analyze_images_in_folder(folder_path, model_path, input_shape, output_folder
                 # Modify the filename to include the confidence score
                 base, ext = os.path.splitext(filename)
                 confidence_str = f"{highest_confidence:.2f}"
-                output_filename = f"{base}_conf_{confidence_str}{ext}"
+                output_filename = f"{base}{ext}"
                 output_path = os.path.join(output_folder, output_filename)
                 
                 # Save the image with bounding boxes to the new folder
@@ -113,7 +113,7 @@ def analyze_images_in_folder(folder_path, model_path, input_shape, output_folder
 
 def main():
     input_dir = "defects/scratches"
-    model_path = 'models/scratches.onnx'  # Path to the ONNX model
+    model_path = 'models/scratches.onnx'   
     input_shape = [1, 3, 640, 640] 
     output_folder = './output' 
     confidence_threshold = 0.85
