@@ -112,13 +112,13 @@ def analyze_images_in_folder(folder_path, model_path, input_shape, output_folder
             print(f"Deleted {filename} from {folder_path}")
 
 def main():
-    folder_path = './detect'  # Folder containing images
+    input_dir = "defects/scratches"
     model_path = 'models/scratches.onnx'  # Path to the ONNX model
     input_shape = [1, 3, 640, 640] 
     output_folder = './output' 
     confidence_threshold = 0.85
 
-    analyze_images_in_folder(folder_path, model_path, input_shape, output_folder, confidence_threshold)
+    analyze_images_in_folder(input_dir, model_path, input_shape, output_folder, confidence_threshold)
 
 if __name__ == "__main__":
     main()

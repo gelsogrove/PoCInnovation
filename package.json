@@ -5,7 +5,7 @@
   "scripts": {
     "start:backend": "cd server/backend && npm run dev",
     "start:frontend": "cd server/frontend && PORT=4000 npm start npm run start",
-    "start:node-red": "cd client/post-processing && npm run start",
+    "start:node-red": "cd server/post-processing && npm run start",
     "start:all": "npm run start:backend & npm run start:frontend & npm run start:node-red",
     "stop:all": "pkill -f 'node' && pkill -f 'nodemon'"
   }

@@ -8,14 +8,6 @@
         "env": []
     },
     {
-        "id": "b56b851c180cbc4b",
-        "type": "tab",
-        "label": "Pre Detection flow",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "56d7af57f34d08fb",
         "type": "tab",
         "label": "Post Detection flow",
@@ -28,6 +20,7 @@
         "type": "tab",
         "label": "Catch Flow",
         "disabled": false,
+        "locked": true,
         "info": "",
         "env": []
     },
@@ -47,7 +40,7 @@
         "category": "",
         "in": [
             {
-                "x": 160,
+                "x": 200,
                 "y": 140,
                 "wires": [
                     {
@@ -58,11 +51,11 @@
         ],
         "out": [
             {
-                "x": 1260,
+                "x": 1440,
                 "y": 140,
                 "wires": [
                     {
-                        "id": "c5967c8042d82735",
+                        "id": "809a7186b4352fc2",
                         "port": 0
                     }
                 ]
@@ -206,259 +199,15 @@
         "x": 1100,
         "y": 140,
         "wires": [
-            []
-        ]
-    },
-    {
-        "id": "31f530353a98f1a7",
-        "type": "http request",
-        "z": "e5ff7f387ec0af58",
-        "name": "Http Post -Send Defect",
-        "method": "POST",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "http://localhost:3000/new-defect",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 770,
-        "y": 180,
-        "wires": [
             [
-                "3e7d849007b1bb5c"
-            ]
-        ]
-    },
-    {
-        "id": "3e7d849007b1bb5c",
-        "type": "exec",
-        "z": "e5ff7f387ec0af58",
-        "command": "rm ",
-        "addpay": "filename",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "1",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Delete local image",
-        "x": 1050,
-        "y": 180,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "aada60ebf6288682",
-        "type": "subflow:79f7f96a02b62b78",
-        "z": "e5ff7f387ec0af58",
-        "name": "Prepare Object Defect",
-        "x": 500,
-        "y": 180,
-        "wires": [
-            [
-                "31f530353a98f1a7"
-            ]
-        ]
-    },
-    {
-        "id": "dc47a598cd60c45f",
-        "type": "watch",
-        "z": "e5ff7f387ec0af58",
-        "name": "Watch output folder",
-        "files": "/Users/gelso/workspace/PoC/client/inferences/output",
-        "recursive": true,
-        "x": 250,
-        "y": 180,
-        "wires": [
-            [
-                "aada60ebf6288682"
-            ]
-        ]
-    },
-    {
-        "id": "09310a4daf509e32",
-        "type": "watch",
-        "z": "b56b851c180cbc4b",
-        "name": "Watch test folder",
-        "files": "/Users/gelso/workspace/PoC/client/inferences/test",
-        "recursive": true,
-        "x": 360,
-        "y": 180,
-        "wires": [
-            [
-                "d370592ba8da03c9"
-            ]
-        ]
-    },
-    {
-        "id": "d370592ba8da03c9",
-        "type": "exec",
-        "z": "b56b851c180cbc4b",
-        "command": "cd /Users/gelso/workspace/PoC/client/inferences && python3 test-onnx.py",
-        "addpay": "",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "1",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Run detection",
-        "x": 580,
-        "y": 180,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "b6657661e635a53b",
-        "type": "http request",
-        "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 850,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "0c57b342dc3cd876",
-        "type": "node-red-contrib-whatsapp-cmb-send-message",
-        "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "credtype": "account",
-        "account": "",
-        "text": "",
-        "phonenumbervalue": "",
-        "apikeyvalue": "",
-        "apikeyinputtypemessage": "msg",
-        "phonenumberinputtypemessage": "msg",
-        "inputtypemessage": "str",
-        "rejectssl": false,
-        "x": 860,
-        "y": 320,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b9bc5f9ce600beb1",
-        "type": "telegram sender",
-        "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "bot": "",
-        "haserroroutput": false,
-        "outputs": 1,
-        "x": 860,
-        "y": 380,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "126195d01abe3337",
-        "type": "http request",
-        "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 850,
-        "y": 440,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "553c2b1463077f70",
-        "type": "template",
-        "z": "56d7af57f34d08fb",
-        "name": "HTML Template",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "html",
-        "syntax": "mustache",
-        "template": "<h1> DEFECT DEFECT... </h1>\n<p>We detected a defect on {{dateFormat}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
-        "output": "str",
-        "x": 400,
-        "y": 340,
-        "wires": [
-            [
-                "81b74fbe0531d93f",
-                "b6657661e635a53b",
-                "0c57b342dc3cd876",
-                "b9bc5f9ce600beb1",
-                "126195d01abe3337",
-                "e337c3dd0bb0b473"
-            ]
-        ]
-    },
-    {
-        "id": "81b74fbe0531d93f",
-        "type": "e-mail",
-        "z": "56d7af57f34d08fb",
-        "server": "smtp.gmail.com",
-        "port": "465",
-        "authtype": "BASIC",
-        "saslformat": true,
-        "token": "oauth2Response.access_token",
-        "secure": true,
-        "tls": true,
-        "name": "andrea_gelsomino@hotmail.com",
-        "dname": "Send notification",
-        "x": 870,
-        "y": 200,
-        "wires": [],
-        "info": "vpsp hmum bsge lxyf"
-    },
-    {
-        "id": "d7263d5a9eec6d6c",
-        "type": "watch",
-        "z": "56d7af57f34d08fb",
-        "name": "Watch output folder",
-        "files": "/Users/gelso/workspace/PoC/client/inferences/output",
-        "recursive": true,
-        "x": 270,
-        "y": 80,
-        "wires": [
-            [
-                "54db61e91c8f9d4c"
+                "809a7186b4352fc2"
             ]
         ]
     },
     {
         "id": "809a7186b4352fc2",
         "type": "change",
-        "z": "56d7af57f34d08fb",
+        "z": "79f7f96a02b62b78",
         "name": "Change name",
         "rules": [
             {
@@ -497,11 +246,276 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 780,
+        "x": 1300,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "31f530353a98f1a7",
+        "type": "http request",
+        "z": "e5ff7f387ec0af58",
+        "name": "Http Post -Send Defect",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://localhost:3000/new-defect",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 650,
+        "y": 620,
+        "wires": [
+            [
+                "3e7d849007b1bb5c"
+            ]
+        ]
+    },
+    {
+        "id": "3e7d849007b1bb5c",
+        "type": "exec",
+        "z": "e5ff7f387ec0af58",
+        "command": "rm ",
+        "addpay": "filename",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "1",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Delete local image",
+        "x": 930,
+        "y": 620,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "aada60ebf6288682",
+        "type": "subflow:79f7f96a02b62b78",
+        "z": "e5ff7f387ec0af58",
+        "name": "Prepare Object Defect",
+        "x": 340,
+        "y": 620,
+        "wires": [
+            [
+                "31f530353a98f1a7"
+            ]
+        ]
+    },
+    {
+        "id": "dc47a598cd60c45f",
+        "type": "watch",
+        "z": "e5ff7f387ec0af58",
+        "name": "Watch output",
+        "files": "/Users/gelso/workspace/PoC/server/inferences/output",
+        "recursive": true,
+        "x": 110,
+        "y": 620,
+        "wires": [
+            [
+                "aada60ebf6288682"
+            ]
+        ]
+    },
+    {
+        "id": "09310a4daf509e32",
+        "type": "watch",
+        "z": "e5ff7f387ec0af58",
+        "name": "Watch Scratches",
+        "files": "/Users/gelso/workspace/PoC/server/inferences/defects/scratches",
+        "recursive": true,
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "d370592ba8da03c9",
+                "f2895e90d92e67ae"
+            ]
+        ]
+    },
+    {
+        "id": "d370592ba8da03c9",
+        "type": "exec",
+        "z": "e5ff7f387ec0af58",
+        "command": "cd /Users/gelso/workspace/PoC/server/inferences && python3 detect-vin.py ",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "1",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Run Vin detection",
+        "x": 350,
+        "y": 60,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "f2895e90d92e67ae",
+        "type": "exec",
+        "z": "e5ff7f387ec0af58",
+        "command": "cd /Users/gelso/workspace/PoC/server/inferences  && python3 detect-defects.py",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "1",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Run Detection",
+        "x": 340,
+        "y": 140,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b6657661e635a53b",
+        "type": "http request",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1010,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0c57b342dc3cd876",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "credtype": "account",
+        "account": "",
+        "text": "",
+        "phonenumbervalue": "",
+        "apikeyvalue": "",
+        "apikeyinputtypemessage": "msg",
+        "phonenumberinputtypemessage": "msg",
+        "inputtypemessage": "str",
+        "rejectssl": false,
+        "x": 1020,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b9bc5f9ce600beb1",
+        "type": "telegram sender",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "bot": "",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1020,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "126195d01abe3337",
+        "type": "http request",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1010,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "553c2b1463077f70",
+        "type": "template",
+        "z": "56d7af57f34d08fb",
+        "name": "HTML Template",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<h1> DEFECT DEFECT... </h1>\n<p>We detected a defect on {{dateFormat}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
+        "output": "str",
+        "x": 720,
         "y": 80,
         "wires": [
             [
-                "553c2b1463077f70"
+                "81b74fbe0531d93f",
+                "b6657661e635a53b",
+                "0c57b342dc3cd876",
+                "b9bc5f9ce600beb1",
+                "126195d01abe3337",
+                "e337c3dd0bb0b473"
+            ]
+        ]
+    },
+    {
+        "id": "81b74fbe0531d93f",
+        "type": "e-mail",
+        "z": "56d7af57f34d08fb",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "andrea_gelsomino@hotmail.com",
+        "dname": "Send notification",
+        "x": 1030,
+        "y": 40,
+        "wires": [],
+        "info": "vpsp hmum bsge lxyf"
+    },
+    {
+        "id": "d7263d5a9eec6d6c",
+        "type": "watch",
+        "z": "56d7af57f34d08fb",
+        "name": "Watch output",
+        "files": "/Users/gelso/workspace/PoC/server/inferences/output",
+        "recursive": true,
+        "x": 190,
+        "y": 80,
+        "wires": [
+            [
+                "54db61e91c8f9d4c"
             ]
         ]
     },
@@ -513,8 +527,8 @@
         "name": "",
         "server": "",
         "client": "",
-        "x": 850,
-        "y": 500,
+        "x": 1010,
+        "y": 340,
         "wires": []
     },
     {
@@ -522,11 +536,11 @@
         "type": "subflow:79f7f96a02b62b78",
         "z": "56d7af57f34d08fb",
         "name": "",
-        "x": 540,
+        "x": 440,
         "y": 80,
         "wires": [
             [
-                "809a7186b4352fc2"
+                "553c2b1463077f70"
             ]
         ]
     },

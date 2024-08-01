@@ -117,7 +117,7 @@ def run_yolo_detection(model_path, input_dir, output_dir, tmpDir, confidence_thr
 
 # Example usage
 model_path = "models/vin.onnx"
-input_dir = "detect"
+input_dir = "defects/scratches"
 output_dir = "output"
 tmpDir = "tmp"
 confidence_threshold = 0.7
