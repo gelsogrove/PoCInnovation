@@ -342,7 +342,7 @@
         "id": "d370592ba8da03c9",
         "type": "exec",
         "z": "e5ff7f387ec0af58",
-        "command": "cd /Users/gelso/workspace/PoC/server/inferences; python3 detect-defects.py",
+        "command": "cd /Users/gelso/workspace/PoC/server/inferences && python3 detect-defects.py",
         "addpay": "",
         "append": "",
         "useSpawn": "false",
@@ -404,29 +404,8 @@
         "y": 60,
         "wires": [
             [
-                "d370592ba8da03c9",
-                "7b481c8c64fdd93b"
+                "d370592ba8da03c9"
             ]
-        ]
-    },
-    {
-        "id": "7b481c8c64fdd93b",
-        "type": "exec",
-        "z": "e5ff7f387ec0af58",
-        "command": "cd /Users/gelso/workspace/PoC/server/inferences; python3 python3 detect-vin.py",
-        "addpay": "",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "5",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Run Vin detection",
-        "x": 650,
-        "y": 160,
-        "wires": [
-            [],
-            [],
-            []
         ]
     },
     {

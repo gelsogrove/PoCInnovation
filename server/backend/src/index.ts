@@ -104,7 +104,7 @@ app.post("/new-defect", (req: Request, res: Response) => {
     }
 
     // Add a new entry if the last entry does not contain VIN
-    console.log(file)
+
     if (!file.toLowerCase().includes("vin")) {
       jsonData.push({
         _msgId,
@@ -121,8 +121,7 @@ app.post("/new-defect", (req: Request, res: Response) => {
         ...lastEntry,
         vin: `images/${file}`,
       }
-
-      console.log(lastEntry)
+      sendWebSocketMessage("refresh")
     }
 
     const fileContent = JSON.stringify(jsonData, null, 2)
@@ -133,7 +132,6 @@ app.post("/new-defect", (req: Request, res: Response) => {
         return res.status(500).json({ error: "Error saving the file" })
       }
 
-      sendWebSocketMessage("refresh")
       res.json({ message: "File saved/updated successfully" })
     })
   })

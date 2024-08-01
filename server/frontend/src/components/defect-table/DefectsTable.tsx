@@ -54,7 +54,7 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
           <tbody>
             {sortedDefects.map((defect) => {
               const vin = defect.vin
-                ? defect.vin.replace("images/VIN_", "").replace(".jpeg", "")
+                ? defect.vin.replace("images/VIN_", "").replace(/\.[^/.]+$/, "")
                 : "N/A"
 
               return (
@@ -79,7 +79,7 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
                     />
                   </td>
                   <td>
-                    <b>Vin:</b> {vin}
+                    <b>VIN:</b> {vin}
                     <br />
                     <br />
                     <b>Date:</b> {new Date(defect.data).toLocaleDateString()}{" "}

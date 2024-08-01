@@ -346,7 +346,7 @@
         "addpay": "",
         "append": "",
         "useSpawn": "false",
-        "timer": "2",
+        "timer": "0",
         "winHide": false,
         "oldrc": false,
         "name": "Run Vin detection",
