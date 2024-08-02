@@ -2,7 +2,6 @@ import express, { Request, Response } from "express"
 import fs from "fs"
 import http from "http"
 import path from "path"
-import WebSocket, { Server as WebSocketServer } from "ws"
 const cors = require("cors")
 
 const app = express()
@@ -28,35 +27,6 @@ const isValidDate = (dateString: string): boolean => {
 // Create HTTP server
 const server = http.createServer(app)
 
-// Create WebSocket server
-const wss = new WebSocketServer({ server })
-
-wss.on("connection", (ws: WebSocket) => {
-  console.log("Client connected via WebSocket")
-
-  ws.on("message", (message: WebSocket.MessageEvent) => {
-    console.log(`Received message: ${message}`)
-  })
-
-  ws.on("close", (code: number, reason: Buffer) => {
-    console.log(
-      `WebSocket connection closed. Code: ${code}, Reason: ${reason.toString()}`
-    )
-  })
-
-  ws.on("error", (error: Error) => {
-    console.error("WebSocket error:", error)
-  })
-})
-
-// Function to send WebSocket messages
-const sendWebSocketMessage = (message: string) => {
-  wss.clients.forEach((client: WebSocket) => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(message)
-    }
-  })
-}
 app.post("/new-defect", (req: Request, res: Response) => {
   const { dateFormat, timestamp, workshop, _msgId, camera, imageBase64, file } =
     req.body
@@ -104,7 +74,6 @@ app.post("/new-defect", (req: Request, res: Response) => {
     }
 
     // Add a new entry if the last entry does not contain VIN
-
     if (!file.toLowerCase().includes("vin")) {
       jsonData.push({
         _msgId,
@@ -133,7 +102,6 @@ app.post("/new-defect", (req: Request, res: Response) => {
 
       res.json({ message: "File saved/updated successfully" })
     })
-    sendWebSocketMessage("refresh")
   })
 })
 

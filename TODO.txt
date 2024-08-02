@@ -1,15 +1,8 @@
-- il websocket non va
-
-- MI PIACEREBBE FARE IL SOCKET DA NDOE-resized
-
--MI PIACEREBBE FARE UN ALTRO ONNX WHEEL per esempio (ma ci penso)
-
-- ORGANNIZA VIAGGIO GERMANIA
 
 - COMUNICA CHE SEI LISTO
 
-- Metti Commenti
+- ORGANNIZA VIAGGIO GERMANIA
 
-- Bottoni di delete
+ -MI PIACEREBBE FARE UN ALTRO ONNX WHEEL per esempio (ma ci penso)
 
- post detection > troppi swicth e se li raggruppiamo ?
+ - PAGAMENTI

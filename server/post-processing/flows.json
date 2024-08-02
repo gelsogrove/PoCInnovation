@@ -65,6 +65,12 @@
         "color": "#DDAA99"
     },
     {
+        "id": "1d383fba4761d3dd",
+        "type": "websocket-listener",
+        "path": "/ws/refresh",
+        "wholemsg": "false"
+    },
+    {
         "id": "837c2f09fddccebf",
         "type": "file in",
         "z": "79f7f96a02b62b78",
@@ -267,8 +273,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 610,
-        "y": 620,
+        "x": 690,
+        "y": 160,
         "wires": [
             [
                 "3e7d849007b1bb5c"
@@ -287,8 +293,8 @@
         "winHide": false,
         "oldrc": false,
         "name": "Delete local image",
-        "x": 870,
-        "y": 620,
+        "x": 950,
+        "y": 160,
         "wires": [
             [],
             [],
@@ -300,8 +306,8 @@
         "type": "subflow:79f7f96a02b62b78",
         "z": "e5ff7f387ec0af58",
         "name": "Prepare Object Defect",
-        "x": 340,
-        "y": 620,
+        "x": 420,
+        "y": 160,
         "wires": [
             [
                 "31f530353a98f1a7"
@@ -312,14 +318,15 @@
         "id": "dc47a598cd60c45f",
         "type": "watch",
         "z": "e5ff7f387ec0af58",
-        "name": "Watch output",
+        "name": "Watch processed folder",
         "files": "/Users/gelso/workspace/PoC/server/inferences/output",
         "recursive": true,
-        "x": 110,
-        "y": 620,
+        "x": 140,
+        "y": 160,
         "wires": [
             [
-                "aada60ebf6288682"
+                "aada60ebf6288682",
+                "ce1d71f9d8db86f7"
             ]
         ]
     },
@@ -327,10 +334,10 @@
         "id": "09310a4daf509e32",
         "type": "watch",
         "z": "e5ff7f387ec0af58",
-        "name": "Watch Scratches",
+        "name": "Watch defects folder",
         "files": "/Users/gelso/workspace/PoC/server/inferences/defects/scratches",
         "recursive": true,
-        "x": 120,
+        "x": 130,
         "y": 60,
         "wires": [
             [
@@ -349,8 +356,8 @@
         "timer": "0",
         "winHide": false,
         "oldrc": false,
-        "name": "Run Vin detection",
-        "x": 650,
+        "name": "Run detection",
+        "x": 640,
         "y": 60,
         "wires": [
             [],
@@ -409,27 +416,249 @@
         ]
     },
     {
-        "id": "b6657661e635a53b",
-        "type": "http request",
-        "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 1130,
-        "y": 100,
+        "id": "19db539a731d63d8",
+        "type": "function",
+        "z": "e5ff7f387ec0af58",
+        "name": "add property containsVin",
+        "func": "let filename = msg.filename;\n\nif (filename.toLowerCase().includes(\"vin\")) {\n    msg.containsVin = true;\n} else {\n    msg.containsVin = false;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 220,
         "wires": [
-            []
+            [
+                "81e95a41d11fcea8"
+            ]
         ]
+    },
+    {
+        "id": "0dc487b35f3e44bb",
+        "type": "websocket out",
+        "z": "e5ff7f387ec0af58",
+        "name": "Websocket",
+        "server": "1d383fba4761d3dd",
+        "client": "",
+        "x": 1270,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6fe088e3fa0aab1c",
+        "type": "change",
+        "z": "e5ff7f387ec0af58",
+        "name": "Set Refresh Payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "refresh",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 220,
+        "wires": [
+            [
+                "0dc487b35f3e44bb"
+            ]
+        ]
+    },
+    {
+        "id": "ce1d71f9d8db86f7",
+        "type": "switch",
+        "z": "e5ff7f387ec0af58",
+        "name": "Update Events",
+        "property": "event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 400,
+        "y": 220,
+        "wires": [
+            [
+                "19db539a731d63d8"
+            ]
+        ]
+    },
+    {
+        "id": "81e95a41d11fcea8",
+        "type": "switch",
+        "z": "e5ff7f387ec0af58",
+        "name": "ContainsVIn",
+        "property": "containsVin",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 850,
+        "y": 220,
+        "wires": [
+            [],
+            [
+                "6fe088e3fa0aab1c"
+            ]
+        ]
+    },
+    {
+        "id": "1de649cedfdbae05",
+        "type": "switch",
+        "z": "56d7af57f34d08fb",
+        "name": "ContainsVIn",
+        "property": "containsVin",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 690,
+        "y": 120,
+        "wires": [
+            [
+                "54db61e91c8f9d4c"
+            ]
+        ]
+    },
+    {
+        "id": "bd78fcd07e69dbfa",
+        "type": "function",
+        "z": "56d7af57f34d08fb",
+        "name": "add property containsVin",
+        "func": "let filename = msg.filename;\n\nif (filename.toLowerCase().includes(\"vin\")) {\n    msg.containsVin = true;\n} else {\n    msg.containsVin = false;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [
+                "1de649cedfdbae05"
+            ]
+        ]
+    },
+    {
+        "id": "54db61e91c8f9d4c",
+        "type": "subflow:79f7f96a02b62b78",
+        "z": "56d7af57f34d08fb",
+        "name": "",
+        "x": 900,
+        "y": 120,
+        "wires": [
+            [
+                "553c2b1463077f70"
+            ]
+        ]
+    },
+    {
+        "id": "6d3a0b6230ef2ea8",
+        "type": "switch",
+        "z": "56d7af57f34d08fb",
+        "name": "Update Events",
+        "property": "event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "bd78fcd07e69dbfa"
+            ]
+        ]
+    },
+    {
+        "id": "553c2b1463077f70",
+        "type": "template",
+        "z": "56d7af57f34d08fb",
+        "name": "HTML Template",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<h1> NEW DEFECT... </h1>\n<p>We detected a defect!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
+        "output": "str",
+        "x": 1020,
+        "y": 260,
+        "wires": [
+            [
+                "81b74fbe0531d93f",
+                "0c57b342dc3cd876",
+                "126195d01abe3337"
+            ]
+        ]
+    },
+    {
+        "id": "d7263d5a9eec6d6c",
+        "type": "watch",
+        "z": "56d7af57f34d08fb",
+        "name": "Watch output",
+        "files": "/Users/gelso/workspace/PoC/server/inferences/output",
+        "recursive": true,
+        "x": 90,
+        "y": 120,
+        "wires": [
+            [
+                "6d3a0b6230ef2ea8"
+            ]
+        ]
+    },
+    {
+        "id": "81b74fbe0531d93f",
+        "type": "e-mail",
+        "z": "56d7af57f34d08fb",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "andrea_gelsomino@hotmail.com",
+        "dname": "Send notification",
+        "x": 1290,
+        "y": 100,
+        "wires": [],
+        "info": "vpsp hmum bsge lxyf"
     },
     {
         "id": "0c57b342dc3cd876",
@@ -446,23 +675,8 @@
         "phonenumberinputtypemessage": "msg",
         "inputtypemessage": "str",
         "rejectssl": false,
-        "x": 1140,
+        "x": 1280,
         "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b9bc5f9ce600beb1",
-        "type": "telegram sender",
-        "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "bot": "",
-        "haserroroutput": false,
-        "outputs": 1,
-        "x": 1140,
-        "y": 220,
         "wires": [
             []
         ]
@@ -484,162 +698,10 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1130,
-        "y": 280,
+        "x": 1270,
+        "y": 220,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "553c2b1463077f70",
-        "type": "template",
-        "z": "56d7af57f34d08fb",
-        "name": "HTML Template",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "html",
-        "syntax": "mustache",
-        "template": "<h1> NEW DEFECT... </h1>\n<p>We detected a defect on {{dateFormat}}!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
-        "output": "str",
-        "x": 900,
-        "y": 80,
-        "wires": [
-            [
-                "81b74fbe0531d93f",
-                "b6657661e635a53b",
-                "0c57b342dc3cd876",
-                "b9bc5f9ce600beb1",
-                "126195d01abe3337",
-                "e337c3dd0bb0b473"
-            ]
-        ]
-    },
-    {
-        "id": "81b74fbe0531d93f",
-        "type": "e-mail",
-        "z": "56d7af57f34d08fb",
-        "server": "smtp.gmail.com",
-        "port": "465",
-        "authtype": "BASIC",
-        "saslformat": true,
-        "token": "oauth2Response.access_token",
-        "secure": true,
-        "tls": true,
-        "name": "andrea_gelsomino@hotmail.com",
-        "dname": "Send notification",
-        "x": 1150,
-        "y": 40,
-        "wires": [],
-        "info": "vpsp hmum bsge lxyf"
-    },
-    {
-        "id": "d7263d5a9eec6d6c",
-        "type": "watch",
-        "z": "56d7af57f34d08fb",
-        "name": "Watch output",
-        "files": "/Users/gelso/workspace/PoC/server/inferences/output",
-        "recursive": true,
-        "x": 90,
-        "y": 80,
-        "wires": [
-            [
-                "6a7735e113237e6d"
-            ]
-        ]
-    },
-    {
-        "id": "e337c3dd0bb0b473",
-        "type": "websocket out",
-        "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "server": "",
-        "client": "",
-        "x": 1130,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "54db61e91c8f9d4c",
-        "type": "subflow:79f7f96a02b62b78",
-        "z": "56d7af57f34d08fb",
-        "name": "",
-        "x": 680,
-        "y": 80,
-        "wires": [
-            [
-                "553c2b1463077f70"
-            ]
-        ]
-    },
-    {
-        "id": "bd78fcd07e69dbfa",
-        "type": "function",
-        "z": "56d7af57f34d08fb",
-        "name": "function 1",
-        "func": "let filename = msg.filename; \n\nif (filename.toLowerCase().includes(\"vin\")) {\n    msg.process = false;\n    return null;\n} else {\n    msg.process = true;\n    return msg;\n}\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 80,
-        "wires": [
-            [
-                "be74cea9aed6ba88"
-            ]
-        ]
-    },
-    {
-        "id": "be74cea9aed6ba88",
-        "type": "switch",
-        "z": "56d7af57f34d08fb",
-        "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "null",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 510,
-        "y": 80,
-        "wires": [
-            [
-                "54db61e91c8f9d4c"
-            ]
-        ]
-    },
-    {
-        "id": "6a7735e113237e6d",
-        "type": "switch",
-        "z": "56d7af57f34d08fb",
-        "name": "",
-        "property": "event",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "update",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 230,
-        "y": 80,
-        "wires": [
-            [
-                "bd78fcd07e69dbfa"
-            ]
         ]
     },
     {
