@@ -17,22 +17,16 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
   useEffect(() => {
     if (defects.length > prevDefectsCountRef.current) {
       const newDefect = defects[defects.length - 1]
-      setHighlightedRowId(newDefect._msgId)
 
       // Set loading to true for 4 seconds
       setLoading(true)
       const loadingTimeoutId = setTimeout(() => setLoading(false), 0)
 
       // Remove the highlight after 3 seconds
-      const highlightTimeoutId = setTimeout(
-        () => setHighlightedRowId(null),
-        5000
-      )
 
       // Cleanup the timeouts if the component unmounts or the effect reruns
       return () => {
         clearTimeout(loadingTimeoutId)
-        clearTimeout(highlightTimeoutId)
       }
     }
 
@@ -100,7 +94,12 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
                             alt="Defect"
                             onClick={() => handleImageClick(defect.vin)}
                             className="thumbnail"
+                            onError={(e) =>
+                              (e.currentTarget.src =
+                                "https://media.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif")
+                            }
                           />
+
                           <img
                             src={`http://localhost:3000/${defect.filepath}`}
                             alt="Defect"

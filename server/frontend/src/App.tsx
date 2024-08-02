@@ -6,6 +6,27 @@ import Settings from "./components/settings/settings"
 import Statistics from "./components/statistics/statistics"
 import DefectModel from "./models/DefectModel"
 
+const processDefects = (defects: DefectModel[]): DefectModel[] => {
+  // Crea una copia dell'array dei difetti per modificare senza alterare lo stato direttamente
+  const updatedDefects = [...defects]
+
+  // Trova gli indici dei record con `vin` null
+  for (let i = 0; i < updatedDefects.length - 1; i++) {
+    if (updatedDefects[i].vin === null && updatedDefects[i + 1]) {
+      // Sostituisci il vin del record precedente con quello del record successivo
+      updatedDefects[i].vin = updatedDefects[i + 1].vin
+
+      // Verifica se i due record hanno lo stesso filepath
+      if (updatedDefects[i].filepath === updatedDefects[i + 1].filepath) {
+        // Rimuovi il record successivo
+        updatedDefects.splice(i + 1, 1)
+      }
+    }
+  }
+
+  return updatedDefects
+}
+
 const App: React.FC = () => {
   const [defects, setDefects] = useState<DefectModel[]>([])
   const [ws, setWs] = useState<WebSocket | null>(null)
@@ -46,7 +67,10 @@ const App: React.FC = () => {
       }
       const data = await response.json()
 
-      setDefects(data)
+      // Process defects to update vin values
+      const processedDefects = processDefects(data)
+
+      setDefects(processedDefects)
     } catch (error) {
       console.error("Error fetching defects:", error)
     }
