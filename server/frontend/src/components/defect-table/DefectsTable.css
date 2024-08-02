@@ -35,7 +35,7 @@
 }
 
 .defects-table td:first-child {
-  width: 350px;
+  width: 370px;
 }
 
 /* Table column for images */
@@ -102,4 +102,11 @@
   to {
     background: none;
   }
+}
+
+.loading {
+  width: 100px; /* Adjust width if needed */
+  margin: 0px 400px; /* Center the image horizontally */
+  display: block; /* Make sure it takes up its own line */
+  padding: 15px;
 }

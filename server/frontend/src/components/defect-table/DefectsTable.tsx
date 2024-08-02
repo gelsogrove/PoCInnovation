@@ -11,19 +11,29 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [selectedVin, setSelectedVin] = useState<string | null>(null)
   const [highlightedRowId, setHighlightedRowId] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
   const prevDefectsCountRef = useRef<number>(defects.length)
 
   useEffect(() => {
-    // Check if the number of defects has increased
     if (defects.length > prevDefectsCountRef.current) {
       const newDefect = defects[defects.length - 1]
       setHighlightedRowId(newDefect._msgId)
 
-      // Remove the highlight after 3 seconds
-      const timeoutId = setTimeout(() => setHighlightedRowId(null), 3000)
+      // Set loading to true for 4 seconds
+      setLoading(true)
+      const loadingTimeoutId = setTimeout(() => setLoading(false), 4000)
 
-      // Cleanup the timeout if the component unmounts or the effect reruns
-      return () => clearTimeout(timeoutId)
+      // Remove the highlight after 3 seconds
+      const highlightTimeoutId = setTimeout(
+        () => setHighlightedRowId(null),
+        3000
+      )
+
+      // Cleanup the timeouts if the component unmounts or the effect reruns
+      return () => {
+        clearTimeout(loadingTimeoutId)
+        clearTimeout(highlightTimeoutId)
+      }
     }
 
     // Update the previous defects count
@@ -60,44 +70,66 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
                 ? defect.vin.replace("images/VIN_", "").replace(/\.[^/.]+$/, "")
                 : null
 
+              // Determine if this row is loading
+              const isLoading = loading && highlightedRowId === defect._msgId
+
               return (
-                <tr
-                  key={defect._msgId}
-                  className={
-                    highlightedRowId === defect._msgId ? "highlight-new" : ""
-                  }
-                >
-                  <td>
-                    <img
-                      src={`http://localhost:3000/${defect.vin}`}
-                      alt="Defect"
-                      onClick={() => handleImageClick(defect.vin)}
-                      className="thumbnail"
-                    />
-                    <img
-                      src={`http://localhost:3000/${defect.filepath}`}
-                      alt="Defect"
-                      onClick={() => handleImageClick(defect.filepath)}
-                      className="thumbnail"
-                    />
-                  </td>
-                  <td>
-                    {vin ? (
-                      <>
-                        <b>VIN:</b> {vin}
+                <React.Fragment key={defect._msgId}>
+                  {isLoading ? (
+                    <tr>
+                      <td colSpan={2}>
+                        <img
+                          src="https://media.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"
+                          className="loading"
+                          alt="Loading"
+                        />
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr
+                      className={
+                        highlightedRowId === defect._msgId
+                          ? "highlight-new"
+                          : ""
+                      }
+                    >
+                      <td>
+                        <>
+                          <img
+                            src={`http://localhost:3000/${defect.vin}`}
+                            alt="Defect"
+                            onClick={() => handleImageClick(defect.vin)}
+                            className="thumbnail"
+                          />
+                          <img
+                            src={`http://localhost:3000/${defect.filepath}`}
+                            alt="Defect"
+                            onClick={() => handleImageClick(defect.filepath)}
+                            className="thumbnail"
+                          />
+                        </>
+                      </td>
+                      <td>
+                        {vin ? (
+                          <>
+                            <b>VIN:</b> {vin}
+                            <br />
+                            <br />
+                          </>
+                        ) : null}
+                        <b>Date:</b>{" "}
+                        {new Date(defect.data).toLocaleDateString()}
                         <br />
+                        <b>Time:</b>{" "}
+                        {new Date(defect.data).toLocaleTimeString()}
                         <br />
-                      </>
-                    ) : null}
-                    <b>Date:</b> {new Date(defect.data).toLocaleDateString()}
-                    <br />
-                    <b>Time:</b> {new Date(defect.data).toLocaleTimeString()}
-                    <br />
-                    <b>Defect: </b> Scratch
-                    <br />
-                    <b>Workshop: </b> T11
-                  </td>
-                </tr>
+                        <b>Defect: </b> Scratch
+                        <br />
+                        <b>Workshop: </b> T11
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
               )
             })}
           </tbody>
