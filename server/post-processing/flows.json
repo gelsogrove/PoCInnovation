@@ -331,91 +331,6 @@
         ]
     },
     {
-        "id": "09310a4daf509e32",
-        "type": "watch",
-        "z": "e5ff7f387ec0af58",
-        "name": "Watch defects folder",
-        "files": "/Users/gelso/workspace/PoC/server/inferences/defects/scratches",
-        "recursive": true,
-        "x": 130,
-        "y": 60,
-        "wires": [
-            [
-                "77204c5bf4fedaa6"
-            ]
-        ]
-    },
-    {
-        "id": "d370592ba8da03c9",
-        "type": "exec",
-        "z": "e5ff7f387ec0af58",
-        "command": "cd /Users/gelso/workspace/PoC/server/inferences && python3 detect-defects.py",
-        "addpay": "",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "0",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Run detection",
-        "x": 640,
-        "y": 60,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "77204c5bf4fedaa6",
-        "type": "switch",
-        "z": "e5ff7f387ec0af58",
-        "name": "",
-        "property": "event",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "update",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 310,
-        "y": 60,
-        "wires": [
-            [
-                "4cbd1e5d146f5ad0"
-            ]
-        ]
-    },
-    {
-        "id": "4cbd1e5d146f5ad0",
-        "type": "switch",
-        "z": "e5ff7f387ec0af58",
-        "name": "",
-        "property": "file",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "neq",
-                "v": ".DS_Store",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 450,
-        "y": 60,
-        "wires": [
-            [
-                "d370592ba8da03c9"
-            ]
-        ]
-    },
-    {
         "id": "19db539a731d63d8",
         "type": "function",
         "z": "e5ff7f387ec0af58",
@@ -507,10 +422,10 @@
         "propertyType": "msg",
         "rules": [
             {
-                "t": "false"
+                "t": "true"
             },
             {
-                "t": "true"
+                "t": "false"
             }
         ],
         "checkall": "true",
@@ -520,10 +435,10 @@
         "y": 220,
         "wires": [
             [
-                "bc5ed6bde9e74d5b"
+                "6fe088e3fa0aab1c"
             ],
             [
-                "6fe088e3fa0aab1c"
+                "bc5ed6bde9e74d5b"
             ]
         ]
     },
@@ -534,8 +449,8 @@
         "name": "Websocket",
         "server": "1d383fba4761d3dd",
         "client": "",
-        "x": 990,
-        "y": 320,
+        "x": 1030,
+        "y": 280,
         "wires": []
     },
     {

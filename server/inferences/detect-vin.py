@@ -93,12 +93,11 @@ def process_image(filepath, model, confidence_threshold, ocr_confidence_threshol
             resized_frame_with_bbox = draw_bounding_box(resized_frame.copy(), (x1, y1, x2, y2), margin)
             
             # Zoom into the bounding box area
-            zoomed_img = zoom_into_bbox(resized_frame, (x1, y1, x2, y2), margin, zoom_level=3.0)
+            zoomed_img = zoom_into_bbox(resized_frame, (x1, y1, x2, y2), margin, zoom_level=4.0)
             
             # Convert zoomed image to Base64
             zoomed_image_base64 = convert_image_to_base64(zoomed_img)
 
-            print(zoomed_image_base64)
             
             # Perform OCR on the zoomed image
             vin_number = perform_ocr(zoomed_image_base64, ocr_confidence_threshold)

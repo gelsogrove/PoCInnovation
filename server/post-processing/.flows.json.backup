@@ -353,7 +353,7 @@
         "addpay": "",
         "append": "",
         "useSpawn": "false",
-        "timer": "0",
+        "timer": "15",
         "winHide": false,
         "oldrc": false,
         "name": "Run detection",
@@ -361,7 +361,9 @@
         "y": 60,
         "wires": [
             [],
-            [],
+            [
+                "2c8a80fb146fa301"
+            ],
             []
         ]
     },
@@ -507,10 +509,10 @@
         "propertyType": "msg",
         "rules": [
             {
-                "t": "false"
+                "t": "true"
             },
             {
-                "t": "true"
+                "t": "false"
             }
         ],
         "checkall": "true",
@@ -520,10 +522,10 @@
         "y": 220,
         "wires": [
             [
-                "bc5ed6bde9e74d5b"
+                "6fe088e3fa0aab1c"
             ],
             [
-                "6fe088e3fa0aab1c"
+                "bc5ed6bde9e74d5b"
             ]
         ]
     },
@@ -536,6 +538,22 @@
         "client": "",
         "x": 990,
         "y": 320,
+        "wires": []
+    },
+    {
+        "id": "2c8a80fb146fa301",
+        "type": "debug",
+        "z": "e5ff7f387ec0af58",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 60,
         "wires": []
     },
     {
@@ -553,7 +571,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 670,
+        "x": 910,
         "y": 120,
         "wires": [
             [
@@ -573,7 +591,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 470,
+        "x": 710,
         "y": 120,
         "wires": [
             [
@@ -586,7 +604,7 @@
         "type": "subflow:79f7f96a02b62b78",
         "z": "56d7af57f34d08fb",
         "name": "",
-        "x": 240,
+        "x": 480,
         "y": 320,
         "wires": [
             [
@@ -611,7 +629,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 260,
+        "x": 500,
         "y": 120,
         "wires": [
             [
@@ -630,7 +648,7 @@
         "syntax": "mustache",
         "template": "<h1> NEW DEFECT... </h1>\n<p>We detected a defect!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
         "output": "str",
-        "x": 480,
+        "x": 720,
         "y": 320,
         "wires": [
             [
@@ -648,7 +666,7 @@
         "name": "Watch output",
         "files": "/Users/gelso/workspace/PoC/server/inferences/output",
         "recursive": true,
-        "x": 90,
+        "x": 330,
         "y": 120,
         "wires": [
             [
@@ -670,7 +688,7 @@
         "tls": true,
         "name": "andrea.gelsomino@metropolis-lab.es",
         "dname": "Send notification",
-        "x": 850,
+        "x": 1090,
         "y": 240,
         "wires": [],
         "info": "vpsp hmum bsge lxyf"
@@ -690,7 +708,7 @@
         "phonenumberinputtypemessage": "msg",
         "inputtypemessage": "str",
         "rejectssl": false,
-        "x": 840,
+        "x": 1080,
         "y": 300,
         "wires": [
             []
@@ -713,7 +731,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 830,
+        "x": 1070,
         "y": 360,
         "wires": [
             []
@@ -727,7 +745,7 @@
         "name": "",
         "server": "1d383fba4761d3dd",
         "client": "",
-        "x": 840,
+        "x": 1080,
         "y": 420,
         "wires": []
     },
