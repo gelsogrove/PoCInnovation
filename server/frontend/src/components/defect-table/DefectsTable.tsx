@@ -10,27 +10,20 @@ interface DefectsTableProps {
 const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [selectedVin, setSelectedVin] = useState<string | null>(null)
-  const [highlightedRowId, setHighlightedRowId] = useState<string | null>(null)
+  const [highlightedRowId] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const prevDefectsCountRef = useRef<number>(defects.length)
 
   useEffect(() => {
     if (defects.length > prevDefectsCountRef.current) {
-      const newDefect = defects[defects.length - 1]
-
-      // Set loading to true for 4 seconds
       setLoading(true)
       const loadingTimeoutId = setTimeout(() => setLoading(false), 0)
 
-      // Remove the highlight after 3 seconds
-
-      // Cleanup the timeouts if the component unmounts or the effect reruns
       return () => {
         clearTimeout(loadingTimeoutId)
       }
     }
 
-    // Update the previous defects count
     prevDefectsCountRef.current = defects.length
   }, [defects])
 

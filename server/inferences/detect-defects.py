@@ -34,6 +34,17 @@ def infer(session, input_data):
     outputs = session.run(None, {input_name: input_data})
     return outputs
 
+
+def clear_output_folder(folder_path):
+    """
+    Clear the contents of the output folder.
+    """
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
+
 def postprocess(outputs, original_image, confidence_threshold):
     """
     Postprocess the inference results to determine if there are defects
@@ -69,9 +80,9 @@ def postprocess(outputs, original_image, confidence_threshold):
 
     return has_defect, highest_confidence, image_with_boxes
 
-def clear_output_folder(folder_path):
+def clear_input_folder(folder_path):
     """
-    Clear the contents of the output folder.
+    Clear the contents of the input folder.
     """
     for filename in os.listdir(folder_path):
         file_path = os.path.join(folder_path, filename)
@@ -83,8 +94,9 @@ def analyze_images_in_folder(folder_path, model_path, input_shape, output_folder
     Analyze all images in a folder and save images with bounding boxes in a new folder.
     """
     session = load_model(model_path)
+    defects_found = False  # Flag to track if any defects were found
+
     for filename in os.listdir(folder_path):
-        # Process only files that do not contain 'vin' in any case
         if 'vin' not in filename.lower() and filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
             image_path = os.path.join(folder_path, filename)
             image = cv2.imread(image_path)
@@ -96,21 +108,19 @@ def analyze_images_in_folder(folder_path, model_path, input_shape, output_folder
             outputs = infer(session, preprocessed_image)
             has_defect, highest_confidence, image_with_boxes = postprocess(outputs, original_image, confidence_threshold)
 
-            # Only save and remove the file if defects are detected
             if has_defect:
-                # Modify the filename to include the confidence score
+                defects_found = True  # Set flag to True if a defect is found
                 base, ext = os.path.splitext(filename)
                 confidence_str = f"{highest_confidence:.2f}"
                 output_filename = f"{base}{ext}"
                 output_path = os.path.join(output_folder, output_filename)
-                
-                # Save the image with bounding boxes to the new folder
                 cv2.imwrite(output_path, image_with_boxes)
                 print(f"Saved {output_filename} to {output_folder}")
 
-            # Remove the processed image from the original folder
             os.remove(image_path)
             print(f"Deleted {filename} from {folder_path}")
+
+    return defects_found  # Return the flag indicating whether defects were found
 
 def main():
     input_dir = "defects/scratches"
@@ -119,11 +129,19 @@ def main():
     output_folder = './output' 
     confidence_threshold = 0.85
 
-    analyze_images_in_folder(input_dir, model_path, input_shape, output_folder, confidence_threshold)
+    # Clear the output folder before starting the analysis
+    clear_output_folder(output_folder)
 
-    # Execute the shell command at the end
-    command = "cd /Users/gelso/workspace/PoC/server/inferences && python3 detect-vin.py"
-    subprocess.run(command, shell=True)
+    defects_found = analyze_images_in_folder(input_dir, model_path, input_shape, output_folder, confidence_threshold)
+
+    if defects_found:
+        # Execute the shell command if defects were found
+        command = "cd /Users/gelso/workspace/PoC/server/inferences && python3 detect-vin.py"
+        subprocess.run(command, shell=True)
+    else:
+        # Clear the input directory if no defects were found
+        clear_input_folder(input_dir)
+        print(f"No defects found. Cleared input directory: {input_dir}")
 
 if __name__ == "__main__":
     main()

@@ -1,8 +1,10 @@
 
 - COMUNICA CHE SEI LISTO
-
 - ORGANNIZA VIAGGIO GERMANIA
-
  -MI PIACEREBBE FARE UN ALTRO ONNX WHEEL per esempio (ma ci penso)
-
  - PAGAMENTI
+ - MACCHINA
+ - FUNZIONE DI DELETE
+
+- raggruppare flow per la poc
+- audio quando arriva un elemtno

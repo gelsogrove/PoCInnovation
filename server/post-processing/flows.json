@@ -292,8 +292,8 @@
         "timer": "1",
         "winHide": false,
         "oldrc": false,
-        "name": "Delete local image",
-        "x": 950,
+        "name": "Delete bouding box image",
+        "x": 980,
         "y": 160,
         "wires": [
             [],
@@ -519,11 +519,24 @@
         "x": 850,
         "y": 220,
         "wires": [
-            [],
+            [
+                "bc5ed6bde9e74d5b"
+            ],
             [
                 "6fe088e3fa0aab1c"
             ]
         ]
+    },
+    {
+        "id": "bc5ed6bde9e74d5b",
+        "type": "websocket out",
+        "z": "e5ff7f387ec0af58",
+        "name": "Websocket",
+        "server": "1d383fba4761d3dd",
+        "client": "",
+        "x": 990,
+        "y": 320,
+        "wires": []
     },
     {
         "id": "1de649cedfdbae05",
@@ -540,7 +553,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 690,
+        "x": 910,
         "y": 120,
         "wires": [
             [
@@ -560,7 +573,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 490,
+        "x": 710,
         "y": 120,
         "wires": [
             [
@@ -573,8 +586,8 @@
         "type": "subflow:79f7f96a02b62b78",
         "z": "56d7af57f34d08fb",
         "name": "",
-        "x": 900,
-        "y": 120,
+        "x": 480,
+        "y": 320,
         "wires": [
             [
                 "553c2b1463077f70"
@@ -598,7 +611,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 260,
+        "x": 500,
         "y": 120,
         "wires": [
             [
@@ -610,20 +623,21 @@
         "id": "553c2b1463077f70",
         "type": "template",
         "z": "56d7af57f34d08fb",
-        "name": "HTML Template",
+        "name": "message",
         "field": "payload",
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
         "template": "<h1> NEW DEFECT... </h1>\n<p>We detected a defect!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
         "output": "str",
-        "x": 1020,
-        "y": 260,
+        "x": 720,
+        "y": 320,
         "wires": [
             [
                 "81b74fbe0531d93f",
                 "0c57b342dc3cd876",
-                "126195d01abe3337"
+                "126195d01abe3337",
+                "5ff87b6e917f5666"
             ]
         ]
     },
@@ -634,7 +648,7 @@
         "name": "Watch output",
         "files": "/Users/gelso/workspace/PoC/server/inferences/output",
         "recursive": true,
-        "x": 90,
+        "x": 330,
         "y": 120,
         "wires": [
             [
@@ -646,6 +660,7 @@
         "id": "81b74fbe0531d93f",
         "type": "e-mail",
         "z": "56d7af57f34d08fb",
+        "d": true,
         "server": "smtp.gmail.com",
         "port": "465",
         "authtype": "BASIC",
@@ -653,10 +668,10 @@
         "token": "oauth2Response.access_token",
         "secure": true,
         "tls": true,
-        "name": "andrea_gelsomino@hotmail.com",
+        "name": "andrea.gelsomino@metropolis-lab.es",
         "dname": "Send notification",
-        "x": 1290,
-        "y": 100,
+        "x": 1090,
+        "y": 240,
         "wires": [],
         "info": "vpsp hmum bsge lxyf"
     },
@@ -675,8 +690,8 @@
         "phonenumberinputtypemessage": "msg",
         "inputtypemessage": "str",
         "rejectssl": false,
-        "x": 1280,
-        "y": 160,
+        "x": 1080,
+        "y": 300,
         "wires": [
             []
         ]
@@ -698,11 +713,23 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1270,
-        "y": 220,
+        "x": 1070,
+        "y": 360,
         "wires": [
             []
         ]
+    },
+    {
+        "id": "5ff87b6e917f5666",
+        "type": "websocket out",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "server": "1d383fba4761d3dd",
+        "client": "",
+        "x": 1080,
+        "y": 420,
+        "wires": []
     },
     {
         "id": "98bb624796090f07",

@@ -292,8 +292,8 @@
         "timer": "1",
         "winHide": false,
         "oldrc": false,
-        "name": "Delete local image",
-        "x": 950,
+        "name": "Delete bouding box image",
+        "x": 980,
         "y": 160,
         "wires": [
             [],
@@ -519,120 +519,45 @@
         "x": 850,
         "y": 220,
         "wires": [
-            [],
+            [
+                "bc5ed6bde9e74d5b"
+            ],
             [
                 "6fe088e3fa0aab1c"
             ]
         ]
     },
     {
-        "id": "0c57b342dc3cd876",
-        "type": "node-red-contrib-whatsapp-cmb-send-message",
-        "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "credtype": "account",
-        "account": "",
-        "text": "",
-        "phonenumbervalue": "",
-        "apikeyvalue": "",
-        "apikeyinputtypemessage": "msg",
-        "phonenumberinputtypemessage": "msg",
-        "inputtypemessage": "str",
-        "rejectssl": false,
-        "x": 1260,
-        "y": 140,
-        "wires": [
-            []
-        ]
+        "id": "bc5ed6bde9e74d5b",
+        "type": "websocket out",
+        "z": "e5ff7f387ec0af58",
+        "name": "Websocket",
+        "server": "1d383fba4761d3dd",
+        "client": "",
+        "x": 990,
+        "y": 320,
+        "wires": []
     },
     {
-        "id": "126195d01abe3337",
-        "type": "http request",
+        "id": "1de649cedfdbae05",
+        "type": "switch",
         "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 1250,
-        "y": 200,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "553c2b1463077f70",
-        "type": "template",
-        "z": "56d7af57f34d08fb",
-        "name": "HTML Template",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "html",
-        "syntax": "mustache",
-        "template": "<h1> NEW DEFECT... </h1>\n<p>We detected a defect!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
-        "output": "str",
-        "x": 940,
-        "y": 80,
-        "wires": [
-            [
-                "81b74fbe0531d93f",
-                "0c57b342dc3cd876",
-                "126195d01abe3337"
-            ]
-        ]
-    },
-    {
-        "id": "81b74fbe0531d93f",
-        "type": "e-mail",
-        "z": "56d7af57f34d08fb",
-        "server": "smtp.gmail.com",
-        "port": "465",
-        "authtype": "BASIC",
-        "saslformat": true,
-        "token": "oauth2Response.access_token",
-        "secure": true,
-        "tls": true,
-        "name": "andrea_gelsomino@hotmail.com",
-        "dname": "Send notification",
-        "x": 1270,
-        "y": 80,
-        "wires": [],
-        "info": "vpsp hmum bsge lxyf"
-    },
-    {
-        "id": "d7263d5a9eec6d6c",
-        "type": "watch",
-        "z": "56d7af57f34d08fb",
-        "name": "Watch output",
-        "files": "/Users/gelso/workspace/PoC/server/inferences/output",
-        "recursive": true,
-        "x": 90,
+        "name": "ContainsVIn",
+        "property": "containsVin",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 670,
         "y": 120,
         "wires": [
             [
-                "6d3a0b6230ef2ea8"
-            ]
-        ]
-    },
-    {
-        "id": "54db61e91c8f9d4c",
-        "type": "subflow:79f7f96a02b62b78",
-        "z": "56d7af57f34d08fb",
-        "name": "",
-        "x": 720,
-        "y": 80,
-        "wires": [
-            [
-                "553c2b1463077f70"
+                "54db61e91c8f9d4c"
             ]
         ]
     },
@@ -648,8 +573,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 350,
-        "y": 220,
+        "x": 470,
+        "y": 120,
         "wires": [
             [
                 "1de649cedfdbae05"
@@ -657,40 +582,15 @@
         ]
     },
     {
-        "id": "334447abefa3171b",
-        "type": "websocket out",
+        "id": "54db61e91c8f9d4c",
+        "type": "subflow:79f7f96a02b62b78",
         "z": "56d7af57f34d08fb",
-        "name": "Websocket",
-        "server": "1d383fba4761d3dd",
-        "client": "",
-        "x": 930,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "66a6373dc941b318",
-        "type": "change",
-        "z": "56d7af57f34d08fb",
-        "name": "Set Refresh Payload",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "refresh",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 720,
-        "y": 200,
+        "name": "",
+        "x": 240,
+        "y": 320,
         "wires": [
             [
-                "334447abefa3171b"
+                "553c2b1463077f70"
             ]
         ]
     },
@@ -720,33 +620,116 @@
         ]
     },
     {
-        "id": "1de649cedfdbae05",
-        "type": "switch",
+        "id": "553c2b1463077f70",
+        "type": "template",
         "z": "56d7af57f34d08fb",
-        "name": "ContainsVIn",
-        "property": "containsVin",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "false"
-            },
-            {
-                "t": "true"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 510,
+        "name": "message",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<h1> NEW DEFECT... </h1>\n<p>We detected a defect!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
+        "output": "str",
+        "x": 480,
+        "y": 320,
+        "wires": [
+            [
+                "81b74fbe0531d93f",
+                "0c57b342dc3cd876",
+                "126195d01abe3337",
+                "5ff87b6e917f5666"
+            ]
+        ]
+    },
+    {
+        "id": "d7263d5a9eec6d6c",
+        "type": "watch",
+        "z": "56d7af57f34d08fb",
+        "name": "Watch output",
+        "files": "/Users/gelso/workspace/PoC/server/inferences/output",
+        "recursive": true,
+        "x": 90,
         "y": 120,
         "wires": [
             [
-                "54db61e91c8f9d4c"
-            ],
-            [
-                "66a6373dc941b318"
+                "6d3a0b6230ef2ea8"
             ]
         ]
+    },
+    {
+        "id": "81b74fbe0531d93f",
+        "type": "e-mail",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "andrea.gelsomino@metropolis-lab.es",
+        "dname": "Send notification",
+        "x": 850,
+        "y": 240,
+        "wires": [],
+        "info": "vpsp hmum bsge lxyf"
+    },
+    {
+        "id": "0c57b342dc3cd876",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "credtype": "account",
+        "account": "",
+        "text": "",
+        "phonenumbervalue": "",
+        "apikeyvalue": "",
+        "apikeyinputtypemessage": "msg",
+        "phonenumberinputtypemessage": "msg",
+        "inputtypemessage": "str",
+        "rejectssl": false,
+        "x": 840,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "126195d01abe3337",
+        "type": "http request",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 830,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5ff87b6e917f5666",
+        "type": "websocket out",
+        "z": "56d7af57f34d08fb",
+        "d": true,
+        "name": "",
+        "server": "1d383fba4761d3dd",
+        "client": "",
+        "x": 840,
+        "y": 420,
+        "wires": []
     },
     {
         "id": "98bb624796090f07",
