@@ -21,12 +21,12 @@ const DefectsTable: React.FC<DefectsTableProps> = ({ defects }) => {
 
       // Set loading to true for 4 seconds
       setLoading(true)
-      const loadingTimeoutId = setTimeout(() => setLoading(false), 4000)
+      const loadingTimeoutId = setTimeout(() => setLoading(false), 0)
 
       // Remove the highlight after 3 seconds
       const highlightTimeoutId = setTimeout(
         () => setHighlightedRowId(null),
-        3000
+        5000
       )
 
       // Cleanup the timeouts if the component unmounts or the effect reruns
