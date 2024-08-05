@@ -39,7 +39,7 @@ const Settings: React.FC = () => {
 
   return (
     <div className="card">
-      <h2>Settings</h2>
+      <h2>Flows Settings</h2>
       <div className="settings-list">
         <div className="block">
           <a
@@ -75,6 +75,18 @@ const Settings: React.FC = () => {
           >
             <b>Catch Errors flow</b>
             <span className="status active">Active</span>
+          </a>
+        </div>
+
+        <div className="block">
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault()
+              openModal("http://127.0.0.1:1880/#flow/61b72cbb5a213105")
+            }}
+          >
+            <b>Weekly Report</b>
           </a>
         </div>
       </div>

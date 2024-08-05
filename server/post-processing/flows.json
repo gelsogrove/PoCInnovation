@@ -33,6 +33,14 @@
         "env": []
     },
     {
+        "id": "61b72cbb5a213105",
+        "type": "tab",
+        "label": "Weekly report",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "79f7f96a02b62b78",
         "type": "subflow",
         "name": "Prepare Object Defect",
@@ -629,14 +637,11 @@
         "syntax": "mustache",
         "template": "<h1> NEW DEFECT... </h1>\n<p>We detected a defect!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
         "output": "str",
-        "x": 680,
+        "x": 640,
         "y": 240,
         "wires": [
             [
-                "81b74fbe0531d93f",
-                "0c57b342dc3cd876",
-                "126195d01abe3337",
-                "5ff87b6e917f5666"
+                "81b74fbe0531d93f"
             ]
         ]
     },
@@ -659,7 +664,6 @@
         "id": "81b74fbe0531d93f",
         "type": "e-mail",
         "z": "56d7af57f34d08fb",
-        "d": true,
         "server": "smtp.gmail.com",
         "port": "465",
         "authtype": "BASIC",
@@ -669,73 +673,17 @@
         "tls": true,
         "name": "andrea.gelsomino@metropolis-lab.es",
         "dname": "Send notification",
-        "x": 1050,
-        "y": 160,
+        "x": 910,
+        "y": 240,
         "wires": [],
         "info": "vpsp hmum bsge lxyf"
-    },
-    {
-        "id": "0c57b342dc3cd876",
-        "type": "node-red-contrib-whatsapp-cmb-send-message",
-        "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "credtype": "account",
-        "account": "",
-        "text": "",
-        "phonenumbervalue": "",
-        "apikeyvalue": "",
-        "apikeyinputtypemessage": "msg",
-        "phonenumberinputtypemessage": "msg",
-        "inputtypemessage": "str",
-        "rejectssl": false,
-        "x": 1040,
-        "y": 220,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "126195d01abe3337",
-        "type": "http request",
-        "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 1030,
-        "y": 280,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "5ff87b6e917f5666",
-        "type": "websocket out",
-        "z": "56d7af57f34d08fb",
-        "d": true,
-        "name": "",
-        "server": "1d383fba4761d3dd",
-        "client": "",
-        "x": 1040,
-        "y": 340,
-        "wires": []
     },
     {
         "id": "ef9fe18d381c3dad",
         "type": "subflow:90b1d3702319f334",
         "z": "56d7af57f34d08fb",
-        "name": "",
-        "x": 470,
+        "name": "Template Object",
+        "x": 440,
         "y": 240,
         "wires": [
             [
@@ -754,28 +702,9 @@
         "y": 140,
         "wires": [
             [
-                "56b7a1f0165a52a4",
-                "596fe05ccbb831ea"
+                "56b7a1f0165a52a4"
             ]
         ]
-    },
-    {
-        "id": "596fe05ccbb831ea",
-        "type": "debug",
-        "z": "8f4823599e012ecf",
-        "d": true,
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 400,
-        "y": 200,
-        "wires": []
     },
     {
         "id": "56b7a1f0165a52a4",
@@ -792,7 +721,7 @@
         "name": "andrea_gelsomino@hotmail.com",
         "dname": "Send notification",
         "x": 430,
-        "y": 100,
+        "y": 140,
         "wires": [],
         "info": "vpsp hmum bsge lxyf"
     },
@@ -881,6 +810,77 @@
         "wires": [
             [
                 "e8a8bbfe1ba546b7"
+            ]
+        ]
+    },
+    {
+        "id": "ef7fb1792a6f0bc6",
+        "type": "inject",
+        "z": "61b72cbb5a213105",
+        "name": "Scheduler",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 12 * * 5",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 330,
+        "y": 140,
+        "wires": [
+            [
+                "e8898b8e8680590a"
+            ]
+        ]
+    },
+    {
+        "id": "db80488040cb64c8",
+        "type": "e-mail",
+        "z": "61b72cbb5a213105",
+        "d": true,
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "andrea.gelsomino@code.seat",
+        "dname": "Send report",
+        "x": 750,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "e8898b8e8680590a",
+        "type": "change",
+        "z": "61b72cbb5a213105",
+        "d": true,
+        "name": "Create Report",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 140,
+        "wires": [
+            [
+                "db80488040cb64c8"
             ]
         ]
     }

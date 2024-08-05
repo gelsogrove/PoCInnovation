@@ -1,15 +1,2 @@
 
-- COMUNICA CHE SEI LISTO
-- ORGANNIZA VIAGGIO GERMANIA
- -MI PIACEREBBE FARE UN ALTRO ONNX WHEEL per esempio (ma ci penso)
- - PAGAMENTI
- - pagamenti mamma viaggio
- - MACCHINA
- - FUNZIONE DI DELETE
- - BOLLEETTA?
-
-- raggruppare flow per la poc
-- audio quando arriva un elemento
-- perche' non possono andare in parallelo i due script
-- provare un altro ocr easyOCR e' troppo lento
-
+- RICORDIAMOCI DI ATTIVARE IL WATCH
