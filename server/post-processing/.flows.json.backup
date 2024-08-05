@@ -65,6 +65,39 @@
         "color": "#DDAA99"
     },
     {
+        "id": "90b1d3702319f334",
+        "type": "subflow",
+        "name": "Prepare Template Object",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "6d3a0b6230ef2ea8"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1080,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "8a8e0f7b70c0e2c6",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
         "id": "1d383fba4761d3dd",
         "type": "websocket-listener",
         "path": "/ws/refresh",
@@ -258,6 +291,85 @@
         ]
     },
     {
+        "id": "1de649cedfdbae05",
+        "type": "switch",
+        "z": "90b1d3702319f334",
+        "name": "ContainsVIn",
+        "property": "containsVin",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 220,
+        "wires": [
+            [
+                "8a8e0f7b70c0e2c6"
+            ]
+        ]
+    },
+    {
+        "id": "bd78fcd07e69dbfa",
+        "type": "function",
+        "z": "90b1d3702319f334",
+        "name": "add property containsVin",
+        "func": "let filename = msg.filename;\n\nif (filename.toLowerCase().includes(\"vin\")) {\n    msg.containsVin = true;\n} else {\n    msg.containsVin = false;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 220,
+        "wires": [
+            [
+                "1de649cedfdbae05"
+            ]
+        ]
+    },
+    {
+        "id": "6d3a0b6230ef2ea8",
+        "type": "switch",
+        "z": "90b1d3702319f334",
+        "name": "Update Events",
+        "property": "event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 220,
+        "y": 220,
+        "wires": [
+            [
+                "bd78fcd07e69dbfa"
+            ]
+        ]
+    },
+    {
+        "id": "8a8e0f7b70c0e2c6",
+        "type": "subflow:79f7f96a02b62b78",
+        "z": "90b1d3702319f334",
+        "name": "",
+        "x": 900,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "31f530353a98f1a7",
         "type": "http request",
         "z": "e5ff7f387ec0af58",
@@ -326,94 +438,7 @@
         "wires": [
             [
                 "aada60ebf6288682",
-                "ce1d71f9d8db86f7"
-            ]
-        ]
-    },
-    {
-        "id": "09310a4daf509e32",
-        "type": "watch",
-        "z": "e5ff7f387ec0af58",
-        "name": "Watch defects folder",
-        "files": "/Users/gelso/workspace/PoC/server/inferences/defects/scratches",
-        "recursive": true,
-        "x": 130,
-        "y": 60,
-        "wires": [
-            [
-                "77204c5bf4fedaa6"
-            ]
-        ]
-    },
-    {
-        "id": "d370592ba8da03c9",
-        "type": "exec",
-        "z": "e5ff7f387ec0af58",
-        "command": "cd /Users/gelso/workspace/PoC/server/inferences && python3 detect-defects.py",
-        "addpay": "",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "15",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Run detection",
-        "x": 640,
-        "y": 60,
-        "wires": [
-            [],
-            [
-                "2c8a80fb146fa301"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "77204c5bf4fedaa6",
-        "type": "switch",
-        "z": "e5ff7f387ec0af58",
-        "name": "",
-        "property": "event",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "update",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 310,
-        "y": 60,
-        "wires": [
-            [
-                "4cbd1e5d146f5ad0"
-            ]
-        ]
-    },
-    {
-        "id": "4cbd1e5d146f5ad0",
-        "type": "switch",
-        "z": "e5ff7f387ec0af58",
-        "name": "",
-        "property": "file",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "neq",
-                "v": ".DS_Store",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 450,
-        "y": 60,
-        "wires": [
-            [
-                "d370592ba8da03c9"
+                "d11a20dd08c79d59"
             ]
         ]
     },
@@ -525,7 +550,7 @@
                 "6fe088e3fa0aab1c"
             ],
             [
-                "bc5ed6bde9e74d5b"
+                "766796c30fa580ad"
             ]
         ]
     },
@@ -536,87 +561,15 @@
         "name": "Websocket",
         "server": "1d383fba4761d3dd",
         "client": "",
-        "x": 990,
-        "y": 320,
+        "x": 1030,
+        "y": 280,
         "wires": []
     },
     {
-        "id": "2c8a80fb146fa301",
-        "type": "debug",
+        "id": "d11a20dd08c79d59",
+        "type": "switch",
         "z": "e5ff7f387ec0af58",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 860,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "1de649cedfdbae05",
-        "type": "switch",
-        "z": "56d7af57f34d08fb",
-        "name": "ContainsVIn",
-        "property": "containsVin",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "false"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 910,
-        "y": 120,
-        "wires": [
-            [
-                "54db61e91c8f9d4c"
-            ]
-        ]
-    },
-    {
-        "id": "bd78fcd07e69dbfa",
-        "type": "function",
-        "z": "56d7af57f34d08fb",
-        "name": "add property containsVin",
-        "func": "let filename = msg.filename;\n\nif (filename.toLowerCase().includes(\"vin\")) {\n    msg.containsVin = true;\n} else {\n    msg.containsVin = false;\n}\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 710,
-        "y": 120,
-        "wires": [
-            [
-                "1de649cedfdbae05"
-            ]
-        ]
-    },
-    {
-        "id": "54db61e91c8f9d4c",
-        "type": "subflow:79f7f96a02b62b78",
-        "z": "56d7af57f34d08fb",
         "name": "",
-        "x": 480,
-        "y": 320,
-        "wires": [
-            [
-                "553c2b1463077f70"
-            ]
-        ]
-    },
-    {
-        "id": "6d3a0b6230ef2ea8",
-        "type": "switch",
-        "z": "56d7af57f34d08fb",
-        "name": "Update Events",
         "property": "event",
         "propertyType": "msg",
         "rules": [
@@ -629,11 +582,38 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 500,
-        "y": 120,
+        "x": 270,
+        "y": 300,
         "wires": [
             [
-                "bd78fcd07e69dbfa"
+                "ce1d71f9d8db86f7"
+            ]
+        ]
+    },
+    {
+        "id": "766796c30fa580ad",
+        "type": "change",
+        "z": "e5ff7f387ec0af58",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "refreshVIN",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 360,
+        "wires": [
+            [
+                "bc5ed6bde9e74d5b"
             ]
         ]
     },
@@ -648,8 +628,8 @@
         "syntax": "mustache",
         "template": "<h1> NEW DEFECT... </h1>\n<p>We detected a defect!</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
         "output": "str",
-        "x": 720,
-        "y": 320,
+        "x": 680,
+        "y": 240,
         "wires": [
             [
                 "81b74fbe0531d93f",
@@ -666,11 +646,11 @@
         "name": "Watch output",
         "files": "/Users/gelso/workspace/PoC/server/inferences/output",
         "recursive": true,
-        "x": 330,
-        "y": 120,
+        "x": 250,
+        "y": 240,
         "wires": [
             [
-                "6d3a0b6230ef2ea8"
+                "ef9fe18d381c3dad"
             ]
         ]
     },
@@ -688,8 +668,8 @@
         "tls": true,
         "name": "andrea.gelsomino@metropolis-lab.es",
         "dname": "Send notification",
-        "x": 1090,
-        "y": 240,
+        "x": 1050,
+        "y": 160,
         "wires": [],
         "info": "vpsp hmum bsge lxyf"
     },
@@ -708,8 +688,8 @@
         "phonenumberinputtypemessage": "msg",
         "inputtypemessage": "str",
         "rejectssl": false,
-        "x": 1080,
-        "y": 300,
+        "x": 1040,
+        "y": 220,
         "wires": [
             []
         ]
@@ -731,8 +711,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1070,
-        "y": 360,
+        "x": 1030,
+        "y": 280,
         "wires": [
             []
         ]
@@ -745,9 +725,22 @@
         "name": "",
         "server": "1d383fba4761d3dd",
         "client": "",
-        "x": 1080,
-        "y": 420,
+        "x": 1040,
+        "y": 340,
         "wires": []
+    },
+    {
+        "id": "ef9fe18d381c3dad",
+        "type": "subflow:90b1d3702319f334",
+        "z": "56d7af57f34d08fb",
+        "name": "",
+        "x": 470,
+        "y": 240,
+        "wires": [
+            [
+                "553c2b1463077f70"
+            ]
+        ]
     },
     {
         "id": "98bb624796090f07",

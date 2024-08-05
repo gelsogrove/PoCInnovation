@@ -40,9 +40,8 @@ const App: React.FC = () => {
 
     websocket.onmessage = (event) => {
       console.log("WebSocket message received:", event.data)
-      // if (event.data === "refresh") {
-      fetchDefects() // Call fetchDefects here
-      // }
+
+      fetchDefects()
     }
 
     websocket.onclose = (event) => {
