@@ -49,7 +49,7 @@ const Settings: React.FC = () => {
               openModal("http://127.0.0.1:1880/#flow/94e3b6bceb5546d9")
             }}
           >
-            <b>Health Check</b>
+            <b>Health check</b>
             <span className="status active">Active</span>
           </a>
         </div>
@@ -61,7 +61,7 @@ const Settings: React.FC = () => {
               openModal("http://127.0.0.1:1880/#flow/56d7af57f34d08fb")
             }}
           >
-            <b>Post detection flow</b>
+            <b>Post detection</b>
             <span className="status active">Active</span>
           </a>
         </div>
@@ -73,7 +73,7 @@ const Settings: React.FC = () => {
               openModal("http://127.0.0.1:1880/#flow/8f4823599e012ecf")
             }}
           >
-            <b>Catch Errors flow</b>
+            <b>Catch errors</b>
             <span className="status active">Active</span>
           </a>
         </div>

@@ -399,6 +399,12 @@ module.exports = {
     page: {
       css: "./custom.css",
     },
+    header: {
+      title: " ",
+      image: null, // or null to remove image
+      image: null,
+      url: null,
+    },
     /** The following property can be used to set a custom theme for the editor.
      * See https://github.com/node-red-contrib-themes/theme-collection for
      * a collection of themes to chose from.
