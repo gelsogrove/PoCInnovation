@@ -1,0 +1,12 @@
+https://nodered.org/
+https://flows.nodered.org/
+
+Node-RED es una herramienta de programación visual para manejar flujo
+
+
+- Opensource
+- big community
+- works under Node
+- config and flows
+
+

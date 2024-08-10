@@ -81,7 +81,7 @@ def process_image(filepath, model, confidence_threshold, ocr_confidence_threshol
     boxes = results[0].boxes.xyxy.tolist()
     confidences = results[0].boxes.conf.tolist()
 
-   
+    print("boxes:", boxes)
 
     if not boxes:
         return

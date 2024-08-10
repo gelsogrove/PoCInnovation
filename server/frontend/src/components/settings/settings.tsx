@@ -87,6 +87,7 @@ const Settings: React.FC = () => {
             }}
           >
             <b>Weekly Report</b>
+            <span className="status active">Active</span>
           </a>
         </div>
       </div>

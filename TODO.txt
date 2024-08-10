@@ -1,2 +1,341 @@
 
-- RICORDIAMOCI DI ATTIVARE IL WATCH
+=================== ARROW FUNCION =========================
+
+const x = (a, b): number => {
+    return a + b;
+}
+
+=================== MODELS =========================
+
+interface  NomeInterface{
+    pippo: number,
+    b: string,
+    c. string
+}
+
+ 
+ type Person = {
+    name: string;
+    age: number;
+    email?: string; // Proprietà opzionale
+};
+
+type ID = number | string; 
+type Status = 'active' | 'inactive' | 'pending';
+
+
+enum Color {
+    Red = "RED",
+    Green = "GREEN",
+    Blue = "BLUE"
+}
+
+======================= CLASS =======================
+
+class Person {
+    name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    greet() {
+        console.log(`Hello, my name is ${this.name}`);
+    }
+}
+
+const person = new Person('Alice');
+person.greet(); // Output: Hello, my name is Alice
+
+
+=================== PROMISE =========================
+
+function myFunction(a: number, b: number): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+        if (a > b) {
+            resolve(true);
+        } else {
+            reject(new Error('a is not greater than b'));
+        }
+    });
+}
+
+
+
+const myFunction = (a: number, b: number): Promise<boolean> => {
+    return new Promise<boolean>((resolve, reject) => {
+        if (a > b) {
+            resolve(true);
+        } else {
+            reject(new Error('a is not greater than b'));
+        }
+    });
+};
+
+
+async function call() {
+    try {
+        const x: boolean = await myFunction(4, 10);
+        console.log(x); // Stampa il valore di x (true o false)
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+
+=================== MAP =============================
+
+const numbers = [1, 2, 3, 4, 5];
+const doubledNumbers = numbers.map(num => num * 2);
+console.log(doubledNumbers); // Output: [2, 4, 6, 8, 10]
+ 
+
+=================== FOREACH =========================
+
+const numbers = [1, 2, 3, 4, 5];
+numbers.forEach((num, index, arr) => {
+    arr[index] = num * 2;
+});
+console.log(numbers); // Output: [2, 4, 6, 8, 10]
+
+
+const numbers = [1, 2, 3, 4, 5];
+for (let i = 0; i < numbers.length; i++) {
+    numbers[i] = numbers[i] * 2; // Modifica l'array originale
+}
+console.log(numbers); // Output: [2, 4, 6, 8, 10]
+
+
+=================== REDUCE =========================
+
+const numbers = [1, 2, 3, 4, 5];
+const sum = numbers.reduce((accumulator, num) => accumulator + num, 0);
+console.log(sum); // Output: 15
+
+
+=================== INDEXOF =========================
+
+const fruits = ['apple', 'banana', 'cherry', 'date'];
+const index = fruits.indexOf('cherry');
+console.log(index); // Output: 2 
+
+const people = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 35 }
+];
+const personToFind = { name: 'Bob', age: 30 };
+const index = people.indexOf(personToFind);
+console.log(index); // Output: -1  
+
+================== SLICE  ===========================
+
+// Array originale const fruits = ['apple', 'banana', 'cherry', 'date', 'elderberry'];
+const slicedFruits = fruits.slice(1, 4);
+console.log('Sliced Fruits:', slicedFruits); // Output: ['banana', 'cherry', 'date']
+
+
+===================SPLICE ===============================
+
+const people = [
+    { name: 'Alice', age: 30 },
+    { name: 'Bob', age: 25 },
+    { name: 'Charlie', age: 35 }
+];
+
+// Trova l'indice della persona che soddisfa la condizione
+const indexOfPerson = people.findIndex(person => person.name === 'Charlie' && person.age > 30);
+
+if (indexOfPerson !== -1) {
+    // Rimuove 1 elemento a partire dall'indice trovato
+    people.splice(indexOfPerson, 1);
+}
+
+
+
+************************ SPREAD ARRAY ********************
+
+const temp = [ ...nuovoArray, { 
+	proprietà: "valore", 
+	altreProprietà: 42 
+} ];
+
+
+const array = [1, 2, 3]; 
+const oggetto = { id: 4, nome: "Oggetto 4" };
+const temp = [ ...array, oggetto ]; 
+console.log(nuovoArray); 
+// Output: [1, 2, 3, { id: 4, nome: 'Oggetto 4' }]
+
+
+********************* TERNARIA **********************
+
+condizione ? espressioneSeVera : espressioneSeFalsa;
+
+
+******************* FILTERS ******************************
+
+interface Person {
+    id: number;
+    name: string;
+    age: number;
+}
+
+const people: Person[] = [
+    { id: 1, name: 'Alice', age: 30 },
+    { id: 2, name: 'Bob', age: 25 },
+    { id: 3, name: 'Charlie', age: 35 },
+    { id: 4, name: 'David', age: 25 }
+];
+
+const peopleWithAge25 = people.filter(person => person.age === 25);
+const personWithId3 = people.find(person => person.id === 3);
+const index = numbers.findIndex(num => num % 2 === 0);
+const hasPersonOlderThan30 = people.some(person => person.age > 30);
+
+
+=====================INCLUDES / INDEXOF ================================
+const str = 'Hello, world!';
+const containsWorld = str.includes('world');
+console.log(containsWorld); // Output: true
+
+
+const str = 'Hello, world!';
+const index = str.indexOf('world');
+console.log(index);
+
+
+
+====================TYPEOF / INSTANCEOF  =======================
+
+if (typeof value === 'string') {
+
+if (animal instanceof Dog) {
+
+
+================ CALBACK =======================
+
+function x(a: number, b: number, callback: (result: number) => void) {
+    callback(a + b);
+}
+
+x(8, 4, (result) => {
+    console.log(result); // Output: 12
+});
+
+
+
+================= TRY CATCH ==============================
+
+function divideNumbers(a: number, b: number): number {
+    try {
+        if (b === 0) {
+            throw new Error("Division by zero is not allowed.");
+        }
+        return a / b;
+    } catch (error) {
+        console.error("Error:", error.message);
+        return NaN; // Restituisce NaN se si verifica un errore
+    }
+}
+
+const result = divideNumbers(10, 0);
+console.log(result); // Output: Error: Division by zero is not allowed. / NaN
+
+
+ 
+========================= NULLISH COALISCING ===================
+
+let value = null;
+let defaultValue = 'default';
+
+let result = value ?? defaultValue;
+console.log(result); // 'default'
+
+
+===================== Optional Chaining =======================
+
+let user = {
+    name: 'Alice',
+    address: {
+        street: '123 Main St',
+        city: 'Wonderland'
+    }
+};
+
+// Accesso sicuro con optional chaining
+let street = user?.address?.street;
+console.log(street); // '123 Main St'
+
+// Accesso a una proprietà che potrebbe non esistere
+let phone = user?.phone;
+console.log(phone); // undefined
+
+// Optional Chaining +  NULLISH COALISCING
+let street = user?.address?.street ?? 'No Street Provided';
+let city = user?.address?.city ?? 'No City Provided';
+
+
+ ================= TERNARIA =======================
+let age = 18;
+let canVote = age >= 18 ? 'Yes' : 'No';
+console.log(canVote); // 'Yes'
+
+let score = 85;
+let grade = score >= 90 ? 'A'
+           : score >= 80 ? 'B'
+           : score >= 70 ? 'C'
+           : score >= 60 ? 'D'
+           : 'F';
+console.log(grade); // 'B'
+
+
+====================OMIT=================================
+
+
+=================== DECORATION ===========================
+
+=================== ABSTRACT CLAS ========================
+
+=================== EXTEND CLAS ========================
+
+=================== INCAPSULATION ========================
+
+
+NestJS
+
+Prisma
+
+ 
+
+Debugging: Sapere come fare debug del codice usando strumenti di debug, come node --inspect-brk.
+NestJS utilizza un sistema di Dependency Injection p
+
+UserAchievementListener è un esempio di listener che risponde a eventi specifici (user.achievement) emessi nell'applicazione.
+Utilizza il decoratore @OnEvent per specificare quale evento il metodo deve ascoltare.
+
+
+Controller e Routing
+I controller definiscono gli endpoint (rotte) dell'applicazione e rispondono alle richieste HTTP. Ad esempio, TripController gestisce le rotte legate ai viaggi (trips).
+Utilizza decoratori come @Get, @Post, @Put per specificare il tipo di richiesta HTTP che il metodo gestisce.
+
+
+
+Custom Validation
+Il codice contiene anche una custom validation IsBefore, che viene utilizzata per assicurarsi che una data sia antecedente a un'altra in un DTO.
+Questo viene fatto utilizzando ValidatorConstraint e Validate da class-validator
+
+
+
+. Eccezioni e Gestione degli Errori
+NestJS fornisce un sistema integrato per gestire le eccezioni. Ad esempio, vengono usate eccezioni come NotFoundException, BadRequestException e PreconditionFailedException per gestire errori specifici nelle logiche di business.
+
+
+DTO e Validazione: Creare e validare DTO utilizzando class-validator
+
+
+
+
+Prisma
+npx prisma migrate   
+npx prisma generate
