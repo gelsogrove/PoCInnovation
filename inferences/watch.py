@@ -5,9 +5,9 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 # Configurazioni
-FOLDER_TO_WATCH = '/Users/gelso/workspace/PoC/server/inferences/defects/scratches'
-SCRIPT1 = '/Users/gelso/workspace/PoC/server/inferences/detect-vin.py'
-SCRIPT2 = '/Users/gelso/workspace/PoC/server/inferences/detect-defects.py'
+FOLDER_TO_WATCH = '/Users/gelso/workspace/PoC/inferences/defects/scratches'
+SCRIPT1 = '/Users/gelso/workspace/PoC/inferences/detect-vin.py'
+SCRIPT2 = '/Users/gelso/workspace/PoC/inferences/detect-defects.py'
 IMAGE_EXTENSIONS = {'.png', '.jpg', '.jpeg', '.bmp', '.tiff'}
 
 class MyHandler(FileSystemEventHandler):
@@ -38,7 +38,7 @@ class MyHandler(FileSystemEventHandler):
 
 def start_monitoring(folder, script1, script2):
     if not os.path.isdir(folder):
-        print(f"Errore: La cartella '{folder}' non esiste.")
+        print(f"Errore: folder '{folder}' not exist.")
         return
 
     event_handler = MyHandler(script1, script2)
@@ -49,9 +49,8 @@ def start_monitoring(folder, script1, script2):
 
     try:
         while True:
-            pass  # Resta in esecuzione
+            pass  # keep in execution until KeyboardInterrupt
     except KeyboardInterrupt:
-        print("Interruzione del monitoraggio...")
         observer.stop()
     observer.join()
 

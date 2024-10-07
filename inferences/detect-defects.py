@@ -59,10 +59,12 @@ def postprocess(outputs, original_image, confidence_threshold):
         if confidence > confidence_threshold:
             has_defect = True
             highest_confidence = max(highest_confidence, confidence)
+       
 
             x1, y1, x2, y2 = int(det[0]), int(det[1]), int(det[2]), int(det[3])
+            width = x2 - x1 
             cv2.rectangle(original_image, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            text = f"Conf: {confidence:.2f}"
+            text = f"Conf: {confidence:.2f} Width:{width}px"
             cv2.putText(original_image, text, (x1, y2 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
 
     return has_defect, highest_confidence, original_image
@@ -111,7 +113,7 @@ def main():
     defects_found = analyze_images_in_folder(input_dir, model_path, input_shape, output_folder, confidence_threshold)
 
     if defects_found:
-        command = "cd /Users/gelso/workspace/PoC/server/inferences && python3 detect-vin.py"
+        command = "cd /Users/gelso/workspace/PoC/inferences && python3 detect-vin.py"
         subprocess.run(command, shell=True)
     else:
         clear_input_folder(input_dir)

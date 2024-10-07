@@ -81,7 +81,7 @@ def process_image(filepath, model, confidence_threshold, ocr_confidence_threshol
 
 def main():
     model_path = "models/vin.onnx"
-    image_path = "/Users/gelso/workspace/PoC/server/inferences/defects/scratches/mycar4.jpg"
+    image_path = "/Users/gelso/workspace/PoC/inferences/defects/scratches/mycar4.jpg"
     confidence_threshold = 0.7
     ocr_confidence_threshold = 0.1
     margin = 10

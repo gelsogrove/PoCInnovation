@@ -1,15 +1,15 @@
 _dataset/
-server/inferences/test
-server/inferences/output
-server/inferences/tmp
-server/inferences/processed
-server/inferences/models
-server/inferences/easyocr
-server/inferences/models/scratches.onnx
-server/post-processing/node_modules
-server/backend/node_modules
-server/backend/src/data
-server/backend/src/images
+/inferences/test
+/inferences/output
+/inferences/tmp
+/inferences/processed
+/inferences/models
+/inferences/easyocr
+/inferences/models/scratches.onnx
+/post-processing/node_modules
+/backend/node_modules
+/backend/src/data
+/backend/src/images
 node_modules
 
 

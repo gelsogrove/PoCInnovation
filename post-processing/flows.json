@@ -1,0 +1,776 @@
+[
+  {
+    "id": "e5ff7f387ec0af58",
+    "type": "tab",
+    "label": "Advance Settings",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "56d7af57f34d08fb",
+    "type": "tab",
+    "label": "Post Detection flow",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "8f4823599e012ecf",
+    "type": "tab",
+    "label": "Catch Flow",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "94e3b6bceb5546d9",
+    "type": "tab",
+    "label": "Health Check",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "61b72cbb5a213105",
+    "type": "tab",
+    "label": "Weekly report",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "79f7f96a02b62b78",
+    "type": "subflow",
+    "name": "Prepare Object Defect",
+    "info": "",
+    "category": "",
+    "in": [
+      {
+        "x": 200,
+        "y": 140,
+        "wires": [
+          {
+            "id": "336072ee80688ae2"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 1440,
+        "y": 140,
+        "wires": [
+          {
+            "id": "809a7186b4352fc2",
+            "port": 0
+          }
+        ]
+      }
+    ],
+    "env": [],
+    "meta": {},
+    "color": "#DDAA99"
+  },
+  {
+    "id": "90b1d3702319f334",
+    "type": "subflow",
+    "name": "Prepare Template Object",
+    "info": "",
+    "category": "",
+    "in": [
+      {
+        "x": 60,
+        "y": 220,
+        "wires": [
+          {
+            "id": "6d3a0b6230ef2ea8"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 1080,
+        "y": 220,
+        "wires": [
+          {
+            "id": "8a8e0f7b70c0e2c6",
+            "port": 0
+          }
+        ]
+      }
+    ],
+    "env": [],
+    "meta": {},
+    "color": "#DDAA99"
+  },
+  {
+    "id": "1d383fba4761d3dd",
+    "type": "websocket-listener",
+    "path": "/ws/refresh",
+    "wholemsg": "false"
+  },
+  {
+    "id": "837c2f09fddccebf",
+    "type": "file in",
+    "z": "79f7f96a02b62b78",
+    "name": "Convert Image ",
+    "filename": "filename",
+    "filenameType": "msg",
+    "format": "utf8",
+    "chunk": false,
+    "sendError": false,
+    "encoding": "base64",
+    "allProps": false,
+    "x": 480,
+    "y": 140,
+    "wires": [["e5112d79ad9f0215"]]
+  },
+  {
+    "id": "e5112d79ad9f0215",
+    "type": "change",
+    "z": "79f7f96a02b62b78",
+    "name": "Add Timestamp",
+    "rules": [
+      {
+        "t": "set",
+        "p": "timestamp",
+        "pt": "msg",
+        "to": "",
+        "tot": "date"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 680,
+    "y": 140,
+    "wires": [["df45b1cd1b0f25ef"]]
+  },
+  {
+    "id": "336072ee80688ae2",
+    "type": "switch",
+    "z": "79f7f96a02b62b78",
+    "name": "",
+    "property": "event",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "update",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 310,
+    "y": 140,
+    "wires": [["837c2f09fddccebf"]]
+  },
+  {
+    "id": "df45b1cd1b0f25ef",
+    "type": "change",
+    "z": "79f7f96a02b62b78",
+    "name": "Change name",
+    "rules": [
+      {
+        "t": "move",
+        "p": "payload",
+        "pt": "msg",
+        "to": "imageBase64",
+        "tot": "msg"
+      },
+      {
+        "t": "delete",
+        "p": "size",
+        "pt": "msg"
+      },
+      {
+        "t": "delete",
+        "p": "type",
+        "pt": "msg"
+      },
+      {
+        "t": "delete",
+        "p": "topic",
+        "pt": "msg"
+      },
+      {
+        "t": "delete",
+        "p": "event",
+        "pt": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 880,
+    "y": 140,
+    "wires": [["c5967c8042d82735"]]
+  },
+  {
+    "id": "c5967c8042d82735",
+    "type": "function",
+    "z": "79f7f96a02b62b78",
+    "name": "Prepare Object",
+    "func": "msg.payload = {\n    timestamp: msg.timestamp,\n    dateFormat: new Date(msg.timestamp).toLocaleString(),\n    filename: msg.filename,\n    file: msg.file,\n    workshop: \"T11\",\n    workshopId: \"12345\",\n    _msgId: msg._msgid,\n    camera: \"Camera 1\",\n    cameraId: \"CameraId\",\n    imageBase64: msg.imageBase64\n};\n\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1100,
+    "y": 140,
+    "wires": [["809a7186b4352fc2"]]
+  },
+  {
+    "id": "809a7186b4352fc2",
+    "type": "change",
+    "z": "79f7f96a02b62b78",
+    "name": "Change name",
+    "rules": [
+      {
+        "t": "delete",
+        "p": "retry",
+        "pt": "msg"
+      },
+      {
+        "t": "delete",
+        "p": "redirectList",
+        "pt": "msg"
+      },
+      {
+        "t": "delete",
+        "p": "file",
+        "pt": "msg"
+      },
+      {
+        "t": "delete",
+        "p": "statusCode",
+        "pt": "msg"
+      },
+      {
+        "t": "delete",
+        "p": "responseUrl",
+        "pt": "msg"
+      },
+      {
+        "t": "delete",
+        "p": "headers",
+        "pt": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1300,
+    "y": 140,
+    "wires": [[]]
+  },
+  {
+    "id": "1de649cedfdbae05",
+    "type": "switch",
+    "z": "90b1d3702319f334",
+    "name": "ContainsVIn",
+    "property": "containsVin",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "false"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 670,
+    "y": 220,
+    "wires": [["8a8e0f7b70c0e2c6"]]
+  },
+  {
+    "id": "bd78fcd07e69dbfa",
+    "type": "function",
+    "z": "90b1d3702319f334",
+    "name": "add property containsVin",
+    "func": "let filename = msg.filename;\n\nif (filename.toLowerCase().includes(\"vin\")) {\n    msg.containsVin = true;\n} else {\n    msg.containsVin = false;\n}\n\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 450,
+    "y": 220,
+    "wires": [["1de649cedfdbae05"]]
+  },
+  {
+    "id": "6d3a0b6230ef2ea8",
+    "type": "switch",
+    "z": "90b1d3702319f334",
+    "name": "Update Events",
+    "property": "event",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "update",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 220,
+    "y": 220,
+    "wires": [["bd78fcd07e69dbfa"]]
+  },
+  {
+    "id": "8a8e0f7b70c0e2c6",
+    "type": "subflow:79f7f96a02b62b78",
+    "z": "90b1d3702319f334",
+    "name": "",
+    "x": 900,
+    "y": 220,
+    "wires": [[]]
+  },
+  {
+    "id": "31f530353a98f1a7",
+    "type": "http request",
+    "z": "e5ff7f387ec0af58",
+    "name": "Http Post -Send Defect",
+    "method": "POST",
+    "ret": "txt",
+    "paytoqs": "ignore",
+    "url": "http://localhost:3000/new-defect",
+    "tls": "",
+    "persist": false,
+    "proxy": "",
+    "insecureHTTPParser": false,
+    "authType": "",
+    "senderr": false,
+    "headers": [],
+    "x": 690,
+    "y": 160,
+    "wires": [[]]
+  },
+  {
+    "id": "aada60ebf6288682",
+    "type": "subflow:79f7f96a02b62b78",
+    "z": "e5ff7f387ec0af58",
+    "name": "Prepare Object Defect",
+    "x": 420,
+    "y": 160,
+    "wires": [["31f530353a98f1a7"]]
+  },
+  {
+    "id": "dc47a598cd60c45f",
+    "type": "watch",
+    "z": "e5ff7f387ec0af58",
+    "name": "Watch inference folder",
+    "files": "/Users/gelso/workspace/PoC/inferences/output",
+    "recursive": false,
+    "x": 140,
+    "y": 160,
+    "wires": [["aada60ebf6288682", "d11a20dd08c79d59"]]
+  },
+  {
+    "id": "19db539a731d63d8",
+    "type": "function",
+    "z": "e5ff7f387ec0af58",
+    "name": "add property containsVin",
+    "func": "let filename = msg.filename;\n\nif (filename.toLowerCase().includes(\"vin\")) {\n    msg.containsVin = true;\n} else {\n    msg.containsVin = false;\n}\n\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 530,
+    "y": 300,
+    "wires": [["81e95a41d11fcea8"]]
+  },
+  {
+    "id": "0dc487b35f3e44bb",
+    "type": "websocket out",
+    "z": "e5ff7f387ec0af58",
+    "name": "Websocket",
+    "server": "1d383fba4761d3dd",
+    "client": "",
+    "x": 1490,
+    "y": 260,
+    "wires": []
+  },
+  {
+    "id": "6fe088e3fa0aab1c",
+    "type": "change",
+    "z": "e5ff7f387ec0af58",
+    "name": "Set Refresh Payload",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "refresh",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1220,
+    "y": 260,
+    "wires": [["0dc487b35f3e44bb"]]
+  },
+  {
+    "id": "81e95a41d11fcea8",
+    "type": "switch",
+    "z": "e5ff7f387ec0af58",
+    "name": "ContainsVIn",
+    "property": "containsVin",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "true"
+      },
+      {
+        "t": "false"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 2,
+    "x": 950,
+    "y": 300,
+    "wires": [["6fe088e3fa0aab1c"], ["766796c30fa580ad"]]
+  },
+  {
+    "id": "bc5ed6bde9e74d5b",
+    "type": "websocket out",
+    "z": "e5ff7f387ec0af58",
+    "name": "Websocket",
+    "server": "1d383fba4761d3dd",
+    "client": "",
+    "x": 1490,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "d11a20dd08c79d59",
+    "type": "switch",
+    "z": "e5ff7f387ec0af58",
+    "name": "",
+    "property": "event",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "update",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 270,
+    "y": 300,
+    "wires": [["19db539a731d63d8"]]
+  },
+  {
+    "id": "766796c30fa580ad",
+    "type": "change",
+    "z": "e5ff7f387ec0af58",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "refreshVIN",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1200,
+    "y": 340,
+    "wires": [["bc5ed6bde9e74d5b"]]
+  },
+  {
+    "id": "553c2b1463077f70",
+    "type": "template",
+    "z": "56d7af57f34d08fb",
+    "name": "message",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "html",
+    "syntax": "mustache",
+    "template": "<h1> NEW DEFECT ON WORKSHOP 11 ! </h1>\n\n<p>A new scratch has been detected</p>\n\n<p><img src=\"data:image/jpeg;base64,{{imageBase64}}\" alt=\"Defect Image\"/></p>\n",
+    "output": "str",
+    "x": 640,
+    "y": 240,
+    "wires": [
+      [
+        "81b74fbe0531d93f",
+        "7a306e2e328f6674",
+        "9a692f2bbbe831d1",
+        "6f4c763e9c26c730"
+      ]
+    ]
+  },
+  {
+    "id": "d7263d5a9eec6d6c",
+    "type": "watch",
+    "z": "56d7af57f34d08fb",
+    "name": "Post detection",
+    "files": "/Users/gelso/workspace/PoC/inferences/output",
+    "recursive": true,
+    "x": 240,
+    "y": 240,
+    "wires": [["ef9fe18d381c3dad"]]
+  },
+  {
+    "id": "81b74fbe0531d93f",
+    "type": "e-mail",
+    "z": "56d7af57f34d08fb",
+    "server": "smtp.gmail.com",
+    "port": "465",
+    "authtype": "BASIC",
+    "saslformat": true,
+    "token": "oauth2Response.access_token",
+    "secure": true,
+    "tls": true,
+    "name": "andrea.gelsomino@metropolis-lab.es",
+    "dname": "Send notification",
+    "x": 870,
+    "y": 240,
+    "wires": [],
+    "info": "vpsp hmum bsge lxyf"
+  },
+  {
+    "id": "ef9fe18d381c3dad",
+    "type": "subflow:90b1d3702319f334",
+    "z": "56d7af57f34d08fb",
+    "name": "Template Object",
+    "x": 440,
+    "y": 240,
+    "wires": [["553c2b1463077f70"]]
+  },
+  {
+    "id": "7a306e2e328f6674",
+    "type": "node-red-contrib-whatsapp-cmb-send-message",
+    "z": "56d7af57f34d08fb",
+    "d": true,
+    "name": "",
+    "credtype": "account",
+    "account": "",
+    "text": "",
+    "phonenumbervalue": "",
+    "apikeyvalue": "",
+    "apikeyinputtypemessage": "msg",
+    "phonenumberinputtypemessage": "msg",
+    "inputtypemessage": "str",
+    "rejectssl": false,
+    "x": 860,
+    "y": 300,
+    "wires": [[]]
+  },
+  {
+    "id": "9a692f2bbbe831d1",
+    "type": "ftp in",
+    "z": "56d7af57f34d08fb",
+    "d": true,
+    "ftp": "",
+    "operation": "list",
+    "filename": "",
+    "localFilename": "",
+    "name": "",
+    "x": 830,
+    "y": 360,
+    "wires": [[]]
+  },
+  {
+    "id": "6f4c763e9c26c730",
+    "type": "http request",
+    "z": "56d7af57f34d08fb",
+    "d": true,
+    "name": "",
+    "method": "GET",
+    "ret": "txt",
+    "paytoqs": "ignore",
+    "url": "",
+    "tls": "",
+    "persist": false,
+    "proxy": "",
+    "insecureHTTPParser": false,
+    "authType": "",
+    "senderr": false,
+    "headers": [],
+    "x": 850,
+    "y": 420,
+    "wires": [[]]
+  },
+  {
+    "id": "98bb624796090f07",
+    "type": "catch",
+    "z": "8f4823599e012ecf",
+    "name": "",
+    "scope": null,
+    "uncaught": true,
+    "x": 160,
+    "y": 140,
+    "wires": [["56b7a1f0165a52a4"]]
+  },
+  {
+    "id": "56b7a1f0165a52a4",
+    "type": "e-mail",
+    "z": "8f4823599e012ecf",
+    "server": "smtp.gmail.com",
+    "port": "465",
+    "authtype": "BASIC",
+    "saslformat": true,
+    "token": "oauth2Response.access_token",
+    "secure": true,
+    "tls": true,
+    "name": "andrea_gelsomino@hotmail.com",
+    "dname": "Send notification",
+    "x": 430,
+    "y": 140,
+    "wires": [],
+    "info": "vpsp hmum bsge lxyf"
+  },
+  {
+    "id": "e8a8bbfe1ba546b7",
+    "type": "debug",
+    "z": "94e3b6bceb5546d9",
+    "name": "CHECK ",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 660,
+    "y": 200,
+    "wires": []
+  },
+  {
+    "id": "3f7a6bd0a3237e26",
+    "type": "http in",
+    "z": "94e3b6bceb5546d9",
+    "d": true,
+    "name": "Check Sensor 1",
+    "url": "",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 420,
+    "y": 160,
+    "wires": [["e8a8bbfe1ba546b7"]]
+  },
+  {
+    "id": "8281a173d441a8e0",
+    "type": "http in",
+    "z": "94e3b6bceb5546d9",
+    "d": true,
+    "name": "Check Camera 1",
+    "url": "",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 420,
+    "y": 220,
+    "wires": [["e8a8bbfe1ba546b7"]]
+  },
+  {
+    "id": "b7afcf2b0211296c",
+    "type": "http in",
+    "z": "94e3b6bceb5546d9",
+    "d": true,
+    "name": "Check Camera 2",
+    "url": "",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 420,
+    "y": 280,
+    "wires": [["e8a8bbfe1ba546b7"]]
+  },
+  {
+    "id": "ef7fb1792a6f0bc6",
+    "type": "inject",
+    "z": "61b72cbb5a213105",
+    "name": "Scheduler",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "00 12 * * 5",
+    "once": true,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 330,
+    "y": 140,
+    "wires": [["e8898b8e8680590a"]]
+  },
+  {
+    "id": "db80488040cb64c8",
+    "type": "e-mail",
+    "z": "61b72cbb5a213105",
+    "d": true,
+    "server": "smtp.gmail.com",
+    "port": "465",
+    "authtype": "BASIC",
+    "saslformat": true,
+    "token": "oauth2Response.access_token",
+    "secure": true,
+    "tls": true,
+    "name": "andrea.gelsomino@code.seat",
+    "dname": "Send report",
+    "x": 750,
+    "y": 140,
+    "wires": []
+  },
+  {
+    "id": "e8898b8e8680590a",
+    "type": "change",
+    "z": "61b72cbb5a213105",
+    "d": true,
+    "name": "Create Report",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 540,
+    "y": 140,
+    "wires": [["db80488040cb64c8"]]
+  }
+]
